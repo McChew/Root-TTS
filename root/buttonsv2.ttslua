@@ -1,0 +1,26 @@
+button_data = {}
+button_data["Marquise1"] = {click_function = "SwitchMarquise"}
+button_data["Eyrie1"] = {click_function = "SwitchEyrie"}
+button_data["Woodland1"] = {click_function = "SwitchWoodland"}
+button_data["Vagabond1"] = {click_function = "SwitchVagabond"}
+button_data["Riverfolk1"] = {click_function = "SwitchRiverfolk"}
+button_data["Lizard1"] = {click_function = "SwitchLizard"}
+button_data["Duchy1"] = {click_function = "SwitchDuchy"}
+button_data["Corvid1"] = {click_function = "SwitchCorvid"}
+vagabond_buttons = {}
+vagabond_buttons["VagaThief"] = {click_function = "SwitchVagaThief"}
+vagabond_buttons["VagaTinker"] = {click_function = "SwitchVagaTinker"}
+vagabond_buttons["VagaScoundrel"] = {click_function = "SwitchVagaScoundrel"}
+vagabond_buttons["VagaArbiter"] = {click_function = "SwitchVagaArbiter"}
+vagabond_buttons["VagaVagrant"] = {click_function = "SwitchVagaVagrant"}
+vagabond_buttons["VagaRanger"] = {click_function = "SwitchVagaRanger"}
+better_bot_buttons = {}
+better_bot_buttons["MechMarquise1"] = {click_function = "SwitchMechMarquise"}
+better_bot_buttons["ElecEyrie1"] = {click_function = "SwitchElecEyrie"}
+better_bot_buttons["EleAEyrie1"] = {click_function = "SwitchEleAEyrie"}
+better_bot_buttons["AutoWoodland1"] = {click_function = "SwitchAutoWoodland"}
+better_bot_buttons["RoboVagabond2"] = {click_function = "SwitchRoboVagabond"}
+better_bot_buttons["OverRiverfolk1"] = {click_function = "SwitchOverRiverfolk"}
+better_bot_buttons["ClocLizard1"] = {click_function = "SwitchClocLizard"}
+buttons = {"Marquise1", "Eyrie1", "Woodland1", "Vagabond2", "Vagabond1", "Riverfolk1", "Lizard1", "Corvid1", "Duchy1", "MechMarquise1", "ElecEyrie1", "EleAEyrie1", "AutoWoodland1", "RoboVagabond2", "RoboVagabond1", "OverRiverfolk1", "ClocLizard1"}
+vagabonds = {"VagaArbiter", "VagaRanger", "VagaScoundrel", "VagaThief", "VagaTinker", "VagaVagrant"}
