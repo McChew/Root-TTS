@@ -1,160 +1,172 @@
-#include factionsv2
-#include buttonsv2
+board_xml = [[
+<Defaults>
+    <Button class="mapButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
+    <Image class="mapImage" height="28" preserveAspect="true"/>
+    <Image class="vagabondImage" width="76" preserveAspect="true"/>
+    <Button class="vagabondButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
+</Defaults>
 
-has_buttons = true
-has_vagabond_buttons = false
 
-function onLoad(save_state)
-    Global.call('ImHere', {self})
-    makeClickFunctions()
-    showButtons()
-end
+<!-- Faction selection menu -->
+<Panel id="FactionSelection"
+    width="340"
+    height="250"
+    position="0 0 -40"
+    scale="0.75 0.75">
 
-function makeClickFunctions()
-    for k, v in pairs(button_data) do
-        _G[v.click_function] = function() spawnFunction(k:sub(1,-2)) end
-    end
-    for k,v in pairs(vagabond_buttons) do
-        _G[v.click_function] = function() spawnVagabond(k) end
-    end
-    for k,v in pairs(better_bot_buttons) do
-        _G[v.click_function] = function() spawnBot(k:sub(1,-2)) end
-    end
-end
+    <Image class="mapImage" image="faction-title" height="20" rectAlignment="UpperCenter"></Image>
+    <Button id="closeButton"
+        width="20"
+        height="20"
+        rectAlignment="UpperRight"
+        color="#990000"
+        textColor="#FFFFFF"
+        text="X"
+        onClick="deleteThis">
+    </Button>
 
-function spawnFunction(faction)
-    local avail = Global.getTable('available')
-    if (avail[faction] < 1) then return end
-    local closest = findClosestPosition()
-    local color = faction_colors[faction..tostring(avail[faction])]
-    closest.scale = {17.20, 5.40, 3.00}
-    val = false
-    while not val do
-        val = Player[color].setHandTransform(closest, 1)
-    end
-    has_buttons = false
-    Global.call('FactionChosen', {faction})
-    if (faction == "Vagabond") then
-        chooseVagabond()
-    else
-        spawnHere(faction)
-    end
-end
-
-function spawnBot(faction)
-    local avail = Global.getTable('available')
-    if (avail[faction:sub(5,-1)] < 1) then return end
-    local closest = findClosestPosition()
-    local color = faction_colors[faction:sub(5,-1)..tostring(avail[faction:sub(5,-1)])]
-    closest.scale = {17.20, 5.40, 3.00}
-    val = false
-    while not val do
-        val = Player[color].setHandTransform(closest, 1)
-    end
-    bot = Global.getVar('bot')
-    if not bot then
-        for _, v in ipairs(bot_stuff) do
-            spawnObjectJSON({json=v})
-        end
-        Global.setVar('bot', true)
-    end
-    has_buttons = false
-    Global.call('FactionChosen', {faction:sub(5,-1)})
-    spawnHere(faction)
-end
-
-function chooseVagabond()
-    has_vagabond_buttons = true
-    vagabondButtons()
-end
-
-function vagabondButtons()
-    if has_vagabond_buttons then
-        self.UI.setAttribute('vagabond_buttons', 'active', true)
-        avail = Global.getTable('vagabonds')
-        for _,k in ipairs(vagabonds) do
-            if (avail[k] > 0) then
-                self.UI.setAttribute(k, 'active', true)
-            else
-                self.UI.setAttribute(k, 'active', false)
-            end
-        end
-    else
-        self.UI.setAttribute('vagabond_buttons', 'active', false)
-    end
-end
-
-function spawnVagabond(vaga)
-    avail = Global.getTable('vagabonds')
-    if (avail[vaga] < 1) then return end
-    Global.call('VagabondChosen', {vaga})
-    spawnHere(vaga)
-end
-
-function showButtons()
-    if has_buttons then
-        self.UI.setAttribute('faction_buttons', 'active', true)
-        local avail = Global.getTable('available')
-        for _, k in ipairs(buttons) do
-            local set = false
-            local tmp = k:sub(1,-2)
-            if not (tmp..tostring(avail[tmp]) == k) then
-                self.UI.setAttribute(k, 'active', false)
-            else
-                self.UI.setAttribute(k, 'active', true)
-                set = true
-            end
-            if not set then
-                tmp = k:sub(5,-2)
-                if not (tmp..tostring(avail[tmp]) == k:sub(5,-1)) then
-                    self.UI.setAttribute(k, 'active', false)
-                else
-                    self.UI.setAttribute(k, 'active', true)
-                end
-            end
-        end
-    else
-        self.UI.setAttribute('faction_buttons', 'active', false)
-    end
-end
-
-function deleteThis()
-    Global.call('ImGone', {self})
-    self.destruct()
-end
-
-function spawnHere(faction)
-    my_pos = self.getPosition()
-    my_rot = self.getRotation()
-    -- self.destruct()
-    for _,v in ipairs(factions[faction]) do
-        local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
-        local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
-        local new_pos = {x, v.own_y, z}
-        spawnObjectJSON({
-            json              = v.json,
-            position          = new_pos,
-            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y+180, o.getRotation().z}) end
-        })
-    end
-    Global.call('ImGone', {self})
-    self.destruct()
-end
-
-function findClosestPosition()
-    local own_pos = self.getPosition()
-    local closest = nil
-    local smallest_distance = 100000000
-    local places = {{position={-50.00, 5.00, -64.50}, rotation={0, 0, 0}}, {position={0.00, 5.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 5.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={0.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={-50.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}}
-    for _, place in ipairs(places) do
-        pos = place.position
-        local distance = math.sqrt(math.pow(own_pos.x-pos[1], 2)+math.pow(own_pos.z-pos[3], 2))
-        if distance < smallest_distance then
-            smallest_distance = distance
-            closest = place
-        end
-    end
-    return closest
-end
-
-function none() end
+    <TableLayout padding="2 2 2 2" cellspacing="2"  height="250" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" id="faction_buttons">
+        <Row preferredHeight="30">
+            <Cell id="Marquise1">
+                <Button class="mapButton" onClick="SwitchMarquise" color="#f78b18"  >
+                    <Image class="mapImage" image="marquise-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Eyrie1">
+                <Button class="mapButton" onClick="SwitchEyrie" color="blue">
+                    <Image class="mapImage" image="eyrie-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Woodland1">
+                <Button class="mapButton" onClick="SwitchWoodland" color="green">
+                    <Image class="mapImage" image="alliance-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell>
+                <Button id="Vagabond2" class="mapButton" onClick="SwitchVagabond" color="#dbdbdb">
+                    <Image class="mapImage" image="vagabond01-button"></Image>
+                </Button>
+                <Button id="Vagabond1" class="mapButton" onClick="SwitchVagabond" color="gray">
+                    <Image class="mapImage" image="vagabond02-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Riverfolk1">
+                <Button class="mapButton" onClick="SwitchRiverfolk" color="#47f8ff">
+                    <Image class="mapImage" image="riverfolk-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Lizard1">
+                <Button class="mapButton" onClick="SwitchLizard" color="yellow">
+                    <Image class="mapImage" image="lizard-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="Corvid1">
+                <Button class="mapButton" onClick="SwitchCorvid" color="purple">
+                    <Image class="mapImage" image="corvid-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Duchy1">
+                <Button class="mapButton" onClick="SwitchDuchy" color="Brown">
+                    <Image class="mapImage" image="underground-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Fangus1">
+                <Button class="mapButton" onClick="SwitchFangus" color="Pink">
+                    <Image class="mapImage" image="fangus-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell></Cell>
+            <Cell>
+                <Image class="mapImage" image="bots-title"></Image>
+            </Cell>
+            <Cell></Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="MechMarquise1">
+                <Button class="mapButton" onClick="SwitchMechMarquise" color="#f78b18">
+                    <Image class="mapImage" image="mech-marq2-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="ElecEyrie1">
+                <Button class="mapButton" onClick="SwitchElecEyrie" id="ElecEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie"></Image>
+                </Button>
+            </Cell>
+            <Cell id="EleAEyrie1">
+                <Button class="mapButton" onClick="SwitchEleAEyrie" id="EleAEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie-alt"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="AutoWoodland1">
+                <Button class="mapButton" onClick="SwitchAutoWoodland" color="green">
+                    <Image class="mapImage" image="automated-alliance"></Image>
+                </Button>
+            </Cell>
+            <Cell>
+                <Button id="RoboVagabond2" class="mapButton" onClick="SwitchRoboVagabond" color="#dbdbdb">
+                    <Image class="mapImage" image="robot-racoon"></Image>
+                </Button>
+              <Button id="RoboVagabond1" class="mapButton" onClick="SwitchRoboVagabond" color="gray">
+                  <Image class="mapImage" image="robot-racoon2"></Image>
+              </Button>
+            </Cell>
+            <Cell id="OverRiverfolk1">
+                <Button class="mapButton" onClick="SwitchOverRiverfolk" color="#47f8ff">
+                    <Image class="mapImage" image="otter-overlords"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="ClocLizard1">
+                <Button class="mapButton" onClick="SwitchClocLizard" color="yellow">
+                    <Image class="mapImage" image="clockwork-cult"></Image>
+                </Button>
+            </Cell>
+        </Row>
+    </TableLayout>
+    <TableLayout padding="2 2 2 2" cellspacing="2"  height="250" width="200" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" id="vagabond_buttons" active="false">
+        <Row preferredHeight="85">
+            <Cell id="VagaArbiter">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="SwitchVagaArbiter">
+                    <Image class="vagabondImage" image="vagabond-arbiter" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaRanger">
+                <Button class="vagabondButton" color="grey" onClick="SwitchVagaRanger">
+                    <Image class="vagabondImage" image="vagabond-ranger" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaScoundrel">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="SwitchVagaScoundrel">
+                    <Image class="vagabondImage" image="vagabond-scoundrel" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="85">
+            <Cell id="VagaThief">
+                <Button class="vagabondButton" color="grey" onClick="SwitchVagaThief">
+                    <Image class="vagabondImage" image="vagabond-thief" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaTinker">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="SwitchVagaTinker">
+                    <Image class="vagabondImage" image="vagabond-tinker" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaVagrant">
+                <Button class="vagabondButton" color="grey" onClick="SwitchVagaVagrant">
+                    <Image class="vagabondImage" image="vagabond-vagrant" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+        </Row>
+    </TableLayout>
+</Panel>
+]]

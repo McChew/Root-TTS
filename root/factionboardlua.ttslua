@@ -1,0 +1,171 @@
+#include factionsv2
+#include buttonsv2
+#include factionboardxml
+
+has_buttons = true
+has_vagabond_buttons = false
+
+function g()
+    self.UI.setXml(board_xml)
+    -- We need some delay between setting ui and using it. hence the weird coroutine
+    for x=1,10 do
+        coroutine.yield()
+    end
+    makeClickFunctions()
+    showButtons()
+    return 1
+end
+
+function onLoad(save_state)
+    Global.call('ImHere', {self})
+    startLuaCoroutine(self, 'g')
+end
+
+function makeClickFunctions()
+    for k, v in pairs(button_data) do
+        _G[v.click_function] = function() spawnFunction(k:sub(1,-2)) end
+    end
+    for k,v in pairs(vagabond_buttons) do
+        _G[v.click_function] = function() spawnVagabond(k) end
+    end
+    for k,v in pairs(better_bot_buttons) do
+        _G[v.click_function] = function() spawnBot(k:sub(1,-2)) end
+    end
+end
+
+function spawnFunction(faction)
+    local avail = Global.getTable('available')
+    if (avail[faction] < 1) then return end
+    local closest = findClosestPosition()
+    local color = faction_colors[faction..tostring(avail[faction])]
+    closest.scale = {17.20, 5.40, 3.00}
+    val = false
+    while not val do
+        val = Player[color].setHandTransform(closest, 1)
+    end
+    has_buttons = false
+    Global.call('FactionChosen', {faction})
+    if (faction == "Vagabond") then
+        chooseVagabond()
+    else
+        spawnHere(faction)
+    end
+end
+
+function spawnBot(faction)
+    local avail = Global.getTable('available')
+    if (avail[faction:sub(5,-1)] < 1) then return end
+    local closest = findClosestPosition()
+    local color = faction_colors[faction:sub(5,-1)..tostring(avail[faction:sub(5,-1)])]
+    closest.scale = {17.20, 5.40, 3.00}
+    val = false
+    while not val do
+        val = Player[color].setHandTransform(closest, 1)
+    end
+    bot = Global.getVar('bot')
+    if not bot then
+        for _, v in ipairs(bot_stuff) do
+            spawnObjectJSON({json=v})
+        end
+        Global.setVar('bot', true)
+    end
+    has_buttons = false
+    Global.call('FactionChosen', {faction:sub(5,-1)})
+    spawnHere(faction)
+end
+
+function chooseVagabond()
+    has_vagabond_buttons = true
+    vagabondButtons()
+end
+
+function vagabondButtons()
+    if has_vagabond_buttons then
+        self.UI.setAttribute('vagabond_buttons', 'active', true)
+        avail = Global.getTable('vagabonds')
+        for _,k in ipairs(vagabonds) do
+            if (avail[k] > 0) then
+                self.UI.setAttribute(k, 'active', true)
+            else
+                self.UI.setAttribute(k, 'active', false)
+            end
+        end
+    else
+        self.UI.setAttribute('vagabond_buttons', 'active', false)
+    end
+end
+
+function spawnVagabond(vaga)
+    avail = Global.getTable('vagabonds')
+    if (avail[vaga] < 1) then return end
+    Global.call('VagabondChosen', {vaga})
+    spawnHere(vaga)
+end
+
+function showButtons()
+    if has_buttons then
+        self.UI.setAttribute('faction_buttons', 'active', true)
+        local avail = Global.getTable('available')
+        for _, k in ipairs(buttons) do
+            local set = false
+            local tmp = k:sub(1,-2)
+            if not (tmp..tostring(avail[tmp]) == k) then
+                self.UI.setAttribute(k, 'active', false)
+            else
+                self.UI.setAttribute(k, 'active', true)
+                set = true
+            end
+            if not set then
+                tmp = k:sub(5,-2)
+                if not (tmp..tostring(avail[tmp]) == k:sub(5,-1)) then
+                    self.UI.setAttribute(k, 'active', false)
+                else
+                    self.UI.setAttribute(k, 'active', true)
+                end
+            end
+        end
+    else
+        self.UI.setAttribute('faction_buttons', 'active', false)
+    end
+end
+
+function deleteThis()
+    Global.call('ImGone', {self})
+    self.destruct()
+end
+
+function spawnHere(faction)
+    my_pos = self.getPosition()
+    my_rot = self.getRotation()
+    -- self.destruct()
+    for _,v in ipairs(factions[faction]) do
+        local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
+        local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
+        local new_pos = {x, v.own_y, z}
+        spawnObjectJSON({
+            json              = v.json,
+            position          = new_pos,
+            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y+180, o.getRotation().z}) end
+        })
+    end
+    Global.call('ImGone', {self})
+    self.destruct()
+end
+
+function findClosestPosition()
+    local own_pos = self.getPosition()
+    local closest = nil
+    local smallest_distance = 100000000
+    local places = {{position={-50.00, 5.00, -64.50}, rotation={0, 0, 0}}, {position={0.00, 5.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 5.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={0.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={-50.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}}
+    for _, place in ipairs(places) do
+        pos = place.position
+        local distance = math.sqrt(math.pow(own_pos.x-pos[1], 2)+math.pow(own_pos.z-pos[3], 2))
+        if distance < smallest_distance then
+            smallest_distance = distance
+            closest = place
+        end
+    end
+    return closest
+end
+
+function none() end
