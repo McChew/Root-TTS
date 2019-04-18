@@ -6,7 +6,8 @@ available = {
         Riverfolk = 1,
         Lizard = 1,
         Duchy = 1,
-        Corvid = 1
+        Corvid = 1,
+        Fangus = 1
     }
 vagabonds = {
     VagaThief = 1,

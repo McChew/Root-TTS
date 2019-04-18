@@ -7,6 +7,7 @@ button_data["Riverfolk1"] = {click_function = "SwitchRiverfolk"}
 button_data["Lizard1"] = {click_function = "SwitchLizard"}
 button_data["Duchy1"] = {click_function = "SwitchDuchy"}
 button_data["Corvid1"] = {click_function = "SwitchCorvid"}
+button_data["Fangus1"] = {click_function = "SwitchFangus"}
 vagabond_buttons = {}
 vagabond_buttons["VagaThief"] = {click_function = "SwitchVagaThief"}
 vagabond_buttons["VagaTinker"] = {click_function = "SwitchVagaTinker"}
@@ -22,5 +23,5 @@ better_bot_buttons["AutoWoodland1"] = {click_function = "SwitchAutoWoodland"}
 better_bot_buttons["RoboVagabond2"] = {click_function = "SwitchRoboVagabond"}
 better_bot_buttons["OverRiverfolk1"] = {click_function = "SwitchOverRiverfolk"}
 better_bot_buttons["ClocLizard1"] = {click_function = "SwitchClocLizard"}
-buttons = {"Marquise1", "Eyrie1", "Woodland1", "Vagabond2", "Vagabond1", "Riverfolk1", "Lizard1", "Corvid1", "Duchy1", "MechMarquise1", "ElecEyrie1", "EleAEyrie1", "AutoWoodland1", "RoboVagabond2", "RoboVagabond1", "OverRiverfolk1", "ClocLizard1"}
+buttons = {"Marquise1", "Eyrie1", "Woodland1", "Vagabond2", "Vagabond1", "Riverfolk1", "Lizard1", "Corvid1", "Duchy1", "Fangus1", "MechMarquise1", "ElecEyrie1", "EleAEyrie1", "AutoWoodland1", "RoboVagabond2", "RoboVagabond1", "OverRiverfolk1", "ClocLizard1"}
 vagabonds = {"VagaArbiter", "VagaRanger", "VagaScoundrel", "VagaThief", "VagaTinker", "VagaVagrant"}
