@@ -1,9 +1,9 @@
 #include factionsv2
 #include buttonsv2
 #include factionboardxml
+#include scenarios
 
-has_buttons = true
-has_vagabond_buttons = false
+chosen_faction = nil
 
 function g()
     self.UI.setXml(board_xml)
@@ -11,7 +11,6 @@ function g()
     for x=1,10 do
         coroutine.yield()
     end
-    makeClickFunctions()
     showButtons()
     return 1
 end
@@ -21,47 +20,70 @@ function onLoad(save_state)
     startLuaCoroutine(self, 'g')
 end
 
-function makeClickFunctions()
-    for k, v in pairs(button_data) do
-        _G[v.click_function] = function() spawnFunction(k:sub(1,-2)) end
+function toggleButtons(player, value, id)
+    self.UI.setAttribute(id..'Buttons', 'active', value)
+end
+
+function setColor(_, color)
+    local colors = Global.getTable('colors')
+    if not colors[color] then
+        for k,v in pairs(colors) do
+            self.UI.setAttribute(k, 'active', v)
+        end
+        return
     end
-    for k,v in pairs(vagabond_buttons) do
-        _G[v.click_function] = function() spawnVagabond(k) end
-    end
-    for k,v in pairs(better_bot_buttons) do
-        _G[v.click_function] = function() spawnBot(k:sub(1,-2)) end
+    spawnWithColor(chosen_faction, color)
+end
+
+
+function spawnFunction(player, faction)
+    local avail = Global.getTable('available')
+    local colors = Global.getTable('colors')
+    if (avail[faction] < 1) then return end
+    Global.call('FactionChosen', {faction})
+    local preferred_color = faction_colors[faction..tostring(avail[faction])]
+    if not colors[preferred_color] then
+        player.print("Preferred color for faction: "..faction.." alread taken.\nPlease pick another", red)
+        chosen_faction = faction
+        self.UI.setAttribute("factionsButtons", "active", "False")
+        self.UI.setAttribute("botsButtons", "active", "False")
+        self.UI.setAttribute("scenariosButtons", "active", "False")
+        self.UI.setAttribute("fanButtons", "active", "False")
+        self.UI.setAttribute("colorButtons", "active", "True")
+        for k,v in pairs(colors) do
+            self.UI.setAttribute(k, 'active', v)
+        end
+        return
+    else
+        spawnWithColor(faction, preferred_color)
     end
 end
 
-function spawnFunction(faction)
-    local avail = Global.getTable('available')
-    if (avail[faction] < 1) then return end
+function spawnWithColor(faction, color)
+    local colors = Global.getTable('colors')
+    colors[color] = false
+    Global.setTable('colors', colors)
+    log(colors)
     local closest = findClosestPosition()
-    local color = faction_colors[faction..tostring(avail[faction])]
     closest.scale = {17.20, 5.40, 3.00}
     val = false
     while not val do
         val = Player[color].setHandTransform(closest, 1)
     end
-    has_buttons = false
-    Global.call('FactionChosen', {faction})
     if (faction == "Vagabond") then
-        chooseVagabond()
+        self.UI.setAttribute("factionsButtons", "active", "False")
+        self.UI.setAttribute("vagabondButtons", "active", "True")
+        self.UI.setAttribute('typeToggles', "active", "False")
+        self.UI.setAttribute("colorButtons", "active", "False")
     else
-        spawnHere(faction)
+        spawnFaction(faction)
     end
 end
 
-function spawnBot(faction)
+function spawnBot(player, faction)
     local avail = Global.getTable('available')
     if (avail[faction:sub(5,-1)] < 1) then return end
-    local closest = findClosestPosition()
-    local color = faction_colors[faction:sub(5,-1)..tostring(avail[faction:sub(5,-1)])]
-    closest.scale = {17.20, 5.40, 3.00}
-    val = false
-    while not val do
-        val = Player[color].setHandTransform(closest, 1)
-    end
+    local colors = Global.getTable('colors')
     bot = Global.getVar('bot')
     if not bot then
         for _, v in ipairs(bot_stuff) do
@@ -69,63 +91,49 @@ function spawnBot(faction)
         end
         Global.setVar('bot', true)
     end
-    has_buttons = false
     Global.call('FactionChosen', {faction:sub(5,-1)})
-    spawnHere(faction)
-end
-
-function chooseVagabond()
-    has_vagabond_buttons = true
-    vagabondButtons()
-end
-
-function vagabondButtons()
-    if has_vagabond_buttons then
-        self.UI.setAttribute('vagabond_buttons', 'active', true)
-        avail = Global.getTable('vagabonds')
-        for _,k in ipairs(vagabonds) do
-            if (avail[k] > 0) then
-                self.UI.setAttribute(k, 'active', true)
-            else
-                self.UI.setAttribute(k, 'active', false)
-            end
+    local preferred_color = faction_colors[faction:sub(5,-1)..tostring(avail[faction:sub(5,-1)])]
+    if not colors[preferred_color] then
+        player.print("Preferred color for faction: "..faction.." alread taken.\nPlease pick another", red)
+        chosen_faction = faction
+        self.UI.setAttribute("factionsButtons", "active", "False")
+        self.UI.setAttribute("botsButtons", "active", "False")
+        self.UI.setAttribute("scenariosButtons", "active", "False")
+        self.UI.setAttribute("fanButtons", "active", "False")
+        self.UI.setAttribute("colorButtons", "active", "True")
+        for k,v in pairs(colors) do
+            self.UI.setAttribute(k, 'active', v)
         end
+        return
     else
-        self.UI.setAttribute('vagabond_buttons', 'active', false)
+        spawnWithColor(faction, preferred_color)
     end
 end
 
-function spawnVagabond(vaga)
-    avail = Global.getTable('vagabonds')
+function spawnVagabond(_, vaga)
+    avail = Global.getTable('available')
     if (avail[vaga] < 1) then return end
-    Global.call('VagabondChosen', {vaga})
-    spawnHere(vaga)
+    Global.call('FactionChosen', {vaga})
+    spawnFaction(vaga)
+end
+
+function spawnScenario(_, scenario)
+    spawnHere(scenarios[scenario])
+end
+
+function spawnFaction(faction)
+    spawnHere(factions[faction])
 end
 
 function showButtons()
-    if has_buttons then
-        self.UI.setAttribute('faction_buttons', 'active', true)
-        local avail = Global.getTable('available')
-        for _, k in ipairs(buttons) do
-            local set = false
-            local tmp = k:sub(1,-2)
-            if not (tmp..tostring(avail[tmp]) == k) then
-                self.UI.setAttribute(k, 'active', false)
-            else
-                self.UI.setAttribute(k, 'active', true)
-                set = true
-            end
-            if not set then
-                tmp = k:sub(5,-2)
-                if not (tmp..tostring(avail[tmp]) == k:sub(5,-1)) then
-                    self.UI.setAttribute(k, 'active', false)
-                else
-                    self.UI.setAttribute(k, 'active', true)
-                end
-            end
+    local avail = Global.getTable('available')
+    for _, k in ipairs(buttons) do
+        local set = false
+        if (k:sub(1,-2)..tostring(avail[k:sub(1,-2)] or 0)  == k) or (k:sub(5,-2)..tostring(avail[k:sub(5,-2)] or 0) == k:sub(5,-1)) or (avail[k] and avail[k] > 0) then
+            self.UI.setAttribute(k, 'active', true)
+        else
+            self.UI.setAttribute(k, 'active', false)
         end
-    else
-        self.UI.setAttribute('faction_buttons', 'active', false)
     end
 end
 
@@ -134,11 +142,11 @@ function deleteThis()
     self.destruct()
 end
 
-function spawnHere(faction)
+function spawnHere(to_spawn)
     my_pos = self.getPosition()
     my_rot = self.getRotation()
     -- self.destruct()
-    for _,v in ipairs(factions[faction]) do
+    for _,v in ipairs(to_spawn) do
         local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
         local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
         local new_pos = {x, v.own_y, z}

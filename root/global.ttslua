@@ -7,16 +7,17 @@ available = {
         Lizard = 1,
         Duchy = 1,
         Corvid = 1,
-        Fangus = 1
-    }
-vagabonds = {
-    VagaThief = 1,
-    VagaTinker = 1,
-    VagaScoundrel = 1,
-    VagaArbiter = 1,
-    VagaRanger = 1,
-    VagaVagrant = 1
+        Fangus = 1,
+        VagaThief = 1,
+        VagaTinker = 1,
+        VagaScoundrel = 1,
+        VagaArbiter = 1,
+        VagaRanger = 1,
+        VagaVagrant = 1
 }
+
+colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
+          Purple=true, White=true, Red=true, Brown=true, Pink=true}
 
 factionboards = {}
 bot = false
@@ -43,16 +44,8 @@ function FactionChosen(par)
     ShowAllButtons()
 end
 
--- par = {vagabond}
-function VagabondChosen(par)
-    local vagabond = par[1]
-    vagabonds[vagabond] = vagabonds[vagabond] -1
-    ShowAllButtons()
-end
-
 function ShowAllButtons()
     for _, x in ipairs(factionboards) do
-        x.call('vagabondButtons', {})
         x.call('showButtons', {})
     end
 end
