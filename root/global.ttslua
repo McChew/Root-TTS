@@ -13,7 +13,8 @@ available = {
         VagaScoundrel = 1,
         VagaArbiter = 1,
         VagaRanger = 1,
-        VagaVagrant = 1
+        VagaVagrant = 1,
+        Arachnid = 1,
 }
 
 colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
