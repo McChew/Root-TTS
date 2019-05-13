@@ -139,7 +139,22 @@ board_xml = [[
     <TableLayout id="scenariosButtons" active="False">
         <Row preferredHeight="30">
             <Cell>
-                <Button class="mapButton" onClick="spawnScenario(Trickster)" color="#f78b18" icon="trickster-button">
+                <Button class="mapButton" onClick="spawnScenario(Trickster)" color="#f78b18">
+                    <Image class="mapImage" image="trickster-button" height="20" />
+                </Button>
+            </Cell>
+            <Cell />
+            <Cell />
+        </Row>
+        <Row preferredHeight="30">
+            <Cell />
+            <Cell><Text color="White">Fan Scenarios</Text></Cell>
+            <Cell />
+        </Row>
+        <Row preferredHeight="30">
+            <Cell>
+                <Button class="mapButton" onClick="spawnScenario(Civics)" color="Grey">
+                    <Image class="mapImage" image="civics-button" height="20" />
                 </Button>
             </Cell>
             <Cell />
@@ -153,7 +168,11 @@ board_xml = [[
                     <Image class="mapImage" image="arachnid-button" height="20"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="WeeklyCroak1">
+                <Button class="mapButton" onClick="spawnFunction(WeeklyCroak)" color="#8B9668">
+                    <Image class="mapImage" image="weekly-croak-button" height="20"></Image>
+                </Button>
+            </Cell>
             <Cell />
         </Row>
     </TableLayout>
