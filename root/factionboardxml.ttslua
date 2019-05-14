@@ -4,7 +4,7 @@ board_xml = [[
     <TableLayout padding="2 2 2 2" cellspacing="2"  height="250" offsetXY="0 -27" cellBackgroundColor="rgba(1,1,1,0)" />
     <TableLayout class="vagabondButtons" padding="2 2 2 2" cellspacing="2"  height="250" width="200" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" />
     <Button class="mapButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
-    <Image class="mapImage" preserveAspect="true"/>
+    <Image class="mapImage" preserveAspect="true" height="25"/>
     <Image class="vagabondImage" width="76" preserveAspect="true"/>
     <Button class="vagabondButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
 </Defaults>
@@ -18,10 +18,10 @@ board_xml = [[
 
     <ToggleGroup id="typeToggles">
     <HorizontalLayout height="25" rectAlignment="UpperLeft" width="300">
-        <ToggleButton class="toggleButton" id="factions" icon="faction-title" />
-        <ToggleButton class="toggleButton" id="bots" icon="bots-title" />
-        <ToggleButton class="toggleButton" id="scenarios">Scenarios</ToggleButton>
-        <ToggleButton class="toggleButton" id="fan">Fan Factions</ToggleButton>
+        <ToggleButton class="toggleButton" id="factions"><Image class="mapImage" image="faction-title" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="bots"><Image class="mapImage" image="bots-title" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="scenarios"><Image class="mapImage" image="scenarios-button" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="fan"><Image class="mapImage" image="fan-factions-button" height="20"/></ToggleButton>
     </HorizontalLayout>
     </ToggleGroup>
     <Button id="closeButton"
