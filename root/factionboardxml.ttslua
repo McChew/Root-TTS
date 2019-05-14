@@ -146,20 +146,6 @@ board_xml = [[
             <Cell />
             <Cell />
         </Row>
-        <Row preferredHeight="30">
-            <Cell />
-            <Cell><Text color="White">Fan Scenarios</Text></Cell>
-            <Cell />
-        </Row>
-        <Row preferredHeight="30">
-            <Cell>
-                <Button class="mapButton" onClick="spawnScenario(Civics)" color="Grey">
-                    <Image class="mapImage" image="civics-button" height="20" />
-                </Button>
-            </Cell>
-            <Cell />
-            <Cell />
-        </Row>
     </TableLayout>
     <TableLayout id="fanButtons" active="False">
         <Row preferredHeight="30">
