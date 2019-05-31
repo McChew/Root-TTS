@@ -83,11 +83,7 @@ board_xml = [[
                     <Image class="mapImage" image="underground-button"></Image>
                 </Button>
             </Cell>
-            <Cell id="Fangus1">
-                <Button class="mapButton" onClick="spawnFunction(Fangus)" color="Pink">
-                    <Image class="mapImage" image="fangus-button"></Image>
-                </Button>
-            </Cell>
+            <Cell />
         </Row>
     </TableLayout>
     <TableLayout id="botsButtons" active="False">
@@ -159,7 +155,11 @@ board_xml = [[
                     <Image class="mapImage" image="weekly-croak-button" height="20"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="Fangus1">
+                <Button class="mapButton" onClick="spawnFunction(Fangus)" color="Pink">
+                    <Image class="mapImage" image="fangus-button"></Image>
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
