@@ -161,6 +161,15 @@ board_xml = [[
                 </Button>
             </Cell>
         </Row>
+        <Row preferredHeight="30">
+            <Cell id="Boars1">
+                <Button class="mapButton" onClick="spawnFunction(Boars)" color="Brown">
+                    <Image class="mapImage" Width="90%" image="boars-button"></Image>
+                </Button>
+            </Cell>
+            <Cell />
+            <Cell />
+        </Row>
     </TableLayout>
     <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
         <Row preferredHeight="85">

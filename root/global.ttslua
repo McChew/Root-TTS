@@ -16,6 +16,7 @@ available = {
         VagaVagrant = 1,
         Arachnid = 1,
         WeeklyCroak = 1,
+        Boars = 1,
 }
 
 colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,

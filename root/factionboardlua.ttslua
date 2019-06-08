@@ -37,6 +37,10 @@ end
 
 
 function spawnFunction(player, faction)
+    if isSpectator(player) then
+        broadcastToColor("Sit down first", player.color, "Red")
+        return
+    end
     local avail = Global.getTable('available')
     local colors = Global.getTable('colors')
     if (avail[faction] < 1) then return end
@@ -56,6 +60,14 @@ function spawnFunction(player, faction)
         return
     else
         spawnWithColor(faction, preferred_color)
+    end
+end
+
+function isSpectator(player)
+    if player.color == "Grey" then
+        return true
+    else
+        return false
     end
 end
 
@@ -81,6 +93,10 @@ function spawnWithColor(faction, color)
 end
 
 function spawnBot(player, faction)
+    if isSpectator(player) then
+        broadcastToColor("Sit down first", player.color, "Red")
+        return
+    end
     local avail = Global.getTable('available')
     if (avail[faction:sub(5,-1)] < 1) then return end
     local colors = Global.getTable('colors')
@@ -110,14 +126,22 @@ function spawnBot(player, faction)
     end
 end
 
-function spawnVagabond(_, vaga)
+function spawnVagabond(player, vaga)
+    if isSpectator(player) then
+        broadcastToColor("Sit down first", player.color, "Red")
+        return
+    end
     avail = Global.getTable('available')
     if (avail[vaga] < 1) then return end
     Global.call('FactionChosen', {vaga})
     spawnFaction(vaga)
 end
 
-function spawnScenario(_, scenario)
+function spawnScenario(player, scenario)
+    if isSpectator(player) then
+        broadcastToColor("Sit down first", player.color, "Red")
+        return
+    end
     spawnHere(scenarios[scenario])
 end
 
