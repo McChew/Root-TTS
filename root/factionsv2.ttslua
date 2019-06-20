@@ -17768,7 +17768,7 @@ factions["Boars"] = {{distance=17.506708891596, heading=5.05550446174547, own_y=
   "HideWhenFaceDown": false,
   "Hands": false,
   "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532834899157/CB99F4EF09E681EDF221014F9739142E0464F143/",
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532838660829/3D2907AB2C0988332CC761F42AB6D750E7A2AA86/",
     "ImageSecondaryURL": "",
     "WidthScale": 0.0,
     "CustomTile": {
