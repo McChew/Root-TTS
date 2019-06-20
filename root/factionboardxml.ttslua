@@ -22,6 +22,7 @@ board_xml = [[
         <ToggleButton class="toggleButton" id="bots"><Image class="mapImage" image="bots-title" height="20"/></ToggleButton>
         <ToggleButton class="toggleButton" id="scenarios"><Image class="mapImage" image="scenarios-button" height="20"/></ToggleButton>
         <ToggleButton class="toggleButton" id="fan"><Image class="mapImage" image="fan-factions-button" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="fanbot"><Image class="mapImage" image="fan-bots-button" height="20"/></ToggleButton>
     </HorizontalLayout>
     </ToggleGroup>
     <Button id="closeButton"
@@ -88,6 +89,46 @@ board_xml = [[
     </TableLayout>
     <TableLayout id="botsButtons" active="False">
         <Row preferredHeight="30">
+            <Cell id="rBotMarquise1">
+                <Button class="mapButton" onClick="spawnBot(rBotMarquise)" color="#f78b18">
+                    <Image class="mapImage" image="mech-marq2-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="rBotEyrie1">
+                <Button class="mapButton" onClick="spawnBot(rBotEyrie)" id="ElecEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie"></Image>
+                </Button>
+            </Cell>
+            <Cell id="rBotWoodland1">
+                <Button class="mapButton" onClick="spawnBot(rBotWoodland)" color="green">
+                    <Image class="mapImage" image="automated-alliance"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell>
+                <Button id="rBotVagabond2" class="mapButton" onClick="spawnBot(rBotVagabond)" color="#dbdbdb">
+                    <Image class="mapImage" image="vehicular-vagabond"></Image>
+                </Button>
+              <Button id="rBotVagabond1" class="mapButton" onClick="spawnBot(rBotVagabond)" color="gray">
+                  <Image class="mapImage" image="vehicular-vagabond2"></Image>
+              </Button>
+            </Cell>
+        </Row>
+    </TableLayout>
+    <TableLayout id="scenariosButtons" active="False">
+        <Row preferredHeight="30">
+            <Cell>
+                <Button class="mapButton" onClick="spawnScenario(Trickster)" color="#f78b18">
+                    <Image class="mapImage" image="trickster-button" height="20" />
+                </Button>
+            </Cell>
+            <Cell />
+            <Cell />
+        </Row>
+    </TableLayout>
+    <TableLayout id="fanbotButtons" active="False">
+        <Row preferredHeight="30">
             <Cell id="MechMarquise1">
                 <Button class="mapButton" onClick="spawnBot(MechMarquise)" color="#f78b18">
                     <Image class="mapImage" image="mech-marq2-button"></Image>
@@ -130,17 +171,6 @@ board_xml = [[
                     <Image class="mapImage" image="clockwork-cult"></Image>
                 </Button>
             </Cell>
-        </Row>
-    </TableLayout>
-    <TableLayout id="scenariosButtons" active="False">
-        <Row preferredHeight="30">
-            <Cell>
-                <Button class="mapButton" onClick="spawnScenario(Trickster)" color="#f78b18">
-                    <Image class="mapImage" image="trickster-button" height="20" />
-                </Button>
-            </Cell>
-            <Cell />
-            <Cell />
         </Row>
     </TableLayout>
     <TableLayout id="fanButtons" active="False">
