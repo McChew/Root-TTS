@@ -93,7 +93,11 @@ function spawnWithColor(faction, color)
     end
 end
 
-function spawnBot(player, faction)
+function spawnFanBot(player, faction)
+    spawnBot(player, faction, true)
+end
+
+function spawnBot(player, faction, fan)
     if isSpectator(player) then
         broadcastToColor("Sit down first", player.color, "Red")
         return
@@ -103,7 +107,12 @@ function spawnBot(player, faction)
     local colors = Global.getTable('colors')
     bot = Global.getVar('bot')
     if not bot then
-        for _, v in ipairs(bot_stuff) do
+        if fan then
+            bot_pieces = fan_bot_stuff
+        else
+            bot_pieces = bot_stuff
+        end
+        for _, v in ipairs(bot_pieces) do
             spawnObjectJSON({json=v})
         end
         Global.setVar('bot', true)

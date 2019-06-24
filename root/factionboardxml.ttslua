@@ -130,44 +130,44 @@ board_xml = [[
     <TableLayout id="fanbotButtons" active="False">
         <Row preferredHeight="30">
             <Cell id="MechMarquise1">
-                <Button class="mapButton" onClick="spawnBot(MechMarquise)" color="#f78b18">
+                <Button class="mapButton" onClick="spawnFanBot(MechMarquise)" color="#f78b18">
                     <Image class="mapImage" image="mech-marq2-button"></Image>
                 </Button>
             </Cell>
             <Cell id="ElecEyrie1">
-                <Button class="mapButton" onClick="spawnBot(ElecEyrie)" id="ElecEyrie1" color="blue">
+                <Button class="mapButton" onClick="spawnFanBot(ElecEyrie)" id="ElecEyrie1" color="blue">
                     <Image class="mapImage" image="electric-eyrie"></Image>
                 </Button>
             </Cell>
             <Cell id="EleAEyrie1">
-                <Button class="mapButton" onClick="spawnBot(EleAEyrie)" id="EleAEyrie1" color="blue">
+                <Button class="mapButton" onClick="spawnFanBot(EleAEyrie)" id="EleAEyrie1" color="blue">
                     <Image class="mapImage" image="electric-eyrie-alt"></Image>
                 </Button>
             </Cell>
         </Row>
         <Row preferredHeight="30">
             <Cell id="AutoWoodland1">
-                <Button class="mapButton" onClick="spawnBot(AutoWoodland)" color="green">
+                <Button class="mapButton" onClick="spawnFanBot(AutoWoodland)" color="green">
                     <Image class="mapImage" image="automated-alliance"></Image>
                 </Button>
             </Cell>
             <Cell>
-                <Button id="RoboVagabond2" class="mapButton" onClick="spawnBot(RoboVagabond)" color="#dbdbdb">
+                <Button id="RoboVagabond2" class="mapButton" onClick="spawnFanBot(RoboVagabond)" color="#dbdbdb">
                     <Image class="mapImage" image="robot-racoon"></Image>
                 </Button>
-              <Button id="RoboVagabond1" class="mapButton" onClick="spawnBot(RoboVagabond)" color="gray">
+              <Button id="RoboVagabond1" class="mapButton" onClick="spawnFanBot(RoboVagabond)" color="gray">
                   <Image class="mapImage" image="robot-racoon2"></Image>
               </Button>
             </Cell>
             <Cell id="OverRiverfolk1">
-                <Button class="mapButton" onClick="spawnBot(OverRiverfolk)" color="#47f8ff">
+                <Button class="mapButton" onClick="spawnFanBot(OverRiverfolk)" color="#47f8ff">
                     <Image class="mapImage" image="otter-overlords"></Image>
                 </Button>
             </Cell>
         </Row>
         <Row preferredHeight="30">
             <Cell id="ClocLizard1">
-                <Button class="mapButton" onClick="spawnBot(ClocLizard)" color="yellow">
+                <Button class="mapButton" onClick="spawnFanBot(ClocLizard)" color="yellow">
                     <Image class="mapImage" image="clockwork-cult"></Image>
                 </Button>
             </Cell>
