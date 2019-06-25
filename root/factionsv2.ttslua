@@ -26570,14 +26570,14 @@ factions["WeeklyCroak"] = {{distance=13.6186925595361, heading=5.9411261502119, 
     }
   ]
 }]]},}
-factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y=1.67728328704834, json=[[{
+factions["Boars"] = {{distance=17.3942730063209, heading=5.06609422766262, own_y=1.67728328704834, json=[[{
   "Name": "Custom_Token",
   "Transform": {
-    "posX": -16.4300175,
+    "posX": -16.3175049,
     "posY": 1.67728329,
-    "posZ": 5.93476963,
+    "posZ": 6.02497339,
     "rotX": 359.983154,
-    "rotY": 0.0166483615,
+    "rotY": 0.01817832,
     "rotZ": 359.920135,
     "scaleX": 3.17,
     "scaleY": 1.0,
@@ -26672,19 +26672,19 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
       "Rotation": {
         "x": 0.00241599348,
         "y": 0.08256333,
-        "z": 0.000418693118
+        "z": 0.0004186932
       }
     }
   ]
-}]]},{distance=14.8520788172626, heading=5.8057476113877, own_y=1.6160569190979, json=[[{
+}]]},{distance=8.00994239369639, heading=5.50636232635373, own_y=1.60252451896667, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": -6.82461452,
-    "posY": 1.61605692,
-    "posZ": 13.1912622,
-    "rotX": 359.983582,
-    "rotY": 0.0100162169,
-    "rotZ": 359.9203,
+    "posX": -5.61511946,
+    "posY": 1.60252452,
+    "posZ": 5.71225834,
+    "rotX": 0.000259394466,
+    "rotY": 0.01826949,
+    "rotZ": -0.000621841638,
     "scaleX": 0.70858,
     "scaleY": 1.0,
     "scaleZ": 0.70858
@@ -26694,52 +26694,7 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "ColorDiffuse": {
     "r": 1.0,
     "g": 0.62264353,
-    "b": 0.189889282
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/793110609118849978/DF60CE5BDBF5AACEB16E3EB4FAA55FE1B4A24855/",
-    "ImageSecondaryURL": "",
-    "WidthScale": 0.0,
-    "CustomTile": {
-      "Type": 3,
-      "Thickness": 0.1,
-      "Stackable": false,
-      "Stretch": true
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "db77d8"
-}]]},{distance=14.1824883330723, heading=5.90675954483533, own_y=1.61381530761719, json=[[{
-  "Name": "Custom_Tile",
-  "Transform": {
-    "posX": -5.21347761,
-    "posY": 1.61381531,
-    "posZ": 13.1895075,
-    "rotX": 359.983582,
-    "rotY": 0.0176601447,
-    "rotZ": 359.9203,
-    "scaleX": 0.70858,
-    "scaleY": 1.0,
-    "scaleZ": 0.70858
-  },
-  "Nickname": "Looted Building",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 1.0,
-    "g": 0.62264353,
-    "b": 0.189889282
+    "b": 0.1898892
   },
   "Locked": false,
   "Grid": true,
@@ -26766,15 +26721,15 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "556f91"
-}]]},{distance=13.1746581710827, heading=6.25998794079314, own_y=1.60698211193085, json=[[{
+}]]},{distance=9.23025064651713, heading=5.37996307034419, own_y=1.6024923324585, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": -0.305601329,
-    "posY": 1.60698211,
-    "posZ": 13.1711273,
-    "rotX": 359.983521,
-    "rotY": 0.0268866513,
-    "rotZ": 359.920349,
+    "posX": -7.24876547,
+    "posY": 1.60249233,
+    "posZ": 5.714302,
+    "rotX": 0.0004113546,
+    "rotY": 0.0123972278,
+    "rotZ": -0.0006855898,
     "scaleX": 0.70858,
     "scaleY": 1.0,
     "scaleZ": 0.70858
@@ -26784,7 +26739,7 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "ColorDiffuse": {
     "r": 1.0,
     "g": 0.62264353,
-    "b": 0.189889282
+    "b": 0.1898892
   },
   "Locked": false,
   "Grid": true,
@@ -26810,16 +26765,16 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "XmlUI": "",
   "LuaScript": "",
   "LuaScriptState": "",
-  "GUID": "ef1680"
-}]]},{distance=13.6635466071726, heading=6.01671785935044, own_y=1.6115654706955, json=[[{
+  "GUID": "db77d8"
+}]]},{distance=6.96651492561318, heading=5.67168970778287, own_y=1.60242772102356, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": -3.59796762,
-    "posY": 1.61156547,
-    "posZ": 13.1813345,
-    "rotX": 359.983582,
-    "rotY": 0.0259643774,
-    "rotZ": 359.9203,
+    "posX": -3.99943662,
+    "posY": 1.60242772,
+    "posZ": 5.70412874,
+    "rotX": 0.000556577,
+    "rotY": 0.0267648045,
+    "rotZ": -0.0013851223,
     "scaleX": 0.70858,
     "scaleY": 1.0,
     "scaleZ": 0.70858
@@ -26829,7 +26784,7 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "ColorDiffuse": {
     "r": 1.0,
     "g": 0.62264353,
-    "b": 0.189889282
+    "b": 0.1898892
   },
   "Locked": false,
   "Grid": true,
@@ -26856,15 +26811,15 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "28000c"
-}]]},{distance=13.3187162096924, heading=6.13840879584474, own_y=1.60923266410828, json=[[{
+}]]},{distance=6.17495786168201, heading=5.88956883886403, own_y=1.60251474380493, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": -1.92151964,
-    "posY": 1.60923266,
-    "posZ": 13.1793919,
-    "rotX": 359.983551,
-    "rotY": 0.00585895125,
-    "rotZ": 359.9203,
+    "posX": -2.368298,
+    "posY": 1.60251474,
+    "posZ": 5.7027607,
+    "rotX": 0.00028674936,
+    "rotY": 0.00753123825,
+    "rotZ": -0.0008381588,
     "scaleX": 0.70858,
     "scaleY": 1.0,
     "scaleZ": 0.70858
@@ -26874,7 +26829,7 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "ColorDiffuse": {
     "r": 1.0,
     "g": 0.62264353,
-    "b": 0.189889282
+    "b": 0.1898892
   },
   "Locked": false,
   "Grid": true,
@@ -26901,14 +26856,103 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "2cfe6e"
-}]]},{distance=10.9923239054516, heading=4.16537798112317, own_y=2.21735215187073, json=[[{
+}]]},{distance=5.74077825585799, heading=6.15567543286249, own_y=1.60248196125031, json=[[{
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -0.7300353,
+    "posY": 1.602482,
+    "posZ": 5.694186,
+    "rotX": 0.000369494344,
+    "rotY": 0.0280720647,
+    "rotZ": -0.00113890134,
+    "scaleX": 0.70858,
+    "scaleY": 1.0,
+    "scaleZ": 0.70858
+  },
+  "Nickname": "Looted Building",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 1.0,
+    "g": 0.62264353,
+    "b": 0.1898892
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/793110609118849978/DF60CE5BDBF5AACEB16E3EB4FAA55FE1B4A24855/",
+    "ImageSecondaryURL": "",
+    "WidthScale": 0.0,
+    "CustomTile": {
+      "Type": 3,
+      "Thickness": 0.1,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "ef1680"
+}]]},{distance=12.9792728280907, heading=3.95788785183517, own_y=1.63006436824799, json=[[{
+  "Name": "Custom_Token",
+  "Transform": {
+    "posX": -9.456882,
+    "posY": 1.63006437,
+    "posZ": -8.889818,
+    "rotX": 1.728756E-08,
+    "rotY": 0.0186427739,
+    "rotZ": -1.71632323E-07,
+    "scaleX": 0.335945159,
+    "scaleY": 1.0,
+    "scaleZ": 0.34
+  },
+  "Nickname": "Boars VP",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 1.0,
+    "g": 1.0,
+    "b": 1.0
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": false,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/790858965203037022/6F3DEF7D98D16BAD1F2B8D26A2439C978323ABA1/",
+    "ImageSecondaryURL": "",
+    "WidthScale": 0.0,
+    "CustomToken": {
+      "Thickness": 0.254999846,
+      "MergeDistancePixels": 15.0,
+      "Stackable": false
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "166355"
+}]]},{distance=10.8496885242082, heading=4.1670850112283, own_y=2.21735215187073, json=[[{
   "Name": "Custom_Model_Bag",
   "Transform": {
-    "posX": -9.388369,
+    "posX": -9.276166,
     "posY": 2.21735215,
-    "posZ": -5.71749735,
-    "rotX": 89.94066,
-    "rotY": 180.045288,
+    "posZ": -5.627481,
+    "rotX": 90.0,
+    "rotY": 180.046768,
     "rotZ": 0.0,
     "scaleX": 4.85,
     "scaleY": 4.85,
@@ -27624,59 +27668,15 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
     }
   ],
   "GUID": "8d69d3"
-}]]},{distance=13.1226237709702, heading=3.95874131961485, own_y=1.63006436824799, json=[[{
-  "Name": "Custom_Token",
-  "Transform": {
-    "posX": -9.568997,
-    "posY": 1.63006437,
-    "posZ": -8.979839,
-    "rotX": -3.69550321E-07,
-    "rotY": 0.01712752,
-    "rotZ": -2.95221184E-07,
-    "scaleX": 0.335945159,
-    "scaleY": 1.0,
-    "scaleZ": 0.34
-  },
-  "Nickname": "Boars VP",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 1.0,
-    "g": 1.0,
-    "b": 1.0
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": false,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/790858965203037022/6F3DEF7D98D16BAD1F2B8D26A2439C978323ABA1/",
-    "ImageSecondaryURL": "",
-    "WidthScale": 0.0,
-    "CustomToken": {
-      "Thickness": 0.254999846,
-      "MergeDistancePixels": 15.0,
-      "Stackable": false
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "166355"
-}]]},{distance=6.3454928495295, heading=3.36550508383184, own_y=2.32611083984375, json=[[{
+}]]},{distance=6.23366210399273, heading=3.35115504091849, own_y=2.32611131668091, json=[[{
   "Name": "Custom_Dice",
   "Transform": {
-    "posX": -1.40900314,
-    "posY": 2.32611084,
-    "posZ": -6.18707132,
-    "rotX": 26.5648689,
-    "rotY": 62.68048,
-    "rotZ": 72.000145,
+    "posX": -1.29681182,
+    "posY": 2.32611132,
+    "posZ": -6.09726858,
+    "rotX": 26.565052,
+    "rotY": 62.6818,
+    "rotZ": 71.99993,
     "scaleX": 1.94999981,
     "scaleY": 1.94999981,
     "scaleZ": 1.94999981
@@ -27808,14 +27808,14 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
       }
     }
   ]
-}]]},{distance=6.80885243043031, heading=2.77092713699802, own_y=2.32611155509949, json=[[{
+}]]},{distance=6.76726948326639, heading=2.7506726004892, own_y=2.32611155509949, json=[[{
   "Name": "Custom_Dice",
   "Transform": {
-    "posX": 2.466399,
+    "posX": 2.57858372,
     "posY": 2.32611156,
-    "posZ": -6.34642553,
+    "posZ": -6.25672531,
     "rotX": 90.0,
-    "rotY": 42.9269142,
+    "rotY": 42.92841,
     "rotZ": 0.0,
     "scaleX": 1.94999981,
     "scaleY": 1.94999981,
@@ -27948,15 +27948,15 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
       }
     }
   ]
-}]]},{distance=15.4346823395398, heading=1.60298085562669, own_y=1.50256454944611, json=[[{
+}]]},{distance=15.544368422986, heading=1.59700281008697, own_y=1.50256454944611, json=[[{
   "Name": "Custom_Tile_Stack",
   "Transform": {
-    "posX": 15.4266777,
+    "posX": 15.53902,
     "posY": 1.50256455,
-    "posZ": -0.496658474,
-    "rotX": -4.278079E-08,
-    "rotY": 0.0165433,
-    "rotZ": -1.15653215E-07,
+    "posZ": -0.407302856,
+    "rotX": 1.0132621E-08,
+    "rotY": 0.0180781949,
+    "rotZ": -4.561915E-08,
     "scaleX": 0.7602123,
     "scaleY": 1.0,
     "scaleZ": 0.7602123
@@ -27996,14 +27996,14 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "27ece5"
-}]]},{distance=16.2646751666042, heading=1.3320713703891, own_y=1.53173089027405, json=[[{
+}]]},{distance=16.395180812459, heading=1.32839834477715, own_y=1.53173089027405, json=[[{
   "Name": "Custom_Token",
   "Transform": {
-    "posX": 15.8034019,
+    "posX": 15.9158592,
     "posY": 1.53173089,
-    "posZ": 3.84602284,
+    "posZ": 3.93536854,
     "rotX": 359.983154,
-    "rotY": 0.0165937189,
+    "rotY": 0.0181236789,
     "rotZ": 359.9201,
     "scaleX": 1.25705588,
     "scaleY": 1.0,
@@ -28040,15 +28040,15 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "LuaScript": "function onload(saved_data)\r\n    f_size = 260\r\n    light_mode = false\r\n    center_mode = false\r\n    tooltip_show = true\r\n\r\n    if saved_data ~= \"\" then\r\n        local loaded_data = JSON.decode(saved_data)\r\n        light_mode = loaded_data[1]\r\n        center_mode = loaded_data[2]\r\n        tooltip_show = loaded_data[3]\r\n    end\r\n\r\n    createAll()\r\nend\r\n\r\nfunction updateSave()\r\n    local data_to_save = {light_mode, center_mode, tooltip_show}\r\n    saved_data = JSON.encode(data_to_save)\r\n    self.script_state = saved_data\r\nend\r\n\r\nfunction createAll()\r\n    s_color = {0.5, 0.5, 0.5, 95}\r\n\r\n    if light_mode then\r\n        f_color = {1,1,1,95}\r\n    else\r\n        f_color = {0,0,0,95}\r\n    end\r\n\r\n    if center_mode then\r\n        f_align = 3\r\n    else\r\n        f_align = 1\r\n    end\r\n\r\n    if tooltip_show then\r\n        ttText = self.getName() .. \"\\n----------\\n\" .. self.getDescription()\r\n    else\r\n        ttText = \"\"\r\n    end\r\n\r\n    self.createInput({\r\n        value = self.getName(), \r\n        input_function = \"editName\", \r\n        label = \"Notecard\",\r\n        function_owner = self, \r\n        alignment = 3,\r\n        position = {0,0.05,-1}, \r\n        width = 1800, \r\n        height = 300, \r\n        font_size = 160, \r\n        scale={x=1, y=1, z=1},\r\n        font_color= f_color,\r\n        color = {0,0,0,0},\r\n        tooltip = ttText\r\n        })\r\n\r\n    self.createInput({\r\n        value = self.getDescription(), \r\n        label = \"\\nClick and type here\\n\\nFlip for settings\",\r\n        input_function = \"editDesc\", \r\n        function_owner = self, \r\n        alignment = f_align,\r\n        position = {0,0.05,0.28}, \r\n        width = 1800, \r\n        height = 1000, \r\n        font_size = 120, \r\n        scale={x=1, y=1, z=1},\r\n        font_color=f_color,\r\n        color = {0,0,0,0},\r\n        tooltip = ttText\r\n        })\r\n\r\n    self.createButton({\r\n        label=\"- Notecard Settings -\",\r\n        tooltip=\"- Notecard Settings -\",\r\n        click_function=\"null\",\r\n        function_owner=self,\r\n        position={0,-0.05,-1.1},\r\n        rotation={180,180,0},\r\n        height=300,\r\n        width=800,\r\n        scale={x=1, y=1, z=1},\r\n        font_size=140,\r\n        font_color=s_color,\r\n        color={0,0,0,0}\r\n        })\r\n\r\n    if light_mode then\r\n        lightButtonText = \"[ Set dark text ]\"\r\n    else\r\n        lightButtonText = \"[ Set light text ]\"\r\n    end\r\n    self.createButton({\r\n        label=lightButtonText,\r\n        tooltip=lightButtonText,\r\n        click_function=\"swap_fcolor\",\r\n        function_owner=self,\r\n        position={0,-0.05,-0.5},\r\n        rotation={180,180,0},\r\n        height=250,\r\n        width=800,\r\n        scale={x=1, y=1, z=1},\r\n        font_size=100,\r\n        font_color=s_color,\r\n        color={0,0,0,0}\r\n        })\r\n\r\n    if center_mode then\r\n        centerButtonText = \"[ Set left align ]\"\r\n    else\r\n        centerButtonText = \"[ Set center align ]\"\r\n    end\r\n    self.createButton({\r\n        label=centerButtonText,\r\n        tooltip=centerButtonText,\r\n        click_function=\"swap_align\",\r\n        function_owner=self,\r\n        position={0,-0.05,0},\r\n        rotation={180,180,0},\r\n        height=250,\r\n        width=800,\r\n        scale={x=1, y=1, z=1},\r\n        font_size=100,\r\n        font_color=s_color,\r\n        color={0,0,0,0}\r\n        })\r\n\r\n    if tooltip_show then\r\n        tooltipShowText = \"[ Hide description in tooltip ]\"\r\n    else\r\n        tooltipShowText = \"[ Show description in tooltip ]\"\r\n    end\r\n    self.createButton({\r\n        label=tooltipShowText,\r\n        tooltip=tooltipShowText,\r\n        click_function=\"swap_tooltip\",\r\n        function_owner=self,\r\n        position={0,-0.05,0.5},\r\n        rotation={180,180,0},\r\n        height=250,\r\n        width=800,\r\n        scale={x=1, y=1, z=1},\r\n        font_size=100,\r\n        font_color=s_color,\r\n        color={0,0,0,0}\r\n        })\r\n\r\n    self.createInput({\r\n        value = \"Sample Text\",\r\n        label = \"...\",\r\n        input_function = \"keepSample\", \r\n        function_owner = self, \r\n        alignment = f_align,\r\n        position={0,-0.05,1.1},\r\n        rotation={180,180,0},\r\n        width = 1800, \r\n        height = 250, \r\n        font_size = 120, \r\n        scale={x=1, y=1, z=1},\r\n        font_color=f_color,\r\n        color = {0,0,0,0}\r\n        })\r\n\r\n    setTooltips()\r\nend\r\n\r\nfunction removeAll()\r\n    self.removeInput(0)\r\n    self.removeInput(1)\r\n    self.removeInput(2)\r\n    self.removeButton(0)\r\n    self.removeButton(1)\r\n    self.removeButton(2)\r\n    self.removeButton(3)\r\nend\r\n\r\nfunction reloadAll()\r\n    removeAll()\r\n    createAll()\r\n    setTooltips()\r\n    updateSave()\r\nend\r\n\r\nfunction update_fcolor()\r\nend\r\n\r\nfunction swap_fcolor(_obj, _color, alt_click)\r\n    light_mode = not light_mode\r\n    reloadAll()\r\nend\r\n\r\nfunction swap_align(_obj, _color, alt_click)\r\n    center_mode = not center_mode\r\n    reloadAll()\r\nend\r\n\r\nfunction swap_tooltip(_obj, _color, alt_click)\r\n    tooltip_show = not tooltip_show\r\n    reloadAll()\r\n    setTooltips()\r\nend\r\n\r\nfunction editName(_obj, _string, value) \r\n    self.setName(value)\r\n    setTooltips()\r\nend\r\n\r\nfunction editDesc(_obj, _string, value) \r\n    self.setDescription(value)\r\n    setTooltips()\r\nend\r\n\r\nfunction setTooltips()\r\n    title = self.getName()\r\n    if title == \"\" then\r\n        title = \"Notecard\"\r\n    end\r\n    desc = self.getDescription()\r\n\r\n    if tooltip_show then\r\n        ttText = title .. \"\\n----------\\n\" .. desc\r\n    else\r\n        ttText = \"\"\r\n    end\r\n\r\n    self.editInput({\r\n        index = 0,\r\n        value = self.getName(),\r\n        tooltip = ttText\r\n        })\r\n    self.editInput({\r\n        index = 1,\r\n        value = self.getDescription(),\r\n        tooltip = ttText\r\n        })\r\nend\r\n\r\nfunction null()\r\nend\r\n\r\nfunction keepSample(_obj, _string, value) \r\n    reloadAll()\r\nend",
   "LuaScriptState": "[false,true,false]",
   "GUID": "56a44e"
-}]]},{distance=13.2386282419941, heading=0.09571810901588, own_y=1.60479879379272, json=[[{
+}]]},{distance=5.7658384589718, heading=0.150347784436536, own_y=1.60244143009186, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": 1.265231,
-    "posY": 1.60479879,
-    "posZ": 13.1780424,
-    "rotX": 359.983521,
-    "rotY": 0.0155525673,
-    "rotZ": 359.920349,
+    "posX": 0.863607466,
+    "posY": 1.60244143,
+    "posZ": 5.700808,
+    "rotX": 0.0004623904,
+    "rotY": 0.0172278825,
+    "rotZ": -0.00148537394,
     "scaleX": 0.70858,
     "scaleY": 1.0,
     "scaleZ": 0.70858
@@ -28058,7 +28058,7 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "ColorDiffuse": {
     "r": 1.0,
     "g": 0.62264353,
-    "b": 0.189889282
+    "b": 0.1898892
   },
   "Locked": false,
   "Grid": true,
@@ -28085,15 +28085,15 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "a7ad16"
-}]]},{distance=6.29733322444454, heading=0.0424224130937779, own_y=1.50421214103699, json=[[{
+}]]},{distance=6.74635693391774, heading=0.0534654208946448, own_y=1.50252306461334, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": 0.267056584,
-    "posY": 1.50421214,
-    "posZ": 6.29168129,
-    "rotX": 359.983582,
-    "rotY": 0.0163205154,
-    "rotZ": 359.9203,
+    "posX": 0.360513628,
+    "posY": 1.50252306,
+    "posZ": 6.73673058,
+    "rotX": 7.316423E-05,
+    "rotY": 0.0162730869,
+    "rotZ": -0.0002652217,
     "scaleX": 8.822735,
     "scaleY": 1.0,
     "scaleZ": 8.822735
@@ -28102,8 +28102,8 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "Description": "",
   "ColorDiffuse": {
     "r": 0.9559999,
-    "g": 0.391993254,
-    "b": 0.112993263
+    "g": 0.391993135,
+    "b": 0.112993143
   },
   "Locked": true,
   "Grid": true,
@@ -28116,7 +28116,7 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "HideWhenFaceDown": false,
   "Hands": false,
   "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532850770401/F731DE0D6FF79A9127A60BB8AA55BDDB37F88101/",
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/784105377317135576/469DF3AABB0E036F25E0553462648F3759C837E0/",
     "ImageSecondaryURL": "",
     "WidthScale": 0.0,
     "CustomTile": {
@@ -28131,162 +28131,6 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
   "LuaScriptState": "",
   "GUID": "52c93d",
   "AttachedSnapPoints": [
-    {
-      "Position": {
-        "x": 0.131384581,
-        "y": 0.100000277,
-        "z": 0.122315347
-      },
-      "Rotation": {
-        "x": 0.00212183315,
-        "y": 359.965973,
-        "z": 0.000384516839
-      }
-    },
-    {
-      "Position": {
-        "x": 0.125420451,
-        "y": 0.100000262,
-        "z": 0.2851222
-      },
-      "Rotation": {
-        "x": 0.00212183315,
-        "y": 359.965973,
-        "z": 0.000384516839
-      }
-    },
-    {
-      "Position": {
-        "x": 0.121344768,
-        "y": 0.100000307,
-        "z": -0.05769425
-      },
-      "Rotation": {
-        "x": 0.00212183315,
-        "y": 359.965973,
-        "z": 0.000384516839
-      }
-    },
-    {
-      "Position": {
-        "x": 0.125444353,
-        "y": 0.100000292,
-        "z": 0.4621112
-      },
-      "Rotation": {
-        "x": 0.00212183315,
-        "y": 359.965973,
-        "z": 0.000384516839
-      }
-    },
-    {
-      "Position": {
-        "x": -0.6463081,
-        "y": 0.100000337,
-        "z": -0.04757781
-      },
-      "Rotation": {
-        "x": 1.908758E-06,
-        "y": 0.007584819,
-        "z": 180.0
-      }
-    },
-    {
-      "Position": {
-        "x": -0.6474527,
-        "y": 0.100000307,
-        "z": 0.154735669
-      },
-      "Rotation": {
-        "x": 3.70986584E-07,
-        "y": 359.985229,
-        "z": -2.95802948E-07
-      }
-    },
-    {
-      "Position": {
-        "x": -0.644309044,
-        "y": 0.100000344,
-        "z": 0.390215039
-      },
-      "Rotation": {
-        "x": -1.09195E-06,
-        "y": 359.9757,
-        "z": -6.31985131E-07
-      }
-    },
-    {
-      "Position": {
-        "x": 0.112667829,
-        "y": 0.09949036,
-        "z": 0.7805088
-      },
-      "Rotation": {
-        "x": -1.13846987E-07,
-        "y": 8.196227E-05,
-        "z": 2.6680345E-08
-      }
-    },
-    {
-      "Position": {
-        "x": -0.06536911,
-        "y": 0.09994455,
-        "z": 0.7796747
-      },
-      "Rotation": {
-        "x": -5.182226E-06,
-        "y": 0.00371561968,
-        "z": 1.07371909E-06
-      }
-    },
-    {
-      "Position": {
-        "x": -0.248471171,
-        "y": 0.0997236,
-        "z": 0.7806098
-      },
-      "Rotation": {
-        "x": -5.276544E-06,
-        "y": 0.00378392148,
-        "z": 1.0937232E-06
-      }
-    },
-    {
-      "Position": {
-        "x": -0.438485473,
-        "y": 0.10074167,
-        "z": 0.7807936
-      },
-      "Rotation": {
-        "x": -5.709036E-07,
-        "y": 0.000409811357,
-        "z": 1.2005988E-07
-      }
-    },
-    {
-      "Position": {
-        "x": -0.621614158,
-        "y": 0.100584507,
-        "z": 0.781688869
-      },
-      "Rotation": {
-        "x": -5.06671E-06,
-        "y": 0.00363365724,
-        "z": 1.05371612E-06
-      }
-    },
-    {
-      "Position": {
-        "x": -0.8042286,
-        "y": 0.09957926,
-        "z": 0.7818518
-      },
-      "Rotation": {
-        "x": -2.47224733E-07,
-        "y": 0.000177584923,
-        "z": 5.33604769E-08
-      }
-    },
     {
       "Position": {
         "x": -0.6326838,
@@ -28333,6 +28177,162 @@ factions["Boars"] = {{distance=17.4690133675179, heading=5.05901927383604, own_y
         "x": -1.65161036E-05,
         "y": 0.0118435379,
         "z": -2.39073688E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.0570548736,
+        "y": 0.100000277,
+        "z": -0.11739774
+      },
+      "Rotation": {
+        "x": 1.2189841E-07,
+        "y": 0.0005211438,
+        "z": 8.74535644E-08
+      }
+    },
+    {
+      "Position": {
+        "x": -0.12357302,
+        "y": 0.09999951,
+        "z": -0.118198887
+      },
+      "Rotation": {
+        "x": 3.756403E-07,
+        "y": 0.0116070881,
+        "z": 1.5467181E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.309258282,
+        "y": 0.100000836,
+        "z": -0.117279731
+      },
+      "Rotation": {
+        "x": -3.732718E-07,
+        "y": 359.9906,
+        "z": -2.36848578E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.494137615,
+        "y": 0.100000627,
+        "z": -0.117175922
+      },
+      "Rotation": {
+        "x": -3.485937E-07,
+        "y": 0.0101625612,
+        "z": -1.19289567E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.6772657,
+        "y": 0.09999979,
+        "z": -0.116306655
+      },
+      "Rotation": {
+        "x": 6.85737E-09,
+        "y": 0.00145593425,
+        "z": 1.28803237E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.862426758,
+        "y": 0.100001,
+        "z": -0.116127461
+      },
+      "Rotation": {
+        "x": 6.283869E-08,
+        "y": -0.00444620568,
+        "z": 7.29892236E-09
+      }
+    },
+    {
+      "Position": {
+        "x": 0.06647483,
+        "y": 0.1000438,
+        "z": 0.494656563
+      },
+      "Rotation": {
+        "x": 0.008256959,
+        "y": -0.00447839964,
+        "z": -0.00427021738
+      }
+    },
+    {
+      "Position": {
+        "x": 0.06730692,
+        "y": 0.09998917,
+        "z": 0.6646728
+      },
+      "Rotation": {
+        "x": 0.005919254,
+        "y": -0.00368537614,
+        "z": -0.002880982
+      }
+    },
+    {
+      "Position": {
+        "x": 0.06720398,
+        "y": 0.100012451,
+        "z": 0.835927844
+      },
+      "Rotation": {
+        "x": 0.008794107,
+        "y": -0.00440402236,
+        "z": -0.00280984445
+      }
+    },
+    {
+      "Position": {
+        "x": -0.6758321,
+        "y": 0.100022458,
+        "z": 0.8430459
+      },
+      "Rotation": {
+        "x": 0.00523498561,
+        "y": -0.00458139926,
+        "z": -0.00046634613
+      }
+    },
+    {
+      "Position": {
+        "x": -0.678248644,
+        "y": 0.09999041,
+        "z": 0.666760743
+      },
+      "Rotation": {
+        "x": 0.00304986886,
+        "y": -0.0045001423,
+        "z": -0.0010788315
+      }
+    },
+    {
+      "Position": {
+        "x": -0.6781473,
+        "y": 0.09998506,
+        "z": 0.49296394
+      },
+      "Rotation": {
+        "x": 0.00169867708,
+        "y": -0.004507065,
+        "z": -0.00127690134
+      }
+    },
+    {
+      "Position": {
+        "x": -0.678046465,
+        "y": 0.09996624,
+        "z": 0.319169939
+      },
+      "Rotation": {
+        "x": 0.00157859316,
+        "y": -0.00456298,
+        "z": -0.00102919422
       }
     }
   ]
