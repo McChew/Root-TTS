@@ -1769,105 +1769,15 @@ factions["Corvid"] = {{distance=17.0588483112695, heading=5.03599547549444, own_
     }
   ]
 }]]},}
-factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y=1.6091046333313, json=[[{
+factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y=1.60225009918213, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": -3.85397482,
-    "posY": 1.60910463,
-    "posZ": 3.84501886,
-    "rotX": 359.983429,
-    "rotY": 359.986145,
-    "rotZ": 359.9189,
-    "scaleX": 0.6958418,
-    "scaleY": 1.0,
-    "scaleZ": 0.6958418
-  },
-  "Nickname": "Citadel",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 0.474509776,
-    "g": 0.399998456,
-    "b": 0.0509794056
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525458/CDE2DD0B935B1BF20B22500BAA7C09F623736382/",
-    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525986/75F3C0D25828037DA86653391876EF5B6852118B/",
-    "WidthScale": 0.0,
-    "CustomTile": {
-      "Type": 3,
-      "Thickness": 0.1,
-      "Stackable": false,
-      "Stretch": true
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "7d6c71"
-}]]},{distance=6.76238201360534, heading=5.32141410005224, own_y=1.61150670051575, json=[[{
-  "Name": "Custom_Tile",
-  "Transform": {
-    "posX": -5.54655838,
-    "posY": 1.6115067,
-    "posZ": 3.868557,
-    "rotX": 359.983429,
-    "rotY": 359.986542,
-    "rotZ": 359.9189,
-    "scaleX": 0.6958418,
-    "scaleY": 1.0,
-    "scaleZ": 0.6958418
-  },
-  "Nickname": "Citadel",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 0.474509776,
-    "g": 0.399998456,
-    "b": 0.0509794056
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525458/CDE2DD0B935B1BF20B22500BAA7C09F623736382/",
-    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525986/75F3C0D25828037DA86653391876EF5B6852118B/",
-    "WidthScale": 0.0,
-    "CustomTile": {
-      "Type": 3,
-      "Thickness": 0.1,
-      "Stackable": false,
-      "Stretch": true
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "2b0e7a"
-}]]},{distance=6.77891540486485, heading=5.67973596578523, own_y=1.60959649085999, json=[[{
-  "Name": "Custom_Tile",
-  "Transform": {
-    "posX": -3.84695077,
-    "posY": 1.60959649,
-    "posZ": 5.581658,
-    "rotX": 359.983429,
-    "rotY": 359.98645,
-    "rotZ": 359.9189,
+    "posX": -5.93562841,
+    "posY": 1.6022501,
+    "posZ": 5.235829,
+    "rotX": 0.00369983818,
+    "rotY": 1.603578E-05,
+    "rotZ": -0.00509454729,
     "scaleX": 0.6958418,
     "scaleY": 1.0,
     "scaleZ": 0.6958418
@@ -1876,143 +1786,8 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "Description": "",
   "ColorDiffuse": {
     "r": 0.474509776,
-    "g": 0.399998426,
-    "b": 0.0509793833
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528239/97F2E1544E2307E184A23D446819696324DCA02E/",
-    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528730/CA4B403E2E948F4E8CB7295F7302F50E51B19983/",
-    "WidthScale": 0.0,
-    "CustomTile": {
-      "Type": 3,
-      "Thickness": 0.1,
-      "Stackable": false,
-      "Stretch": true
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "363e87"
-}]]},{distance=9.17188036066749, heading=5.36947325606881, own_y=1.61443531513214, json=[[{
-  "Name": "Custom_Tile",
-  "Transform": {
-    "posX": -7.262091,
-    "posY": 1.61443532,
-    "posZ": 5.602298,
-    "rotX": 359.983429,
-    "rotY": 359.9868,
-    "rotZ": 359.9189,
-    "scaleX": 0.6958418,
-    "scaleY": 1.0,
-    "scaleZ": 0.6958418
-  },
-  "Nickname": "Market",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 0.474509776,
-    "g": 0.399998426,
-    "b": 0.0509793833
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528239/97F2E1544E2307E184A23D446819696324DCA02E/",
-    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528730/CA4B403E2E948F4E8CB7295F7302F50E51B19983/",
-    "WidthScale": 0.0,
-    "CustomTile": {
-      "Type": 3,
-      "Thickness": 0.1,
-      "Stackable": false,
-      "Stretch": true
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "66cb0c"
-}]]},{distance=8.20907780553685, heading=5.20253329989595, own_y=1.61390566825867, json=[[{
-  "Name": "Custom_Tile",
-  "Transform": {
-    "posX": -7.242593,
-    "posY": 1.61390567,
-    "posZ": 3.86446357,
-    "rotX": 359.983429,
-    "rotY": 359.9857,
-    "rotZ": 359.9189,
-    "scaleX": 0.6958418,
-    "scaleY": 1.0,
-    "scaleZ": 0.6958418
-  },
-  "Nickname": "Citadel",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 0.474509776,
-    "g": 0.399998456,
-    "b": 0.0509794056
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525458/CDE2DD0B935B1BF20B22500BAA7C09F623736382/",
-    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525986/75F3C0D25828037DA86653391876EF5B6852118B/",
-    "WidthScale": 0.0,
-    "CustomTile": {
-      "Type": 3,
-      "Thickness": 0.1,
-      "Stackable": false,
-      "Stretch": true
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "d08f68"
-}]]},{distance=7.88813332094822, heading=5.49940318813384, own_y=1.61203444004059, json=[[{
-  "Name": "Custom_Tile",
-  "Transform": {
-    "posX": -5.56874275,
-    "posY": 1.61203444,
-    "posZ": 5.586773,
-    "rotX": 359.983429,
-    "rotY": 359.986176,
-    "rotZ": 359.9189,
-    "scaleX": 0.6958418,
-    "scaleY": 1.0,
-    "scaleZ": 0.6958418
-  },
-  "Nickname": "Market",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 0.474509776,
-    "g": 0.399998426,
-    "b": 0.0509793833
+    "g": 0.3999983,
+    "b": 0.05097931
   },
   "Locked": false,
   "Grid": true,
@@ -2039,15 +1814,436 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "83a04f"
-}]]},{distance=12.239111467328, heading=5.86706033084954, own_y=1.67057847976685, json=[[{
+}]]},{distance=8.38335956862873, heading=5.14421268482449, own_y=1.6025185585022, json=[[{
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -7.613812,
+    "posY": 1.60251856,
+    "posZ": 3.50868273,
+    "rotX": 0.00149816775,
+    "rotY": 0.000146971885,
+    "rotZ": -0.0029611825,
+    "scaleX": 0.6958418,
+    "scaleY": 1.0,
+    "scaleZ": 0.6958418
+  },
+  "Nickname": "Citadel",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 0.474509776,
+    "g": 0.399998337,
+    "b": 0.0509793237
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525458/CDE2DD0B935B1BF20B22500BAA7C09F623736382/",
+    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525986/75F3C0D25828037DA86653391876EF5B6852118B/",
+    "WidthScale": 0.0,
+    "CustomTile": {
+      "Type": 3,
+      "Thickness": 0.1,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "d08f68"
+}]]},{distance=5.47957653660222, heading=5.40380929201625, own_y=1.60237050056458, json=[[{
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -4.22115469,
+    "posY": 1.6023705,
+    "posZ": 3.49396682,
+    "rotX": 0.0017986137,
+    "rotY": 0.000199207527,
+    "rotZ": -0.003735146,
+    "scaleX": 0.6958418,
+    "scaleY": 1.0,
+    "scaleZ": 0.6958418
+  },
+  "Nickname": "Citadel",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 0.474509776,
+    "g": 0.399998337,
+    "b": 0.0509793237
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525458/CDE2DD0B935B1BF20B22500BAA7C09F623736382/",
+    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525986/75F3C0D25828037DA86653391876EF5B6852118B/",
+    "WidthScale": 0.0,
+    "CustomTile": {
+      "Type": 3,
+      "Thickness": 0.1,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "7d6c71"
+}]]},{distance=9.50096878801616, heading=6.26817523761722, own_y=2.09126710891724, json=[[{
+  "Name": "Custom_Model",
+  "Transform": {
+    "posX": -0.142616212,
+    "posY": 2.091267,
+    "posZ": 9.499912,
+    "rotX": 0.00606363546,
+    "rotY": -5.17071639E-05,
+    "rotZ": -0.00313230068,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
+  },
+  "Nickname": "Lord",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 1.0,
+    "g": 1.0,
+    "b": 1.0
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomMesh": {
+    "MeshURL": "http://cloud-3.steamusercontent.com/ugc/989010240774165865/8EA0510B11AB80B8452D53BAE354EC5927CABB0A/",
+    "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/989010240774142572/183FC89B0FB76ABBBBA04AC58C9C0595EE89D723/",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 3,
+    "TypeIndex": 1,
+    "CastShadows": true
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "d3cb8f"
+}]]},{distance=6.28337644008041, heading=6.25510632851747, own_y=1.50234615802765, json=[[{
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -0.176418975,
+    "posY": 1.50234616,
+    "posZ": 6.28091335,
+    "rotX": 0.000373430463,
+    "rotY": 0.000198835914,
+    "rotZ": -0.00135061215,
+    "scaleX": 9.107194,
+    "scaleY": 1.0,
+    "scaleZ": 9.107194
+  },
+  "Nickname": "",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 0.474509776,
+    "g": 0.399998337,
+    "b": 0.0509793237
+  },
+  "Locked": true,
+  "Grid": true,
+  "Snap": false,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849520424/E641CD2F608FA03BC88090278EE60EC7FCEBDCBC/",
+    "ImageSecondaryURL": "",
+    "WidthScale": 0.0,
+    "CustomTile": {
+      "Type": 0,
+      "Thickness": 0.1,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "919e94",
+  "AttachedSnapPoints": [
+    {
+      "Position": {
+        "x": -0.5620021,
+        "y": 0.09997896,
+        "z": 0.502379954
+      },
+      "Rotation": {
+        "x": -2.850952E-09,
+        "y": -0.00397516927,
+        "z": 4.241781E-08
+      }
+    },
+    {
+      "Position": {
+        "x": -0.443251878,
+        "y": 0.100002147,
+        "z": -0.115226433
+      },
+      "Rotation": {
+        "x": 2.40497229E-07,
+        "y": -0.003128226,
+        "z": 1.48090649E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.6323828,
+        "y": 0.09999758,
+        "z": -0.114749789
+      },
+      "Rotation": {
+        "x": 2.1663287E-07,
+        "y": -0.00397516927,
+        "z": 2.747175E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.8168518,
+        "y": 0.09999719,
+        "z": -0.11161264
+      },
+      "Rotation": {
+        "x": 1.928035E-07,
+        "y": -0.002882339,
+        "z": 2.11666816E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.8166558,
+        "y": 0.09999626,
+        "z": -0.304398417
+      },
+      "Rotation": {
+        "x": 4.723155E-07,
+        "y": -0.00346973538,
+        "z": 9.4096734E-08
+      }
+    },
+    {
+      "Position": {
+        "x": -0.6302749,
+        "y": 0.100001656,
+        "z": -0.303771824
+      },
+      "Rotation": {
+        "x": 2.595688E-07,
+        "y": -0.00386588625,
+        "z": 1.13278837E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.444129765,
+        "y": 0.100008741,
+        "z": -0.306013674
+      },
+      "Rotation": {
+        "x": 3.429527E-07,
+        "y": -0.003497056,
+        "z": 2.10618992E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.630800068,
+        "y": 0.09999814,
+        "z": -0.65798825
+      },
+      "Rotation": {
+        "x": 8.270144E-07,
+        "y": 359.990479,
+        "z": 2.36824278E-07
+      }
+    },
+    {
+      "Position": {
+        "x": -0.782261252,
+        "y": 0.09999576,
+        "z": -0.658412
+      },
+      "Rotation": {
+        "x": 4.81953975E-06,
+        "y": 359.990417,
+        "z": 7.497318E-06
+      }
+    },
+    {
+      "Position": {
+        "x": -0.9308685,
+        "y": 0.1000041,
+        "z": -0.656650841
+      },
+      "Rotation": {
+        "x": 5.21075071E-06,
+        "y": 359.990417,
+        "z": -1.10549909E-05
+      }
+    },
+    {
+      "Position": {
+        "x": -1.07852471,
+        "y": 0.09999504,
+        "z": -0.656080246
+      },
+      "Rotation": {
+        "x": 3.45374247E-06,
+        "y": 359.9903,
+        "z": -7.243115E-07
+      }
+    },
+    {
+      "Position": {
+        "x": 1.07536852,
+        "y": 0.09982466,
+        "z": 0.3519519
+      },
+      "Rotation": {
+        "x": 0.0006532721,
+        "y": 0.008071201,
+        "z": -2.63812235E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.960012257,
+        "y": 0.09968623,
+        "z": 0.3510951
+      },
+      "Rotation": {
+        "x": 0.0005149602,
+        "y": 0.008180491,
+        "z": -1.92856714E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.8477684,
+        "y": 0.09937842,
+        "z": 0.351163924
+      },
+      "Rotation": {
+        "x": 0.00053056964,
+        "y": 0.007990586,
+        "z": -3.874436E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.6571999,
+        "y": 0.09957279,
+        "z": 0.351733685
+      },
+      "Rotation": {
+        "x": 0.0006009525,
+        "y": 0.007968091,
+        "z": -3.73131661E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.5451987,
+        "y": 0.0996700451,
+        "z": 0.351989478
+      },
+      "Rotation": {
+        "x": 0.0005565024,
+        "y": 0.008009012,
+        "z": -2.99623825E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.430516034,
+        "y": 0.09938189,
+        "z": 0.352374017
+      },
+      "Rotation": {
+        "x": 0.000576833554,
+        "y": 0.00795551948,
+        "z": -3.997255E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.230430141,
+        "y": 0.09957183,
+        "z": 0.352881
+      },
+      "Rotation": {
+        "x": 0.000562612549,
+        "y": 0.007967283,
+        "z": -3.26005975E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.118428729,
+        "y": 0.09947357,
+        "z": 0.353137136
+      },
+      "Rotation": {
+        "x": 0.00056317274,
+        "y": 0.007963496,
+        "z": -3.37649544E-05
+      }
+    },
+    {
+      "Position": {
+        "x": 0.00374595053,
+        "y": 0.09967202,
+        "z": 0.353521228
+      },
+      "Rotation": {
+        "x": 0.0005591974,
+        "y": 0.007970721,
+        "z": -3.47302739E-05
+      }
+    }
+  ]
+}]]},{distance=12.0784911628658, heading=5.82941355133289, own_y=1.65977621078491, json=[[{
   "Name": "Deck",
   "Transform": {
-    "posX": -4.94729471,
-    "posY": 1.67057848,
-    "posZ": 11.1946659,
-    "rotX": 359.983459,
-    "rotY": 0.0155760832,
-    "rotZ": 359.9189,
+    "posX": -5.294723,
+    "posY": 1.65977621,
+    "posZ": 10.856163,
+    "rotX": 0.003092061,
+    "rotY": 4.94173764E-05,
+    "rotZ": -0.00429101335,
     "scaleX": 2.33,
     "scaleY": 1.0,
     "scaleZ": 2.33
@@ -2071,12 +2267,12 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "Hands": false,
   "SidewaysCard": false,
   "DeckIDs": [
-    7606,
     7607,
     7608,
+    7606,
     7605,
-    7604,
     7603,
+    7604,
     7601,
     7600,
     7602
@@ -2098,59 +2294,12 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
     {
       "Name": "Card",
       "Transform": {
-        "posX": -11.06074,
-        "posY": 1.79472244,
-        "posZ": 13.1818609,
-        "rotX": 359.955017,
-        "rotY": 0.167401,
-        "rotZ": 357.54657,
-        "scaleX": 2.33,
-        "scaleY": 1.0,
-        "scaleZ": 2.33
-      },
-      "Nickname": "",
-      "Description": "",
-      "ColorDiffuse": {
-        "r": 0.713235259,
-        "g": 0.713235259,
-        "b": 0.713235259
-      },
-      "Locked": false,
-      "Grid": true,
-      "Snap": true,
-      "IgnoreFoW": false,
-      "Autoraise": true,
-      "Sticky": true,
-      "Tooltip": true,
-      "GridProjection": false,
-      "HideWhenFaceDown": true,
-      "Hands": true,
-      "CardID": 7606,
-      "SidewaysCard": false,
-      "CustomDeck": {
-        "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
-          "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
-          "NumWidth": 3,
-          "NumHeight": 3,
-          "BackIsHidden": true,
-          "UniqueBack": false
-        }
-      },
-      "XmlUI": "",
-      "LuaScript": "",
-      "LuaScriptState": "",
-      "GUID": "b23c16"
-    },
-    {
-      "Name": "Card",
-      "Transform": {
-        "posX": -11.2308578,
-        "posY": 1.94509757,
-        "posZ": 13.303545,
-        "rotX": 0.028072631,
-        "rotY": 0.00524676638,
-        "rotZ": 357.598724,
+        "posX": 44.9334259,
+        "posY": 1.67416012,
+        "posZ": 54.3576,
+        "rotX": 0.000335372839,
+        "rotY": 359.987,
+        "rotZ": -0.0012577218,
         "scaleX": 2.33,
         "scaleY": 1.0,
         "scaleZ": 2.33
@@ -2187,17 +2336,31 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "XmlUI": "",
       "LuaScript": "",
       "LuaScriptState": "",
-      "GUID": "292ae5"
+      "GUID": "292ae5",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.737799466,
+            "y": 1.15832281,
+            "z": -1.172385
+          },
+          "Rotation": {
+            "x": 7.199772E-05,
+            "y": 0.00065428036,
+            "z": 0.0042777136
+          }
+        }
+      ]
     },
     {
       "Name": "Card",
       "Transform": {
-        "posX": -10.9693851,
-        "posY": 2.06553578,
-        "posZ": 13.4381227,
-        "rotX": 0.009144375,
-        "rotY": 359.9935,
-        "rotZ": 357.598541,
+        "posX": 44.9335251,
+        "posY": 1.84186113,
+        "posZ": 54.3575974,
+        "rotX": -0.004653169,
+        "rotY": -0.00437174831,
+        "rotZ": 359.941742,
         "scaleX": 2.33,
         "scaleY": 1.0,
         "scaleZ": 2.33
@@ -2234,17 +2397,92 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "XmlUI": "",
       "LuaScript": "",
       "LuaScriptState": "",
-      "GUID": "2c6050"
+      "GUID": "982593",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.7354378,
+            "y": 1.15597,
+            "z": -1.17506719
+          },
+          "Rotation": {
+            "x": 0.0001812566,
+            "y": 0.000261561363,
+            "z": 0.004472146
+          }
+        }
+      ]
     },
     {
       "Name": "Card",
       "Transform": {
-        "posX": -10.735467,
-        "posY": 1.97643173,
-        "posZ": 14.0654888,
-        "rotX": 359.98526,
-        "rotY": -0.00234407629,
-        "rotZ": 358.589844,
+        "posX": 44.93353,
+        "posY": 1.85940671,
+        "posZ": 54.3575974,
+        "rotX": -0.0053212354,
+        "rotY": -0.00388402771,
+        "rotZ": 359.936523,
+        "scaleX": 2.33,
+        "scaleY": 1.0,
+        "scaleZ": 2.33
+      },
+      "Nickname": "",
+      "Description": "",
+      "ColorDiffuse": {
+        "r": 0.713235259,
+        "g": 0.713235259,
+        "b": 0.713235259
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": true,
+      "Hands": true,
+      "CardID": 7606,
+      "SidewaysCard": false,
+      "CustomDeck": {
+        "76": {
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
+          "NumWidth": 3,
+          "NumHeight": 3,
+          "BackIsHidden": true,
+          "UniqueBack": false
+        }
+      },
+      "XmlUI": "",
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "GUID": "b23c16",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.7359587,
+            "y": 1.16135812,
+            "z": -1.17915344
+          },
+          "Rotation": {
+            "x": 0.000208667116,
+            "y": 0.000363773055,
+            "z": 0.00436213473
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Card",
+      "Transform": {
+        "posX": 44.9335251,
+        "posY": 1.84552765,
+        "posZ": 54.3575974,
+        "rotX": -0.005196593,
+        "rotY": -0.00146723713,
+        "rotZ": 359.940948,
         "scaleX": 2.33,
         "scaleY": 1.0,
         "scaleZ": 2.33
@@ -2281,64 +2519,31 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "XmlUI": "",
       "LuaScript": "",
       "LuaScriptState": "",
-      "GUID": "2c6050"
-    },
-    {
-      "Name": "Card",
-      "Transform": {
-        "posX": -11.0688391,
-        "posY": 1.98952341,
-        "posZ": 14.1638689,
-        "rotX": 359.981445,
-        "rotY": -0.005726432,
-        "rotZ": 358.598572,
-        "scaleX": 2.33,
-        "scaleY": 1.0,
-        "scaleZ": 2.33
-      },
-      "Nickname": "",
-      "Description": "",
-      "ColorDiffuse": {
-        "r": 0.713235259,
-        "g": 0.713235259,
-        "b": 0.713235259
-      },
-      "Locked": false,
-      "Grid": true,
-      "Snap": true,
-      "IgnoreFoW": false,
-      "Autoraise": true,
-      "Sticky": true,
-      "Tooltip": true,
-      "GridProjection": false,
-      "HideWhenFaceDown": true,
-      "Hands": true,
-      "CardID": 7604,
-      "SidewaysCard": false,
-      "CustomDeck": {
-        "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
-          "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
-          "NumWidth": 3,
-          "NumHeight": 3,
-          "BackIsHidden": true,
-          "UniqueBack": false
+      "GUID": "bd7d69",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.738676548,
+            "y": 1.14630771,
+            "z": -1.17376065
+          },
+          "Rotation": {
+            "x": 0.000262899644,
+            "y": 0.000282421475,
+            "z": 0.004443726
+          }
         }
-      },
-      "XmlUI": "",
-      "LuaScript": "",
-      "LuaScriptState": "",
-      "GUID": "2c6050"
+      ]
     },
     {
       "Name": "Card",
       "Transform": {
-        "posX": -11.5729084,
-        "posY": 2.00759268,
-        "posZ": 14.1938753,
-        "rotX": 359.976318,
-        "rotY": -0.00559090637,
-        "rotZ": 358.567963,
+        "posX": 44.93353,
+        "posY": 1.84372377,
+        "posZ": 54.3575974,
+        "rotX": -0.005299633,
+        "rotY": 0.000380512851,
+        "rotZ": 359.936554,
         "scaleX": 2.33,
         "scaleY": 1.0,
         "scaleZ": 2.33
@@ -2375,17 +2580,92 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "XmlUI": "",
       "LuaScript": "",
       "LuaScriptState": "",
-      "GUID": "2c6050"
+      "GUID": "ee838f",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.734026968,
+            "y": 1.15427423,
+            "z": -1.17198849
+          },
+          "Rotation": {
+            "x": 9.892853E-05,
+            "y": 359.982544,
+            "z": 0.004364011
+          }
+        }
+      ]
     },
     {
       "Name": "Card",
       "Transform": {
-        "posX": -10.4383507,
-        "posY": 1.96861112,
-        "posZ": 14.8609552,
-        "rotX": 359.988037,
-        "rotY": 359.9893,
-        "rotZ": 358.576,
+        "posX": 44.93353,
+        "posY": 1.84640038,
+        "posZ": 54.3575974,
+        "rotX": -0.0053912187,
+        "rotY": 0.0124515342,
+        "rotZ": 359.9364,
+        "scaleX": 2.33,
+        "scaleY": 1.0,
+        "scaleZ": 2.33
+      },
+      "Nickname": "",
+      "Description": "",
+      "ColorDiffuse": {
+        "r": 0.713235259,
+        "g": 0.713235259,
+        "b": 0.713235259
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": true,
+      "Hands": true,
+      "CardID": 7604,
+      "SidewaysCard": false,
+      "CustomDeck": {
+        "76": {
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
+          "NumWidth": 3,
+          "NumHeight": 3,
+          "BackIsHidden": true,
+          "UniqueBack": false
+        }
+      },
+      "XmlUI": "",
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "GUID": "7add0f",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.733661532,
+            "y": 1.159367,
+            "z": -1.18215275
+          },
+          "Rotation": {
+            "x": 0.0002361562,
+            "y": 359.985748,
+            "z": 0.00455453061
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Card",
+      "Transform": {
+        "posX": 44.9335251,
+        "posY": 1.84773827,
+        "posZ": 54.3575974,
+        "rotX": 0.00478570536,
+        "rotY": -0.00133982976,
+        "rotZ": 0.008106823,
         "scaleX": 2.33,
         "scaleY": 1.0,
         "scaleZ": 2.33
@@ -2422,17 +2702,31 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "XmlUI": "",
       "LuaScript": "",
       "LuaScriptState": "",
-      "GUID": "0c8e34"
+      "GUID": "0c8e34",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.7354551,
+            "y": 1.16353011,
+            "z": -1.16848493
+          },
+          "Rotation": {
+            "x": 9.473041E-05,
+            "y": 0.002635904,
+            "z": 0.004282321
+          }
+        }
+      ]
     },
     {
       "Name": "Card",
       "Transform": {
-        "posX": -11.0871267,
-        "posY": 2.07087636,
-        "posZ": 11.754714,
-        "rotX": 359.98,
-        "rotY": 359.979675,
-        "rotZ": 359.728577,
+        "posX": 44.93353,
+        "posY": 1.85735416,
+        "posZ": 54.3575974,
+        "rotX": -0.00317352032,
+        "rotY": -0.004587754,
+        "rotZ": 359.939575,
         "scaleX": 2.33,
         "scaleY": 1.0,
         "scaleZ": 2.33
@@ -2469,17 +2763,31 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "XmlUI": "",
       "LuaScript": "",
       "LuaScriptState": "",
-      "GUID": "ca1af4"
+      "GUID": "ca1af4",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.732264042,
+            "y": 1.15966678,
+            "z": -1.16774
+          },
+          "Rotation": {
+            "x": 0.0001758753,
+            "y": 0.00439847726,
+            "z": 0.004311314
+          }
+        }
+      ]
     },
     {
       "Name": "Card",
       "Transform": {
-        "posX": -10.6704369,
-        "posY": 2.021148,
-        "posZ": 13.19833,
-        "rotX": 1.01635277,
-        "rotY": 0.107573181,
-        "rotZ": 359.047943,
+        "posX": 44.93337,
+        "posY": 1.79491687,
+        "posZ": 54.3578453,
+        "rotX": 0.1666493,
+        "rotY": 359.990753,
+        "rotZ": 0.15271382,
         "scaleX": 2.33,
         "scaleY": 1.0,
         "scaleZ": 2.33
@@ -2516,19 +2824,168 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "XmlUI": "",
       "LuaScript": "",
       "LuaScriptState": "",
-      "GUID": "2c6050"
+      "GUID": "2c6050",
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.7360496,
+            "y": 1.15669906,
+            "z": -1.17101789
+          },
+          "Rotation": {
+            "x": 6.753998E-05,
+            "y": 0.009266583,
+            "z": 0.004472974
+          }
+        }
+      ]
     }
   ],
-  "GUID": "4665eb"
-}]]},{distance=17.9878262912307, heading=5.04150021929506, own_y=1.67813801765442, json=[[{
+  "GUID": "50082d"
+}]]},{distance=6.71707436874664, heading=5.60519617493391, own_y=1.60239315032959, json=[[{
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -4.21314955,
+    "posY": 1.60239315,
+    "posZ": 5.23151,
+    "rotX": 0.00152863318,
+    "rotY": 8.197776E-05,
+    "rotZ": -0.003644611,
+    "scaleX": 0.6958418,
+    "scaleY": 1.0,
+    "scaleZ": 0.6958418
+  },
+  "Nickname": "Market",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 0.474509776,
+    "g": 0.3999983,
+    "b": 0.05097931
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528239/97F2E1544E2307E184A23D446819696324DCA02E/",
+    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528730/CA4B403E2E948F4E8CB7295F7302F50E51B19983/",
+    "WidthScale": 0.0,
+    "CustomTile": {
+      "Type": 3,
+      "Thickness": 0.1,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "363e87"
+}]]},{distance=9.25803293014079, heading=5.31722597555737, own_y=1.60219788551331, json=[[{
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -7.615621,
+    "posY": 1.60219789,
+    "posZ": 5.26439047,
+    "rotX": 0.00547686266,
+    "rotY": -4.03186568E-05,
+    "rotZ": 359.9941,
+    "scaleX": 0.6958418,
+    "scaleY": 1.0,
+    "scaleZ": 0.6958418
+  },
+  "Nickname": "Market",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 0.474509776,
+    "g": 0.3999983,
+    "b": 0.05097931
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528239/97F2E1544E2307E184A23D446819696324DCA02E/",
+    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849528730/CA4B403E2E948F4E8CB7295F7302F50E51B19983/",
+    "WidthScale": 0.0,
+    "CustomTile": {
+      "Type": 3,
+      "Thickness": 0.1,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "66cb0c"
+}]]},{distance=6.88146527534526, heading=5.24838969099986, own_y=1.60250174999237, json=[[{
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -5.916406,
+    "posY": 1.60250175,
+    "posZ": 3.51438951,
+    "rotX": 0.0012715623,
+    "rotY": -4.80373928E-05,
+    "rotZ": -0.00297764526,
+    "scaleX": 0.6958418,
+    "scaleY": 1.0,
+    "scaleZ": 0.6958418
+  },
+  "Nickname": "Citadel",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 0.474509776,
+    "g": 0.399998337,
+    "b": 0.0509793237
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525458/CDE2DD0B935B1BF20B22500BAA7C09F623736382/",
+    "ImageSecondaryURL": "http://cloud-3.steamusercontent.com/ugc/787482532849525986/75F3C0D25828037DA86653391876EF5B6852118B/",
+    "WidthScale": 0.0,
+    "CustomTile": {
+      "Type": 3,
+      "Thickness": 0.1,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "2b0e7a"
+}]]},{distance=18.0985274497808, heading=5.05165501808122, own_y=1.65256464481354, json=[[{
   "Name": "Custom_Token",
   "Transform": {
-    "posX": -17.02243,
-    "posY": 1.678138,
-    "posZ": 5.813717,
-    "rotX": 359.9831,
-    "rotY": 359.985718,
-    "rotZ": 359.9202,
+    "posX": -17.0669079,
+    "posY": 1.65256464,
+    "posZ": 6.023114,
+    "rotX": -1.15807737E-07,
+    "rotY": 8.278436E-05,
+    "rotZ": -7.347121E-07,
     "scaleX": 3.17,
     "scaleY": 1.0,
     "scaleZ": 3.169954
@@ -2622,19 +3079,19 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       "Rotation": {
         "x": 0.00241599348,
         "y": 0.08256333,
-        "z": 0.000418693438
+        "z": 0.000418693555
       }
     }
   ]
-}]]},{distance=9.15644646297002, heading=4.22375783828113, own_y=1.45256459712982, json=[[{
+}]]},{distance=9.25733919174515, heading=4.24192823868945, own_y=1.4537535905838, json=[[{
   "Name": "Custom_Tile_Stack",
   "Transform": {
-    "posX": -8.084936,
-    "posY": 1.4525646,
-    "posZ": -4.298184,
-    "rotX": -2.79039426E-07,
-    "rotY": 359.9863,
-    "rotZ": -5.93831942E-07,
+    "posX": -8.251629,
+    "posY": 1.45375359,
+    "posZ": -4.19631052,
+    "rotX": -7.915948E-09,
+    "rotY": -0.000812999031,
+    "rotZ": -1.41912793E-07,
     "scaleX": 0.703911364,
     "scaleY": 1.0,
     "scaleZ": 0.703911364
@@ -2643,8 +3100,8 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "Description": "",
   "ColorDiffuse": {
     "r": 0.474509776,
-    "g": 0.399998426,
-    "b": 0.0509793833
+    "g": 0.3999983,
+    "b": 0.05097931
   },
   "Locked": false,
   "Grid": true,
@@ -2674,15 +3131,15 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "f5d15c"
-}]]},{distance=21.6100521937429, heading=4.06394355486188, own_y=1.62756443023682, json=[[{
+}]]},{distance=21.7010195284388, heading=4.07935756650019, own_y=1.62756454944611, json=[[{
   "Name": "Custom_Token",
   "Transform": {
-    "posX": -17.2237339,
-    "posY": 1.62756443,
-    "posZ": -13.0513363,
-    "rotX": -3.942998E-07,
-    "rotY": 359.985657,
-    "rotZ": -4.980689E-06,
+    "posX": -17.4961948,
+    "posY": 1.62756455,
+    "posZ": -12.8381252,
+    "rotX": -4.062343E-06,
+    "rotY": 0.000227317243,
+    "rotZ": -4.835422E-08,
     "scaleX": 0.335945159,
     "scaleY": 1.0,
     "scaleZ": 0.335945159
@@ -2718,14 +3175,14 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "1bc57f"
-}]]},{distance=18.3410666563306, heading=4.30399908716877, own_y=2.10844159126282, json=[[{
+}]]},{distance=18.1020387732825, heading=4.29028807640205, own_y=2.086989402771, json=[[{
   "Name": "Custom_Model_Bag",
   "Transform": {
-    "posX": -16.8327351,
-    "posY": 2.10844159,
-    "posZ": -7.28381348,
-    "rotX": 270.079132,
-    "rotY": 0.0930371955,
+    "posX": -16.5132389,
+    "posY": 2.0869894,
+    "posZ": -7.415991,
+    "rotX": 270.0,
+    "rotY": 359.9924,
     "rotZ": 0.0,
     "scaleX": 2.34,
     "scaleY": 2.34,
@@ -3666,155 +4123,15 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
     }
   ],
   "GUID": "f7e991"
-}]]},{distance=9.370999660057, heading=3.86068645595507, own_y=2.32611131668091, json=[[{
+}]]},{distance=12.19242105654, heading=4.09325974166269, own_y=2.3261091709137, json=[[{
   "Name": "Custom_Dice",
   "Transform": {
-    "posX": -6.172718,
-    "posY": 2.32611132,
-    "posZ": -7.050754,
-    "rotX": 26.5649929,
-    "rotY": 180.479309,
-    "rotZ": 72.0000153,
-    "scaleX": 1.94999981,
-    "scaleY": 1.94999981,
-    "scaleZ": 1.94999981
-  },
-  "Nickname": "",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 1.0,
-    "g": 1.0,
-    "b": 1.0
-  },
-  "Locked": false,
-  "Grid": false,
-  "Snap": false,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/920293967506190961/6EC04648BE05DA6E520A6EB3BFED94E674929C6A/",
-    "ImageSecondaryURL": "",
-    "WidthScale": 0.0,
-    "CustomDice": {
-      "Type": 4
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "09b5cf",
-  "RotationValues": [
-    {
-      "Value": "0",
-      "Rotation": {
-        "x": 27.0,
-        "y": 0.0,
-        "z": 72.0
-      }
-    },
-    {
-      "Value": "1",
-      "Rotation": {
-        "x": 27.0,
-        "y": 0.0,
-        "z": 144.0
-      }
-    },
-    {
-      "Value": "2",
-      "Rotation": {
-        "x": 27.0,
-        "y": 0.0,
-        "z": -72.0
-      }
-    },
-    {
-      "Value": "3",
-      "Rotation": {
-        "x": -27.0,
-        "y": 180.0,
-        "z": 180.0
-      }
-    },
-    {
-      "Value": "0",
-      "Rotation": {
-        "x": 90.0,
-        "y": 180.0,
-        "z": 0.0
-      }
-    },
-    {
-      "Value": "1",
-      "Rotation": {
-        "x": 27.0,
-        "y": 0.0,
-        "z": -144.0
-      }
-    },
-    {
-      "Value": "2",
-      "Rotation": {
-        "x": -27.0,
-        "y": 180.0,
-        "z": 36.0
-      }
-    },
-    {
-      "Value": "3",
-      "Rotation": {
-        "x": -90.0,
-        "y": 180.0,
-        "z": 0.0
-      }
-    },
-    {
-      "Value": "0",
-      "Rotation": {
-        "x": 27.0,
-        "y": 0.0,
-        "z": 0.0
-      }
-    },
-    {
-      "Value": "1",
-      "Rotation": {
-        "x": -27.0,
-        "y": 180.0,
-        "z": 108.0
-      }
-    },
-    {
-      "Value": "2",
-      "Rotation": {
-        "x": -27.0,
-        "y": 108.0,
-        "z": -36.0
-      }
-    },
-    {
-      "Value": "3",
-      "Rotation": {
-        "x": -27.0,
-        "y": 36.0,
-        "z": -108.0
-      }
-    }
-  ]
-}]]},{distance=12.1020265634443, heading=4.0751936171936, own_y=2.32611107826233, json=[[{
-  "Name": "Custom_Dice",
-  "Transform": {
-    "posX": -9.727227,
-    "posY": 2.326111,
-    "posZ": -7.20000839,
-    "rotX": 26.5649986,
-    "rotY": 181.981216,
-    "rotZ": 72.0000153,
+    "posX": -9.929325,
+    "posY": 2.32610917,
+    "posZ": -7.075568,
+    "rotX": 26.56509,
+    "rotY": 177.837189,
+    "rotZ": 72.00029,
     "scaleX": 1.94999981,
     "scaleY": 1.94999981,
     "scaleZ": 1.94999981
@@ -3946,15 +4263,189 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
       }
     }
   ]
-}]]},{distance=17.3274048282844, heading=1.43972649432027, own_y=1.50256443023682, json=[[{
+}]]},{distance=9.4436722507578, heading=3.88226943622425, own_y=2.32611203193665, json=[[{
+  "Name": "Custom_Dice",
+  "Transform": {
+    "posX": -6.37248373,
+    "posY": 2.326112,
+    "posZ": -6.96953,
+    "rotX": 26.5650826,
+    "rotY": 177.840286,
+    "rotZ": 71.999855,
+    "scaleX": 1.94999981,
+    "scaleY": 1.94999981,
+    "scaleZ": 1.94999981
+  },
+  "Nickname": "",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 1.0,
+    "g": 1.0,
+    "b": 1.0
+  },
+  "Locked": false,
+  "Grid": false,
+  "Snap": false,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/920293967506190961/6EC04648BE05DA6E520A6EB3BFED94E674929C6A/",
+    "ImageSecondaryURL": "",
+    "WidthScale": 0.0,
+    "CustomDice": {
+      "Type": 4
+    }
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "09b5cf",
+  "RotationValues": [
+    {
+      "Value": "0",
+      "Rotation": {
+        "x": 27.0,
+        "y": 0.0,
+        "z": 72.0
+      }
+    },
+    {
+      "Value": "1",
+      "Rotation": {
+        "x": 27.0,
+        "y": 0.0,
+        "z": 144.0
+      }
+    },
+    {
+      "Value": "2",
+      "Rotation": {
+        "x": 27.0,
+        "y": 0.0,
+        "z": -72.0
+      }
+    },
+    {
+      "Value": "3",
+      "Rotation": {
+        "x": -27.0,
+        "y": 180.0,
+        "z": 180.0
+      }
+    },
+    {
+      "Value": "0",
+      "Rotation": {
+        "x": 90.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "Value": "1",
+      "Rotation": {
+        "x": 27.0,
+        "y": 0.0,
+        "z": -144.0
+      }
+    },
+    {
+      "Value": "2",
+      "Rotation": {
+        "x": -27.0,
+        "y": 180.0,
+        "z": 36.0
+      }
+    },
+    {
+      "Value": "3",
+      "Rotation": {
+        "x": -90.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "Value": "0",
+      "Rotation": {
+        "x": 27.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "Value": "1",
+      "Rotation": {
+        "x": -27.0,
+        "y": 180.0,
+        "z": 108.0
+      }
+    },
+    {
+      "Value": "2",
+      "Rotation": {
+        "x": -27.0,
+        "y": 108.0,
+        "z": -36.0
+      }
+    },
+    {
+      "Value": "3",
+      "Rotation": {
+        "x": -27.0,
+        "y": 36.0,
+        "z": -108.0
+      }
+    }
+  ]
+}]]},{distance=19.4579491571883, heading=1.06055490704448, own_y=1.5725644826889, json=[[{
+  "Name": "Notecard",
+  "Transform": {
+    "posX": 16.9795132,
+    "posY": 1.57256448,
+    "posZ": 9.503041,
+    "rotX": -5.50313075E-08,
+    "rotY": 180.000076,
+    "rotZ": -2.19391216E-09,
+    "scaleX": 1.0,
+    "scaleY": 1.0,
+    "scaleZ": 1.0
+  },
+  "Nickname": "Underground Duchy Setup",
+  "Description": "Setup (H)\n\nPlace The Burrow board near the map.\n\nPlace 1 tunnel and 4 warriors in any corner clearing that no other player chose as their setup corner. Place 1 warrior in each claering adjacent to that clearing.",
+  "ColorDiffuse": {
+    "r": 1.0,
+    "g": 1.0,
+    "b": 1.0
+  },
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "a18827"
+}]]},{distance=17.2126163517192, heading=1.45080120932943, own_y=1.50256431102753, json=[[{
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": 17.17877,
-    "posY": 1.50256443,
-    "posZ": 2.26461673,
-    "rotX": -4.16609724E-09,
-    "rotY": 359.986,
-    "rotZ": 5.049598E-09,
+    "posX": 17.0888329,
+    "posY": 1.50256431,
+    "posZ": 2.06049061,
+    "rotX": 2.0427974E-08,
+    "rotY": -3.41509462E-06,
+    "rotZ": 1.79328712E-08,
     "scaleX": 4.186004,
     "scaleY": 1.0,
     "scaleZ": 4.186004
@@ -3963,8 +4454,8 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "Description": "",
   "ColorDiffuse": {
     "r": 0.474509776,
-    "g": 0.3999984,
-    "b": 0.05097936
+    "g": 0.399998277,
+    "b": 0.05097928
   },
   "Locked": false,
   "Grid": true,
@@ -3991,140 +4482,18 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "78c688"
-}]]},{distance=19.5573814484066, heading=1.05152381282535, own_y=1.55188286304474, json=[[{
-  "Name": "Notecard",
-  "Transform": {
-    "posX": 16.9793243,
-    "posY": 1.55188286,
-    "posZ": 9.70533848,
-    "rotX": 0.0168951564,
-    "rotY": 179.985855,
-    "rotZ": 0.07987103,
-    "scaleX": 1.0,
-    "scaleY": 1.0,
-    "scaleZ": 1.0
-  },
-  "Nickname": "Underground Duchy Setup",
-  "Description": "Setup (H)\n\nPlace The Burrow board near the map.\n\nPlace 1 tunnel and 4 warriors in any corner clearing that no other player chose as their setup corner. Place 1 warrior in each claering adjacent to that clearing.",
-  "ColorDiffuse": {
-    "r": 1.0,
-    "g": 1.0,
-    "b": 1.0
-  },
-  "Locked": true,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "a18827"
-}]]},{distance=11.6047005176214, heading=0.557725398910596, own_y=1.88476777076721, json=[[{
+}]]},{distance=13.5083931645747, heading=0.792257249684324, own_y=2.09162783622742, json=[[{
   "Name": "Custom_Model",
   "Transform": {
-    "posX": 6.14186525,
-    "posY": 1.88476777,
-    "posZ": 9.846151,
-    "rotX": 359.983368,
-    "rotY": -0.001134985,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
-  },
-  "Nickname": "Lord",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 1.0,
-    "g": 1.0,
-    "b": 1.0
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomMesh": {
-    "MeshURL": "http://cloud-3.steamusercontent.com/ugc/989010240774165865/8EA0510B11AB80B8452D53BAE354EC5927CABB0A/",
-    "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/989010240774142572/183FC89B0FB76ABBBBA04AC58C9C0595EE89D723/",
-    "NormalURL": "",
-    "ColliderURL": "",
-    "Convex": true,
-    "MaterialIndex": 3,
-    "TypeIndex": 1,
-    "CastShadows": true
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "86561f"
-}]]},{distance=12.6415255199317, heading=0.671805272273484, own_y=1.88233888149261, json=[[{
-  "Name": "Custom_Model",
-  "Transform": {
-    "posX": 7.868074,
-    "posY": 1.88233888,
-    "posZ": 9.894527,
-    "rotX": 359.983368,
-    "rotY": -0.000654648931,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
-  },
-  "Nickname": "Lord",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 1.0,
-    "g": 1.0,
-    "b": 1.0
-  },
-  "Locked": false,
-  "Grid": true,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomMesh": {
-    "MeshURL": "http://cloud-3.steamusercontent.com/ugc/989010240774165865/8EA0510B11AB80B8452D53BAE354EC5927CABB0A/",
-    "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/989010240774142572/183FC89B0FB76ABBBBA04AC58C9C0595EE89D723/",
-    "NormalURL": "",
-    "ColliderURL": "",
-    "Convex": true,
-    "MaterialIndex": 3,
-    "TypeIndex": 1,
-    "CastShadows": true
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "ef5204"
-}]]},{distance=13.9824134377231, heading=0.787820019702362, own_y=1.87943887710571, json=[[{
-  "Name": "Custom_Model",
-  "Transform": {
-    "posX": 9.910964,
-    "posY": 1.87943888,
-    "posZ": 9.863099,
-    "rotX": 359.983368,
-    "rotY": -0.000145515529,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
+    "posX": 9.617157,
+    "posY": 2.09162784,
+    "posZ": 9.486149,
+    "rotX": 0.00340450485,
+    "rotY": -6.65166453E-06,
+    "rotZ": 0.00235750224,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
   },
   "Nickname": "Lord",
   "Description": "",
@@ -4157,18 +4526,18 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "LuaScript": "",
   "LuaScriptState": "",
   "GUID": "794c95"
-}]]},{distance=13.3030343135598, heading=0.735258830626246, own_y=1.88083732128143, json=[[{
+}]]},{distance=11.1216376147688, heading=0.549541957351979, own_y=2.09117531776428, json=[[{
   "Name": "Custom_Model",
   "Transform": {
-    "posX": 8.923387,
-    "posY": 1.88083732,
-    "posZ": 9.866304,
-    "rotX": 359.983368,
-    "rotY": -0.00229508732,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
+    "posX": 5.808783,
+    "posY": 2.09117532,
+    "posZ": 9.484144,
+    "rotX": 0.00530319568,
+    "rotY": 0.000677294855,
+    "rotZ": -0.000707559637,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
   },
   "Nickname": "Lord",
   "Description": "",
@@ -4200,19 +4569,19 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "XmlUI": "",
   "LuaScript": "",
   "LuaScriptState": "",
-  "GUID": "d93266"
-}]]},{distance=10.6682737458112, heading=0.390891992910584, own_y=1.88771212100983, json=[[{
+  "GUID": "830411"
+}]]},{distance=12.1147356215569, heading=0.672242783803025, own_y=2.0908374786377, json=[[{
   "Name": "Custom_Model",
   "Transform": {
-    "posX": 4.06474257,
-    "posY": 1.88771212,
-    "posZ": 9.863575,
-    "rotX": 359.9834,
-    "rotY": -0.00321170781,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
+    "posX": 7.544348,
+    "posY": 2.09083748,
+    "posZ": 9.47890949,
+    "rotX": 0.006979746,
+    "rotY": 0.0004969697,
+    "rotZ": 0.00102329347,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
   },
   "Nickname": "Lord",
   "Description": "",
@@ -4244,19 +4613,19 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "XmlUI": "",
   "LuaScript": "",
   "LuaScriptState": "",
-  "GUID": "8734f6"
-}]]},{distance=10.0930452025083, heading=0.223863532032664, own_y=1.89028704166412, json=[[{
+  "GUID": "990ef6"
+}]]},{distance=12.775940130822, heading=0.734911599899821, own_y=2.09149622917175, json=[[{
   "Name": "Custom_Model",
   "Transform": {
-    "posX": 2.24062848,
-    "posY": 1.890287,
-    "posZ": 9.8412075,
-    "rotX": 359.9834,
-    "rotY": -0.00145867013,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
+    "posX": 8.566532,
+    "posY": 2.09149623,
+    "posZ": 9.478356,
+    "rotX": 0.003911532,
+    "rotY": -1.25704919E-05,
+    "rotZ": 0.001517566,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
   },
   "Nickname": "Lord",
   "Description": "",
@@ -4288,19 +4657,19 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "XmlUI": "",
   "LuaScript": "",
   "LuaScriptState": "",
-  "GUID": "1c3c4d"
-}]]},{distance=11.0854080781471, heading=0.481070754286507, own_y=1.88619470596313, json=[[{
+  "GUID": "2203f6"
+}]]},{distance=10.2019572351804, heading=0.375802176767927, own_y=2.09153318405151, json=[[{
   "Name": "Custom_Model",
   "Transform": {
-    "posX": 5.12952471,
-    "posY": 1.88619471,
-    "posZ": 9.827228,
-    "rotX": 359.9834,
-    "rotY": 0.000115172108,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
+    "posX": 3.74429917,
+    "posY": 2.09153318,
+    "posZ": 9.490012,
+    "rotX": 0.0036064703,
+    "rotY": 0.0006136385,
+    "rotZ": -0.001379459,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
   },
   "Nickname": "Lord",
   "Description": "",
@@ -4332,19 +4701,19 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "XmlUI": "",
   "LuaScript": "",
   "LuaScriptState": "",
-  "GUID": "6bd79a"
-}]]},{distance=9.8219623390041, heading=0.0198276366626846, own_y=1.89317619800568, json=[[{
+  "GUID": "9a54b6"
+}]]},{distance=9.68695543346866, heading=0.199734453613952, own_y=2.09170794487, json=[[{
   "Name": "Custom_Model",
   "Transform": {
-    "posX": 0.194722176,
-    "posY": 1.8931762,
-    "posZ": 9.820045,
-    "rotX": 359.983368,
-    "rotY": -0.000760832045,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
+    "posX": 1.92196846,
+    "posY": 2.091708,
+    "posZ": 9.494386,
+    "rotX": 0.002892509,
+    "rotY": 4.65159355E-05,
+    "rotZ": -0.00202979473,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
   },
   "Nickname": "Lord",
   "Description": "",
@@ -4376,261 +4745,19 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "XmlUI": "",
   "LuaScript": "",
   "LuaScriptState": "",
-  "GUID": "d55192"
-}]]},{distance=6.62301024206494, heading=0.0266958828118147, own_y=1.50420188903809, json=[[{
-  "Name": "Custom_Tile",
-  "Transform": {
-    "posX": 0.17677474,
-    "posY": 1.50420189,
-    "posZ": 6.620664,
-    "rotX": 359.983429,
-    "rotY": 359.985657,
-    "rotZ": 359.9189,
-    "scaleX": 9.107194,
-    "scaleY": 1.0,
-    "scaleZ": 9.107194
-  },
-  "Nickname": "",
-  "Description": "",
-  "ColorDiffuse": {
-    "r": 0.474509776,
-    "g": 0.399998456,
-    "b": 0.0509794056
-  },
-  "Locked": true,
-  "Grid": true,
-  "Snap": false,
-  "IgnoreFoW": false,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": false,
-  "Hands": false,
-  "CustomImage": {
-    "ImageURL": "http://cloud-3.steamusercontent.com/ugc/787482532849520424/E641CD2F608FA03BC88090278EE60EC7FCEBDCBC/",
-    "ImageSecondaryURL": "",
-    "WidthScale": 0.0,
-    "CustomTile": {
-      "Type": 0,
-      "Thickness": 0.1,
-      "Stackable": false,
-      "Stretch": true
-    }
-  },
-  "XmlUI": "",
-  "LuaScript": "",
-  "LuaScriptState": "",
-  "GUID": "919e94",
-  "AttachedSnapPoints": [
-    {
-      "Position": {
-        "x": -0.5620021,
-        "y": 0.09997896,
-        "z": 0.502379954
-      },
-      "Rotation": {
-        "x": -2.850952E-09,
-        "y": -0.00397516927,
-        "z": 4.241781E-08
-      }
-    },
-    {
-      "Position": {
-        "x": -0.443251878,
-        "y": 0.100002147,
-        "z": -0.115226433
-      },
-      "Rotation": {
-        "x": 2.40497229E-07,
-        "y": -0.003128226,
-        "z": 1.48090649E-07
-      }
-    },
-    {
-      "Position": {
-        "x": -0.6323828,
-        "y": 0.09999758,
-        "z": -0.114749789
-      },
-      "Rotation": {
-        "x": 2.1663287E-07,
-        "y": -0.00397516927,
-        "z": 2.747175E-07
-      }
-    },
-    {
-      "Position": {
-        "x": -0.8168518,
-        "y": 0.09999719,
-        "z": -0.11161264
-      },
-      "Rotation": {
-        "x": 1.928035E-07,
-        "y": -0.002882339,
-        "z": 2.11666816E-07
-      }
-    },
-    {
-      "Position": {
-        "x": -0.8166558,
-        "y": 0.09999626,
-        "z": -0.304398417
-      },
-      "Rotation": {
-        "x": 4.723155E-07,
-        "y": -0.00346973538,
-        "z": 9.4096734E-08
-      }
-    },
-    {
-      "Position": {
-        "x": -0.6302749,
-        "y": 0.100001656,
-        "z": -0.303771824
-      },
-      "Rotation": {
-        "x": 2.595688E-07,
-        "y": -0.00386588625,
-        "z": 1.13278837E-07
-      }
-    },
-    {
-      "Position": {
-        "x": -0.444129765,
-        "y": 0.100008741,
-        "z": -0.306013674
-      },
-      "Rotation": {
-        "x": 3.429527E-07,
-        "y": -0.003497056,
-        "z": 2.10618992E-07
-      }
-    },
-    {
-      "Position": {
-        "x": 1.06805944,
-        "y": 0.100001536,
-        "z": 0.3536895
-      }
-    },
-    {
-      "Position": {
-        "x": 0.9597482,
-        "y": 0.100004256,
-        "z": 0.3545458
-      }
-    },
-    {
-      "Position": {
-        "x": 0.843879044,
-        "y": 0.100002035,
-        "z": 0.35820058
-      }
-    },
-    {
-      "Position": {
-        "x": 0.6542714,
-        "y": 0.100002065,
-        "z": 0.3532316
-      }
-    },
-    {
-      "Position": {
-        "x": 0.5430554,
-        "y": 0.100000352,
-        "z": 0.3512877
-      }
-    },
-    {
-      "Position": {
-        "x": 0.42609337,
-        "y": 0.0999980345,
-        "z": 0.355291933
-      }
-    },
-    {
-      "Position": {
-        "x": 0.225805357,
-        "y": 0.100004405,
-        "z": 0.352976471
-      }
-    },
-    {
-      "Position": {
-        "x": 0.118359119,
-        "y": 0.100000329,
-        "z": 0.352677
-      }
-    },
-    {
-      "Position": {
-        "x": 0.00109934225,
-        "y": 0.10000059,
-        "z": 0.350506365
-      }
-    },
-    {
-      "Position": {
-        "x": -0.630800068,
-        "y": 0.09999814,
-        "z": -0.65798825
-      },
-      "Rotation": {
-        "x": 8.270144E-07,
-        "y": 359.990479,
-        "z": 2.36824278E-07
-      }
-    },
-    {
-      "Position": {
-        "x": -0.782261252,
-        "y": 0.09999576,
-        "z": -0.658412
-      },
-      "Rotation": {
-        "x": 4.81953975E-06,
-        "y": 359.990417,
-        "z": 7.497318E-06
-      }
-    },
-    {
-      "Position": {
-        "x": -0.9308685,
-        "y": 0.1000041,
-        "z": -0.656650841
-      },
-      "Rotation": {
-        "x": 5.21075071E-06,
-        "y": 359.990417,
-        "z": -1.10549909E-05
-      }
-    },
-    {
-      "Position": {
-        "x": -1.07852471,
-        "y": 0.09999504,
-        "z": -0.656080246
-      },
-      "Rotation": {
-        "x": 3.45374247E-06,
-        "y": 359.9903,
-        "z": -7.243115E-07
-      }
-    }
-  ]
-}]]},{distance=9.9202556542968, heading=0.127605027875339, own_y=1.89167094230652, json=[[{
+  "GUID": "ff405a"
+}]]},{distance=10.626642148496, heading=0.467479279473426, own_y=2.09137296676636, json=[[{
   "Name": "Custom_Model",
   "Transform": {
-    "posX": 1.26243055,
-    "posY": 1.891671,
-    "posZ": 9.839613,
-    "rotX": 359.9834,
-    "rotY": -0.00161590532,
-    "rotZ": 359.91864,
-    "scaleX": 0.234683841,
-    "scaleY": 0.234683841,
-    "scaleZ": 0.280632347
+    "posX": 4.7887516,
+    "posY": 2.091373,
+    "posZ": 9.486492,
+    "rotX": 0.00439170934,
+    "rotY": 0.000481926982,
+    "rotZ": -0.00108342851,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
   },
   "Nickname": "Lord",
   "Description": "",
@@ -4662,7 +4789,51 @@ factions["Duchy"] = {{distance=5.44399656899114, heading=5.49662356780337, own_y
   "XmlUI": "",
   "LuaScript": "",
   "LuaScriptState": "",
-  "GUID": "d4bcc0"
+  "GUID": "85c62c"
+}]]},{distance=9.53905341637532, heading=0.0946842324483619, own_y=2.09109950065613, json=[[{
+  "Name": "Custom_Model",
+  "Transform": {
+    "posX": 0.901837647,
+    "posY": 2.0910995,
+    "posZ": 9.49634,
+    "rotX": 0.006812731,
+    "rotY": -0.00018466785,
+    "rotZ": -0.002953106,
+    "scaleX": 0.3989626,
+    "scaleY": 0.3989626,
+    "scaleZ": 0.47707507
+  },
+  "Nickname": "Lord",
+  "Description": "",
+  "ColorDiffuse": {
+    "r": 1.0,
+    "g": 1.0,
+    "b": 1.0
+  },
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomMesh": {
+    "MeshURL": "http://cloud-3.steamusercontent.com/ugc/989010240774165865/8EA0510B11AB80B8452D53BAE354EC5927CABB0A/",
+    "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/989010240774142572/183FC89B0FB76ABBBBA04AC58C9C0595EE89D723/",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 3,
+    "TypeIndex": 1,
+    "CastShadows": true
+  },
+  "XmlUI": "",
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "GUID": "a20d1a"
 }]]},}
 factions["VagaVagrant"] = {{distance=18.7695464928495, heading=5.06289840176215, own_y=1.64792990684509, json=[[{
   "Name": "Custom_Token",
