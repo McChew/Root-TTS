@@ -52,6 +52,7 @@ function spawnFunction(player, faction)
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("botsButtons", "active", "False")
         self.UI.setAttribute("scenariosButtons", "active", "False")
+        self.UI.setAttribute("rBotButtons", "active", "False")
         self.UI.setAttribute("fanButtons", "active", "False")
         self.UI.setAttribute("colorButtons", "active", "True")
         for k,v in pairs(colors) do
@@ -92,7 +93,7 @@ function spawnWithColor(faction, color)
     end
 end
 
-function spawnBot(player, faction)
+function spawnBot(player, faction, fan)
     if isSpectator(player) then
         broadcastToColor("Sit down first", player.color, "Red")
         return
@@ -102,7 +103,12 @@ function spawnBot(player, faction)
     local colors = Global.getTable('colors')
     bot = Global.getVar('bot')
     if not bot then
-        for _, v in ipairs(bot_stuff) do
+        if fan then
+            bot_pieces = fan_bot_stuff
+        else
+            bot_pieces = bot_stuff
+        end
+        for _, v in ipairs(bot_pieces) do
             spawnObjectJSON({json=v})
         end
         Global.setVar('bot', true)
@@ -115,6 +121,7 @@ function spawnBot(player, faction)
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("botsButtons", "active", "False")
         self.UI.setAttribute("scenariosButtons", "active", "False")
+        self.UI.setAttribute("rBotButtons", "active", "False")
         self.UI.setAttribute("fanButtons", "active", "False")
         self.UI.setAttribute("colorButtons", "active", "True")
         for k,v in pairs(colors) do
@@ -124,6 +131,14 @@ function spawnBot(player, faction)
     else
         spawnWithColor(faction, preferred_color)
     end
+end
+
+function spawnFanBot(player, faction)
+    spawnBot(player, faction, true)
+end
+
+function spawnOfficialBot(player, faction)
+    spawnBot(player, faction, false)
 end
 
 function spawnVagabond(player, vaga)
