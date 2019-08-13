@@ -1,92 +1,123 @@
 -- fixed reach values
-tReachToReach = {
-    2 = 17,
-    3 = 18,
-    4 = 21,
-    5 = 25,
-    6 = 28
-}
-nPlayerCount = 5
+tReachToReach = {}
+tReachToReach[2] = 17
+tReachToReach[3] = 18
+tReachToReach[4] = 21
+tReachToReach[5] = 25
+tReachToReach[6] = 28
 
 -- define factions here if you want to include them in the calculations
 tReach = {
     Marquise = 10,
     Duchy = 8,
     Eyrie = 7,
-    Vagabond1 = 2,
+    Vagabond = 2,
     Riverfolk = 5,
     Woodland = 3,
     Corvid = 3,
-    Vagabond2 = 2,
     Lizard = 2
 }
-
-function onLoad(){
-   -- obsolete, rather have a specific table with no cross references
-
-   -- import the table with available factions, then construct our own table
-   -- tAvail = global.getTable("available")
-   -- tPossible = {}
-   -- for i, v in ipairs(tAvail){
-   --     if(tReach[i] != nil)
-   --         tPossible[i] = tReach[i]
-   -- }
-}
+-- counts seatet players, without spectators
+nPlayerCount = 0
 
 
-function checkForValidPick(){
-    nReachToReach = tReachToReach[nPlayerCount]
 
+function onPlayerChangeColor(sPlayerColor)
+    updateReachMax()
+end
+function onPlayerDisconnect()
+    updateReachMax()
+end
+function onPlayerConnect()
+    updateReachMax()
+end
+
+function updateReachMax()
+    nPlayerCount = 2 -- #getPlayers()
+    checkForValidPicks( )
+end
+
+
+function checkForValidPicks( )
+    local nReachToReach = tReachToReach[nPlayerCount]
+
+    local tTemp = sCopy(tReach)
 
     -- to know if a pick is valid we create different table setups
     -- and then check if this assumed setup is valid
-    for i, v in ipairs tPossible{
-        if(v != nil){
-            nTemp = nReachToReach - v
-            tTemp = sCopy(tPossible)
+    for i, v in pairs(tTemp) do
+        if(v ~= nil) then
             tTemp[i] = nil
+            
+            --io.write("try: ")
+            if( false == validateSetup(tTemp, v, nPlayerCount-1) ) then
+                tTemp[i] = nil
+                io.write(" FALSE ")
+            else
+                io.write(" >"..i.."< ")
+            end
+        end
+    end
+    for i, v in pairs(tTemp) do
+      if v~=nil then 
+        io.write(i..v.."  ")
+      end
+    end
 
-            if( !validateSetup(tTemp, nTemp) )
-                tPossible[i] = nil
-        }
-    }
-
-    
-}
+    -- updateAllButtons!?
+end
 
 
-
+-- The following code could be streamlined to be more efficient,
+-- but this way we dont have to care for sorting the reach-table
 -- tPoss = still possible factions
 -- nPsf  = points so far
-function validateSetup(tPoss, nPsf){
-    for i, v in ipairs(tPoss){
-        if(v != nil){
-            nTemp = nPsf - v
-            tTemp = sCopy(tPoss)
+-- nPltp = Players left to pick
+function validateSetup(tPoss, nPsf, nPltp)
+    local tTemp = sCopy(tPoss)
+    for i, v in pairs(tPoss) do
+        if(v ~= nil) then
+            local nTemp = nPsf + v
+            io.write(nTemp.."  ")
+            if( nTemp >= tReachToReach[nPlayerCount]) then
+                return true
+            end
+            
+            if(nPltp <= 0) then
+              return false
+            end
+            -- new assumed score is not high enough so we clone the table and pick another faction from it
             tTemp[i] = nil
-
-            if( validateSetup(tTemp, nTemp) )
-                return true;        
-        }
-    }
+            
+            --io.write("nested:")
+            if( validateSetup(tTemp, nTemp, nPltp-1) ) then
+                io.write("nestedTrue")
+                return true -- subsequent picks proved to be enough
+            else
+                io.write("nestedNil")
+                tPoss[i] = nil --none of the following picks made our result valid
+            end
+        end
+    end
     
-    return false
-}
+    return false -- no picks (nor their subsequent picks) managed to achieve our reach
+end
 
 
 
--- Returns a shallow copy of a table
--- https://stackoverflow.com/a/12397742
+-- Returns a shallow copy of given parameter
+-- based on https://stackoverflow.com/a/12397742
 function sCopy(orig)
     local orig_type = type(orig)
     local copy
-    if orig_type == 'table' then
+    if(orig_type == 'table') then
         copy = {}
         for orig_key, orig_value in pairs(orig) do
-            copy[orig_key] = orig_value
+            copy[orig_key] = orig_value 
         end
     else -- number, string, boolean, etc
         copy = orig
-    end
+    end  
     return copy
 end
+onPlayerChangeColor("white")
