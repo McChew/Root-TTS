@@ -33,7 +33,7 @@ function onPlayerConnect()
 end
 
 function updateReachMax()
-    nPlayerCount = 3 -- #getPlayers()
+    nPlayerCount = 2 -- #getPlayers()
     checkForValidPicks( )
 end
 

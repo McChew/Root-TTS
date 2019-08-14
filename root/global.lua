@@ -1,23 +1,4 @@
-available = {
-        Marquise = 1,
-        Eyrie = 1,
-        Woodland = 1,
-        Vagabond = 2,
-        Riverfolk = 1,
-        Lizard = 1,
-        Duchy = 1,
-        Corvid = 1,
-        Fangus = 1,
-        VagaThief = 1,
-        VagaTinker = 1,
-        VagaScoundrel = 1,
-        VagaArbiter = 1,
-        VagaRanger = 1,
-        VagaVagrant = 1,
-        Arachnid = 1,
-        WeeklyCroak = 1,
-        Boars = 1,
-}
+
 
 colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
           Purple=true, White=true, Red=true, Brown=true, Pink=true}
