@@ -33,34 +33,33 @@ function onPlayerConnect()
 end
 
 function updateReachMax()
-    nPlayerCount = 2 -- #getPlayers()
+    nPlayerCount = 3 -- #getPlayers()
     checkForValidPicks( )
 end
 
 
 function checkForValidPicks( )
     local nReachToReach = tReachToReach[nPlayerCount]
-
-    local tTemp = sCopy(tReach)
+    local tPicked = {}
 
     -- to know if a pick is valid we create different table setups
     -- and then check if this assumed setup is valid
-    for i, v in pairs(tTemp) do
-        if(v ~= nil) then
+    for i, v in pairs(tReach) do
+        if(v ~= nil) then          
+            local tTemp = sCopy(tReach)
             tTemp[i] = nil
-            
-            --io.write("try: ")
             if( false == validateSetup(tTemp, v, nPlayerCount-1) ) then
-                tTemp[i] = nil
-                io.write(" FALSE ")
+                tReach[i] = nil
             else
-                io.write(" >"..i.."< ")
+                tPicked[i] = v
             end
         end
     end
-    for i, v in pairs(tTemp) do
+
+    io.write("Picked Factions:")
+    for i, v in pairs(tPicked) do
       if v~=nil then 
-        io.write(i..v.."  ")
+        io.write(" >"..i.."< ")
       end
     end
 
@@ -74,27 +73,25 @@ end
 -- nPsf  = points so far
 -- nPltp = Players left to pick
 function validateSetup(tPoss, nPsf, nPltp)
-    local tTemp = sCopy(tPoss)
     for i, v in pairs(tPoss) do
         if(v ~= nil) then
+            local tTemp = sCopy(tPoss)
+            if(nPltp <= 0) then
+              return false
+            end
+            
             local nTemp = nPsf + v
-            io.write(nTemp.."  ")
+
             if( nTemp >= tReachToReach[nPlayerCount]) then
                 return true
             end
             
-            if(nPltp <= 0) then
-              return false
-            end
             -- new assumed score is not high enough so we clone the table and pick another faction from it
             tTemp[i] = nil
-            
             --io.write("nested:")
             if( validateSetup(tTemp, nTemp, nPltp-1) ) then
-                io.write("nestedTrue")
                 return true -- subsequent picks proved to be enough
             else
-                io.write("nestedNil")
                 tPoss[i] = nil --none of the following picks made our result valid
             end
         end
