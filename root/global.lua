@@ -24,7 +24,7 @@ end
 -- par = {faction}
 function FactionChosen(par)
     local faction = par[1]
-    available[faction] = available[faction] -1
+    available[faction].max = available[faction].max -1
     ShowAllButtons()
 end
 

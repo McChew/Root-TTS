@@ -37,17 +37,17 @@ board_xml = [[
 
     <TableLayout id="factionsButtons" active="True">
         <Row preferredHeight="30">
-            <Cell id="Marquise1">
+            <Cell id="Marquise">
                 <Button class="mapButton" onClick="spawnFunction(Marquise)" color="#f78b18"  >
                     <Image class="mapImage" image="marquise-button"></Image>
                 </Button>
             </Cell>
-            <Cell id="Eyrie1">
+            <Cell id="Eyrie">
                 <Button class="mapButton" onClick="spawnFunction(Eyrie)" color="blue">
                     <Image class="mapImage" image="eyrie-button"></Image>
                 </Button>
             </Cell>
-            <Cell id="Woodland1">
+            <Cell id="Woodland">
                 <Button class="mapButton" onClick="spawnFunction(Woodland)" color="green">
                     <Image class="mapImage" image="alliance-button"></Image>
                 </Button>
@@ -58,28 +58,28 @@ board_xml = [[
                 <Button id="Vagabond2" class="mapButton" onClick="spawnFunction(Vagabond)" color="#dbdbdb">
                     <Image class="mapImage" image="vagabond01-button"></Image>
                 </Button>
-                <Button id="Vagabond1" class="mapButton" onClick="spawnFunction(Vagabond)" color="gray">
+                <Button id="Vagabond" class="mapButton" onClick="spawnFunction(Vagabond)" color="gray">
                     <Image class="mapImage" image="vagabond02-button"></Image>
                 </Button>
             </Cell>
-            <Cell id="Riverfolk1">
+            <Cell id="Riverfolk">
                 <Button class="mapButton" onClick="spawnFunction(Riverfolk)" color="#47f8ff">
                     <Image class="mapImage" image="riverfolk-button"></Image>
                 </Button>
             </Cell>
-            <Cell id="Lizard1">
+            <Cell id="Lizard">
                 <Button class="mapButton" onClick="spawnFunction(Lizard)" color="yellow">
                     <Image class="mapImage" image="lizard-button"></Image>
                 </Button>
             </Cell>
         </Row>
         <Row preferredHeight="30">
-            <Cell id="Corvid1">
+            <Cell id="Corvid">
                 <Button class="mapButton" onClick="spawnFunction(Corvid)" color="purple">
                     <Image class="mapImage" image="corvid-button"></Image>
                 </Button>
             </Cell>
-            <Cell id="Duchy1">
+            <Cell id="Duchy">
                 <Button class="mapButton" onClick="spawnFunction(Duchy)" color="Brown">
                     <Image class="mapImage" image="underground-button"></Image>
                 </Button>

@@ -7,6 +7,7 @@ chosen_faction = nil
 
 function g()
     self.UI.setXml(board_xml)
+
     -- We need some delay between setting ui and using it. hence the weird coroutine
     for x=1,10 do
         coroutine.yield()
@@ -41,13 +42,15 @@ function spawnFunction(player, faction)
         broadcastToColor("Sit down first", player.color, "Red")
         return
     end
-    local avail = Global.getTable('available')
-    local colors = Global.getTable('colors')
-    if (avail[faction] < 1) then return end
+    local tFactionValues = Global.getTable('tFactionValues') --new data model
+    local colors = Global.getTable('colors') -- format: {colorname = 1}
+
+    if (tFactionValues[faction]:isPickable()) then return end
+
     Global.call('FactionChosen', {faction})
-    local preferred_color = faction_colors[faction..tostring(avail[faction])]
+    local preferred_color = faction_colors[tFactionValues[faction])] -- add fucntion in data set for variants
     if not colors[preferred_color] then
-        player.print("Preferred color for faction: "..faction.." alread taken.\nPlease pick another", red)
+        player.print("Preferred color for faction: "..faction.." already taken.\nPlease pick another", red)
         chosen_faction = faction
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("botsButtons", "active", "False")
@@ -83,7 +86,7 @@ function spawnWithColor(faction, color)
     while not val do
         val = Player[color].setHandTransform(closest, 1)
     end
-    if (faction == "Vagabond") then
+    if (faction == "Vagabond") then -- enables xml ui based on fixed values, rewrite for dynamic access
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("vagabondButtons", "active", "True")
         self.UI.setAttribute('typeToggles', "active", "False")

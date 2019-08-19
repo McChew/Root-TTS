@@ -30544,17 +30544,3 @@ factions["Boars"] = {{distance=17.3572301209992, heading=5.06965441889679, own_y
   "GUID": "a7ad16"
 }]]},}
 
-faction_colors = {}
-faction_colors.Eyrie1 = "Blue"
-faction_colors.Marquise1 = "Orange"
-faction_colors.Riverfolk1 = "Teal"
-faction_colors.Lizard1 = "Yellow"
-faction_colors.Woodland1 = "Green"
-faction_colors.Corvid1 = "Purple"
-faction_colors.Vagabond2 = "White"
-faction_colors.Vagabond1 = "Red"
-faction_colors.Duchy1 = "Brown"
-faction_colors.Fangus1 = "Pink"
-faction_colors.Arachnid1 = "Purple"
-faction_colors.WeeklyCroak1 = "Green"
-faction_colors.Boars1 = "Brown"

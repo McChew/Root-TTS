@@ -1,24 +1,11 @@
 -- fixed reach values
-tReachToReach = {}
-tReachToReach[2] = 17
-tReachToReach[3] = 18
-tReachToReach[4] = 21
-tReachToReach[5] = 25
-tReachToReach[6] = 28
+tReachByPlayerCount = {0, 17,18,21,25,28}
+require("factionDataClass")
 
--- define factions here if you want to include them in the calculations
-tReach = {
-    Marquise = 10,
-    Duchy = 8,
-    Eyrie = 7,
-    Vagabond = 2,
-    Riverfolk = 5,
-    Woodland = 3,
-    Corvid = 3,
-    Lizard = 2
-}
+tFactionValues["Eyrie"]:print()
+
 -- counts seatet players, without spectators
-nPlayerCount = 0
+nPlayerCount = 2
 
 
 
@@ -33,13 +20,14 @@ function onPlayerConnect()
 end
 
 function updateReachMax()
-    nPlayerCount = 2 -- #getPlayers()
+    -- #getPlayers()
     checkForValidPicks( )
 end
 
 
 function checkForValidPicks( )
-    local nReachToReach = tReachToReach[nPlayerCount]
+    tReach = getPickableReachList()
+    local nReachToReach = tReachByPlayerCount[nPlayerCount]
     local tPicked = {}
 
     -- to know if a pick is valid we create different table setups
@@ -48,18 +36,18 @@ function checkForValidPicks( )
         if(v ~= nil) then          
             local tTemp = sCopy(tReach)
             tTemp[i] = nil
-            if( false == validateSetup(tTemp, v, nPlayerCount-1) ) then
-                tReach[i] = nil
-            else
+            if(  validateSetup(tTemp, v, nPlayerCount-1) ) then
                 tPicked[i] = v
+            else
+                tReach[i] = nil
             end
         end
     end
 
-    io.write("Picked Factions:")
+    io.write("\n\n\nPickable Factions:")
     for i, v in pairs(tPicked) do
       if v~=nil then 
-        io.write(" >"..i.."< ")
+        io.write("\n"..i)
       end
     end
 
@@ -82,7 +70,7 @@ function validateSetup(tPoss, nPsf, nPltp)
             
             local nTemp = nPsf + v
 
-            if( nTemp >= tReachToReach[nPlayerCount]) then
+            if( nTemp >= tReachByPlayerCount[nPlayerCount]) then
                 return true
             end
             
