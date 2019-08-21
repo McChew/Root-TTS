@@ -37,7 +37,7 @@ end
 -- sID: unique ID of interface element
 -- xmlUI leave empty, or provide current wip-ui
 function addUIElementAtID(tNewUi, sID, tXmlUi) 
-    for _, v in ipairs(tXmlUi or getXmlTable()) do  
+    for _, v in ipairs(tXmlUi or UI.getXmlTable()) do  
         if(v.id == sID) then
             v.children = v.children or {}
             table.insert(v.children, tNewUi) 
