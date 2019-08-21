@@ -6,21 +6,39 @@ tFactionValues = {}
 FactionData = {
     max = 0,
     picked = 0,
+    color = {},
     reach = {},
     variants = {}
 }
 
--- Constructor
-function FactionData:new(...)
+--Constructor
+-- either pass  color, reach for one faction
+-- or {color, reach}, {color, reach} ... for multiple
+-- main goal here is to keep faction creation as compact as possible
+function FactionData:new(sColor, ...)
     local o = {}   
     
     setmetatable(o, self)
     self.__index = self
-    
+
     o.variants = {}
+    o.color = {}
     o.reach = {} 
-    if arg then
-        o:setReach(arg) 
+
+    if(type(sColor) == "table") then -- we probably got max > 1
+        o:addColor(sColor[1])
+        o:addReach(sColor[2])
+        if arg then
+            for _, a in arg do
+                o:addColor(a[1]) 
+                o:addReach(a[2]) 
+            end
+        end
+    else
+        o.color = sColor
+        if arg then
+            o:setReach(arg) 
+        end
     end
     return o
 end
@@ -43,6 +61,16 @@ end
 --max
 function FactionData:setMaxInstances(nAmount)
     self.max = nAmount
+end
+
+--color
+function FactionData:addColor(...)
+    for _, v in ipairs(arg) do 
+        table.insert(self.color, v)
+    end
+end
+function FactionData:setColors(...)
+    self.color = arg
 end
 
 --reach

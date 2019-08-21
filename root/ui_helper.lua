@@ -27,8 +27,31 @@ txmltest={
         }
     }
 }
+
 function getXmlTable()
   return txmltest
+end
+
+function getFactionButton(sFName, sColor)
+    return "{
+        tag=\"Cell\"
+        id=\""..sFName.."\"
+        children={
+            {
+                tag=\"Button\"
+                class=\"mapButton\"
+                onClick=\"spawnFunction("..sFName..")
+                color=\""..sColor.."\"
+                children={
+                    {
+                        tag=\"Image\"
+                        class=\"mapImage\"
+                        image="..sFName.."-button\"
+                    }
+                }
+            }
+        }
+    }"
 end
 
 
@@ -41,8 +64,6 @@ function addUIElementAtID(tNewUi, sID, tXmlUi)
         if(v.id == sID) then
             v.children = v.children or {}
             table.insert(v.children, tNewUi) 
-
-            io.write(v.tag..v.id..v.children[1].tag)
 
             return true, tXmlUI
         end 
