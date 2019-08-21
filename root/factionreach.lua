@@ -90,8 +90,7 @@ end
 
 
 
--- Returns a shallow copy of given parameter
--- based on https://stackoverflow.com/a/12397742
+-- Returns a 1 layer deep copy of given parameter
 function sCopy(orig)
     local orig_type = type(orig)
     local copy
