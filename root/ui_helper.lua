@@ -31,28 +31,43 @@ txmltest={
 function getXmlTable()
   return txmltest
 end
---test
-function getFactionButton(sFName, sColor)
-    return "{
-        tag=\"Cell\"
-        id=\""..sFName.."\"
-        children={
-            {
-                tag=\"Button\"
-                class=\"mapButton\"
-                onClick=\"spawnFunction("..sFName..")
-                color=\""..sColor.."\"
-                children={
-                    {
-                        tag=\"Image\"
-                        class=\"mapImage\"
-                        image="..sFName.."-button\"
-                    }
-                }
-            }
-        }
-    }"
+
+function getFactionCell(sFName, factionData)
+    return [[{
+    tag="Cell"
+    id="]]..sFName..[[_cell"
+    children={
+    ]]..getFactionButtons(sFName, factionData)..[[
+
+    }
+  }
+  ]]
 end
+
+function getFactionButtons(sFName, factionData)
+        sReturn = ""
+
+        for i=1, factionData.max do
+            sReturn=sReturn..[[
+{
+      tag="Button"
+      class="mapButton"
+      onClick="spawnFunction(]]..sFName..[[)"
+      color="]]..factionData.color[i]..[["
+      children={
+          {
+            tag="Image"
+            id="]]..sFName..[[_image"
+            class="mapImage"
+            image="]]..sFName..[[-button"
+          }
+        }
+      }]]
+        end
+    return sReturn
+end
+
+io.write(getFactionCell("Marquise", {max=2, color={"red","white"}}))
 
 
 --adds the new UI as children to the first element with matching ID
