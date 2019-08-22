@@ -31,7 +31,7 @@ txmltest={
 function getXmlTable()
   return txmltest
 end
-
+--test
 function getFactionButton(sFName, sColor)
     return "{
         tag=\"Cell\"
