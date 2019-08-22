@@ -1,5 +1,10 @@
 tFactionValues = {}
-
+--Style guidelines
+-- prefix on all non-generic variables in camelCase (iNumber, sText...)
+-- objects can use obj, of a acronym of the class-name
+-- PascalCase for classes
+-- camelCase for functoins
+-- ideally single words for variables
 
 
 -- Meta Class
@@ -15,7 +20,7 @@ FactionData = {
 -- either pass  color, reach for one faction
 -- or {color, reach}, {color, reach} ... for multiple
 -- main goal here is to keep faction creation as compact as possible
-function FactionData:new(sColor, ...)
+function FactionData:new(var_table, ...)
     local o = {}   
     
     setmetatable(o, self)
@@ -25,9 +30,9 @@ function FactionData:new(sColor, ...)
     o.color = {}
     o.reach = {} 
 
-    if(type(sColor) == "table") then -- we probably got max > 1
-        o:addColor(sColor[1])
-        o:addReach(sColor[2])
+    if(type(var_table) == "table") then -- we probably got max > 1
+        o:addColor(var_table[1])
+        o:addReach(var_table[2])
         if arg then
             for _, a in arg do
                 o:addColor(a[1]) 
@@ -35,7 +40,7 @@ function FactionData:new(sColor, ...)
             end
         end
     else
-        o.color = sColor
+        o.color = var_table
         if arg then
             o:setReach(arg) 
         end
