@@ -34,8 +34,10 @@ board_xml = [[
         text="X"
         onClick="deleteThis">
     </Button>
-
-    <TableLayout id="factionsButtons" active="True">
+    <Panel height="210" offsetXY="0 -27" active="True" id="subpanel">
+        <Image image="box-art" />
+    </Panel>
+    <TableLayout id="factionsButtons" active="False">
         <Row preferredHeight="30">
             <Cell id="Marquise1">
                 <Button class="mapButton" onClick="spawnFunction(Marquise)" color="#f78b18"  >

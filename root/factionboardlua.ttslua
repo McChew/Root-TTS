@@ -21,6 +21,7 @@ function onLoad(save_state)
 end
 
 function toggleButtons(player, value, id)
+    self.UI.setAttribute("subpanel", "active", "False")
     self.UI.setAttribute(id..'Buttons', 'active', value)
 end
 
