@@ -1,0 +1,45 @@
+function onLoad()
+    Wait.frames(create_buttons, 10)
+end
+
+SELECTED = ""
+
+function create_buttons()
+    local label = {click_function = "nil", function_owner = self, label = "Choose Subsection", position = {-0.9, 0.1, -0.5}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, alignment = 3}
+    self.createButton(label)
+    local counter = 0
+    EVERYTHING = Global.getTable('EVERYTHING')
+    for section ,component in pairs(EVERYTHING) do
+        _G["click_"..section] = function() load_section(section) end
+        color=SELECTED==section and Color.green or Color.white
+        print(string.format("SELECTED: %s, sections: %s, COLOR: %s", SELECTED, section, tostring(color)))
+        local data = {click_function = "click_"..section, function_owner = self, label = section, position = {-0.9, 0.1, -0.3+counter*0.15}, scale = {0.5, 0.5, 0.5}, width = 1100, alignment = 3, color=SELECTED==section and Color.green or Color.white}
+        counter = counter +1
+        self.createButton(data)
+    end
+end
+
+function load_section(section)
+    local boards = gather_boards()
+    for _, board in ipairs(boards) do
+        board.call('empty')
+    end
+    for faction, data in pairs(EVERYTHING[section]) do
+        board = table.remove(boards, 1)
+        board.editInput({index=0, value=section})
+        board.editInput({index=1, value=faction})
+        board.call('spawn_here', data)
+    end
+    SELECTED = section
+    create_buttons()
+end
+
+function  gather_boards()
+    local ret = {}
+    for _, obj in ipairs(getAllObjects()) do
+        if obj.getName() == "Editor Board" then
+            table.insert(ret, obj)
+        end
+    end
+    return ret
+end
