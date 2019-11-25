@@ -1,34 +1,36 @@
 objects = {}
 
-CATEGORY = ""
-NAME = ""
+
 function onLoad(save_state)
-    local data = {input_function = "set_category", function_owner = self, label = "Base category", position = {-0.8, 0.1, -0.9}, scale = {0.5, 0.5, 0.5}, width = 1500, height = 130, tooltip = "Base category", alignment = 3, validation = 6, tooltip="Base category for this faction (ex. Factions, scenarios or fan factions)"}
+    local data = {input_function = "nothing", function_owner = self, label = "Base category", position = {-1.1, 0.100000001490116, -0.899999976158142}, scale = {0.5, 0.5, 0.5}, width = 1100, height = 130, alignment = 3, validation = 1, tooltip="Base category for this faction (ex. Factions, scenarios or fan factions)"}
     self.createInput(data)
-    local data = {input_function = "set_name", function_owner = self, label = "Name", position = {0.8, 0.1, -0.9}, scale = {0.5, 0.5, 0.5}, width = 1500, height = 130, tooltip = "Name", alignment = 3, validation = 6, tooltip="Name for this faction (ex. Eyrie, Woodland or Trickster)"}
+    local data = {input_function = "nothing", function_owner = self, label = "Name", position = {0.1, 0.100000001490116, -0.899999976158142}, scale = {0.5, 0.5, 0.5}, width = 1100, height = 130, alignment = 3, validation = 1, tooltip="Name for this faction (ex. Eyrie, Woodland or Trickster)"}
+    self.createInput(data)
+    local data = {input_function = "set_color", function_owner = self, label = "Color", position = {1.2, 0.100000001490116, -0.899999976158142}, scale = {0.5, 0.5, 0.5}, width = 800, height = 130, color = Color.white, tooltip = "Preferred Color for this faction", alignment = 3}
     self.createInput(data)
 end
 
-function set_category(obj, player_clicker_color, input_value, selected)
-    CATEGORY = input_value
+function nothing()
 end
 
-function set_name(obj, player_clicker_color, input_value, selected)
-    NAME = input_value
+function set_color(_, _, value)
+    if Color[value] then
+        self.editInput({index=2, color=Color[value]})
+    end
 end
 
 function spawn_here(to_spawn)
-    my_pos = self.getPosition()
-    my_rot = self.getRotation()
-    -- self.destruct()
+    local my_rot = self.getRotation()
+    local scale = self.getScale()
+    scale.x = 1/scale.x
+    scale.z = 1/scale.z
+
     for _,v in ipairs(to_spawn) do
-        local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
-        local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
-        local new_pos = {x, v.own_y, z}
+        local new_pos = self.positionToWorld(Vector(v.move_to) * scale)
         spawnObjectJSON({
             json              = v.json,
             position          = new_pos,
-            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y+180, o.getRotation().z}) end
+            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y, o.getRotation().z}) end
         })
     end
 end
@@ -49,7 +51,8 @@ function empty()
     end
 end
 
-function saveHere()
+function save_here(as_string)
+    objects = {}
     my_pos = self.getPosition()
     objs = Physics.cast({
         origin       = self.getPosition(),
@@ -69,25 +72,22 @@ function saveHere()
             objects[#objects+1] = {distance=distance, heading=heading, json=ob.getJSON():gsub("%\r%\n%s+", ""), own_y=ob_pos.y}
         end
     end
-    local body = "{\n"
-    for _,ob in ipairs(objects) do
-        body = body.."{distance="..ob.distance..", "
-        body = body.."heading="..ob.heading..", "
-        body = body.."own_y="..ob.own_y..", "
-        body = body.."json=[["..ob.json.."]]},\n"
+    if as_string then
+        local body = "{\n"
+        for _,ob in ipairs(objects) do
+            body = body.."{distance="..ob.distance..", "
+            body = body.."heading="..ob.heading..", "
+            body = body.."own_y="..ob.own_y..", "
+            body = body.."json=[["..ob.json.."]]},\n"
+        end
+        body = body.."}"
+        -- Notes.addNotebookTab({
+        --     title = "Save",
+        --     body  = body,
+        --     color = "Black",
+        -- })
+        return body
+    else
+        return objects
     end
-    body = body.."}"
-    -- Notes.addNotebookTab({
-    --     title = "Save",
-    --     body  = body,
-    --     color = "Black",
-    -- })
-    function callback(wr)
-        repeat
-            print("not done")
-        until wr.is_done
-        print(wr.text)
-    end
-    WebRequest.post("https://pastecode.xyz/api/create", {text=body, title="Test", name="Test", private=1, lang="lua", expire=10}, callback)
-    objects = {}
 end

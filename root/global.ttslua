@@ -49,7 +49,7 @@ end
 
 function ShowAllButtons()
     for _, x in ipairs(factionboards) do
-        x.call('showButtons', {})
+        x.call('show_buttons', {})
     end
 end
 

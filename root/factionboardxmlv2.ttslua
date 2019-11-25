@@ -1,0 +1,287 @@
+board_xml = [[
+<Defaults>
+    <ToggleButton class="toggleButton" color="#434141" colors="Grey|Grey|Grey|Purple" onValueChanged="toggleButtons"/>
+    <TableLayout padding="2 2 2 2" cellspacing="2"  height="250" offsetXY="0 -27" cellBackgroundColor="rgba(1,1,1,0)" />
+    <TableLayout class="vagabondButtons" padding="2 2 2 2" cellspacing="2"  height="250" width="200" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" />
+    <Button class="mapButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
+    <Image class="mapImage" preserveAspect="true" height="25"/>
+    <Image class="vagabondImage" width="76" preserveAspect="true"/>
+    <Button class="vagabondButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
+</Defaults>
+
+<!-- Faction selection menu -->
+<Panel id="FactionSelection"
+    width="340"
+    height="250"
+    position="0 0 -40"
+    scale="0.75 0.75">
+
+    <ToggleGroup id="typeToggles">
+    <HorizontalLayout height="25" rectAlignment="UpperLeft" width="300">
+        <ToggleButton class="toggleButton" id="factions"><Image class="mapImage" image="faction-title" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="bots"><Image class="mapImage" image="bots-title" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="scenarios"><Image class="mapImage" image="scenarios-button" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="fan"><Image class="mapImage" image="fan-factions-button" height="20"/></ToggleButton>
+        <ToggleButton class="toggleButton" id="fanbot"><Image class="mapImage" image="fan-bots-button" height="20"/></ToggleButton>
+    </HorizontalLayout>
+    </ToggleGroup>
+    <Button id="closeButton"
+        width="20"
+        height="20"
+        rectAlignment="UpperRight"
+        color="#990000"
+        textColor="#FFFFFF"
+        text="X"
+        onClick="deleteThis">
+    </Button>
+    <Panel height="210" offsetXY="0 -27" active="True" id="subpanel">
+        <Image image="box-art" />
+    </Panel>
+    <TableLayout id="factionsButtons" active="False">
+        <Row preferredHeight="30">
+            <Cell id="Marquise1">
+                <Button class="mapButton" onClick="spawnFunction(Marquise)" color="#f78b18"  >
+                    <Image class="mapImage" image="marquise-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Eyrie1">
+                <Button class="mapButton" onClick="spawnFunction(Eyrie)" color="blue">
+                    <Image class="mapImage" image="eyrie-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Woodland1">
+                <Button class="mapButton" onClick="spawnFunction(Woodland)" color="green">
+                    <Image class="mapImage" image="alliance-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell>
+                <Button id="Vagabond2" class="mapButton" onClick="spawnFunction(Vagabond)" color="#dbdbdb">
+                    <Image class="mapImage" image="vagabond01-button"></Image>
+                </Button>
+                <Button id="Vagabond1" class="mapButton" onClick="spawnFunction(Vagabond)" color="gray">
+                    <Image class="mapImage" image="vagabond02-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Riverfolk1">
+                <Button class="mapButton" onClick="spawnFunction(Riverfolk)" color="#47f8ff">
+                    <Image class="mapImage" image="riverfolk-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Lizard1">
+                <Button class="mapButton" onClick="spawnFunction(Lizard)" color="yellow">
+                    <Image class="mapImage" image="lizard-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="Corvid1">
+                <Button class="mapButton" onClick="spawnFunction(Corvid)" color="purple">
+                    <Image class="mapImage" image="corvid-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Duchy1">
+                <Button class="mapButton" onClick="spawnFunction(Duchy)" color="Brown">
+                    <Image class="mapImage" image="underground-button"></Image>
+                </Button>
+            </Cell>
+            <Cell />
+        </Row>
+    </TableLayout>
+    <TableLayout id="botsButtons" active="False">
+        <Row preferredHeight="30">
+            <Cell id="rBotMarquise1">
+                <Button class="mapButton" onClick="spawnOfficialBot(rBotMarquise)" color="#f78b18">
+                    <Image class="mapImage" image="mech-marq2-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="rBotEyrie1">
+                <Button class="mapButton" onClick="spawnOfficialBot(rBotEyrie)" id="ElecEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie"></Image>
+                </Button>
+            </Cell>
+            <Cell id="rBotWoodland1">
+                <Button class="mapButton" onClick="spawnOfficialBot(rBotWoodland)" color="green">
+                    <Image class="mapImage" image="automated-alliance"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell>
+                <Button id="rBotVagabond2" class="mapButton" onClick="spawnOfficialBot(rBotVagabond)" color="#dbdbdb">
+                    <Image class="mapImage" image="vehicular-vagabond"></Image>
+                </Button>
+              <Button id="rBotVagabond1" class="mapButton" onClick="spawnOfficialBot(rBotVagabond)" color="gray">
+                  <Image class="mapImage" image="vehicular-vagabond2"></Image>
+              </Button>
+            </Cell>
+        </Row>
+    </TableLayout>
+    <TableLayout id="scenariosButtons" active="False">
+        <Row preferredHeight="30">
+            <Cell>
+                <Button class="mapButton" onClick="spawnScenario(Trickster)" color="#f78b18">
+                    <Image class="mapImage" image="trickster-button" height="20" />
+                </Button>
+            </Cell>
+            <Cell />
+            <Cell />
+        </Row>
+    </TableLayout>
+    <TableLayout id="fanbotButtons" active="False">
+        <Row preferredHeight="30">
+            <Cell id="MechMarquise1">
+                <Button class="mapButton" onClick="spawnFanBot(MechMarquise)" color="#f78b18">
+                    <Image class="mapImage" image="mech-marq2-button"></Image>
+                </Button>
+            </Cell>
+            <Cell id="ElecEyrie1">
+                <Button class="mapButton" onClick="spawnFanBot(ElecEyrie)" id="ElecEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie"></Image>
+                </Button>
+            </Cell>
+            <Cell id="EleAEyrie1">
+                <Button class="mapButton" onClick="spawnFanBot(EleAEyrie)" id="EleAEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie-alt"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="AutoWoodland1">
+                <Button class="mapButton" onClick="spawnFanBot(AutoWoodland)" color="green">
+                    <Image class="mapImage" image="automated-alliance"></Image>
+                </Button>
+            </Cell>
+            <Cell>
+                <Button id="RoboVagabond2" class="mapButton" onClick="spawnFanBot(RoboVagabond)" color="#dbdbdb">
+                    <Image class="mapImage" image="robot-racoon"></Image>
+                </Button>
+              <Button id="RoboVagabond1" class="mapButton" onClick="spawnFanBot(RoboVagabond)" color="gray">
+                  <Image class="mapImage" image="robot-racoon2"></Image>
+              </Button>
+            </Cell>
+            <Cell id="OverRiverfolk1">
+                <Button class="mapButton" onClick="spawnFanBot(OverRiverfolk)" color="#47f8ff">
+                    <Image class="mapImage" image="otter-overlords"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="ClocLizard1">
+                <Button class="mapButton" onClick="spawnFanBot(ClocLizard)" color="yellow">
+                    <Image class="mapImage" image="clockwork-cult"></Image>
+                </Button>
+            </Cell>
+        </Row>
+    </TableLayout>
+    <TableLayout id="fanButtons" active="False">
+        <Row preferredHeight="30">
+            <Cell id="Arachnid1">
+                <Button class="mapButton" onClick="spawnFunction(Arachnid)" color="purple">
+                    <Image class="mapImage" image="arachnid-button" height="20"></Image>
+                </Button>
+            </Cell>
+            <Cell id="WeeklyCroak1">
+                <Button class="mapButton" onClick="spawnFunction(WeeklyCroak)" color="#8B9668">
+                    <Image class="mapImage" image="weekly-croak-button" height="20"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Fangus1">
+                <Button class="mapButton" onClick="spawnFunction(Fangus)" color="Pink">
+                    <Image class="mapImage" image="fangus-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="Boars1">
+                <Button class="mapButton" onClick="spawnFunction(Boars)" color="Brown">
+                    <Image class="mapImage" Width="90%" image="boars-button"></Image>
+                </Button>
+            </Cell>
+            <Cell />
+            <Cell />
+        </Row>
+    </TableLayout>
+    <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
+        <Row preferredHeight="85">
+            <Cell id="VagaArbiter">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="spawnVagabond(VagaArbiter)">
+                    <Image class="vagabondImage" image="vagabond-arbiter" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaRanger">
+                <Button class="vagabondButton" color="grey" onClick="spawnVagabond(VagaRanger)">
+                    <Image class="vagabondImage" image="vagabond-ranger" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaScoundrel">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="spawnVagabond(VagaScoundrel)">
+                    <Image class="vagabondImage" image="vagabond-scoundrel" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="85">
+            <Cell id="VagaThief">
+                <Button class="vagabondButton" color="grey" onClick="spawnVagabond(VagaThief)">
+                    <Image class="vagabondImage" image="vagabond-thief" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaTinker">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="spawnVagabond(VagaTinker)">
+                    <Image class="vagabondImage" image="vagabond-tinker" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaVagrant">
+                <Button class="vagabondButton" color="grey" onClick="spawnVagabond(VagaVagrant)">
+                    <Image class="vagabondImage" image="vagabond-vagrant" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+        </Row>
+    </TableLayout>
+    <TableLayout id="colorButtons" active="False">
+        <Row preferredHeight="30">
+            <Cell />
+            <Cell><Text color="White">Choose color</Text></Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="Red">
+                <Button class="mapButton" onClick="setColor(Red)" color="Red" />
+            </Cell>
+            <Cell id="Blue">
+                <Button class="mapButton" onClick="setColor(Blue)" color="Blue" />
+            </Cell>
+            <Cell id="Orange">
+                <Button class="mapButton" onClick="setColor(Orange)" color="Orange" />
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="Teal">
+                <Button class="mapButton" onClick="setColor(Teal)" color="Teal" />
+            </Cell>
+            <Cell id="Yellow">
+                <Button class="mapButton" onClick="setColor(Yellow)" color="Yellow" />
+            </Cell>
+            <Cell id="Green">
+                <Button class="mapButton" onClick="setColor(Green)" color="Green" />
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="Purple">
+                <Button class="mapButton" onClick="setColor(Purple)" color="Purple" />
+            </Cell>
+            <Cell id="White">
+                <Button class="mapButton" onClick="setColor(White)" color="White" />
+            </Cell>
+            <Cell id="Brown">
+                <Button class="mapButton" onClick="setColor(Brown)" color="Brown" />
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="Pink">
+                <Button class="mapButton" onClick="setColor(Pink)" color="Pink" />
+            </Cell>
+        </Row>
+    </TableLayout>
+</Panel>
+]]
