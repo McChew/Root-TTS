@@ -38,7 +38,7 @@ function spawnMap(map, random)
 
     -- ruins and ruin items
     available = Global.getTable('available')
-    
+
     -- Spawn items if we have Boars and no vagabonds
     vagabonds = math.max(2-available.Vagabond, 1-available.Boars)
     local params = {}
@@ -85,5 +85,4 @@ function spawnMap(map, random)
         setNotes(map_data[map]['note'])
     end
 
-    Global.call('SetupQuests', {})
 end

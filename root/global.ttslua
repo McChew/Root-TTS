@@ -52,24 +52,3 @@ function ShowAllButtons()
         x.call('showButtons', {})
     end
 end
-
-function SetupQuests()
-    local quest_board = getObjectFromGUID('afea2f')
-    local quest_deck = getObjectFromGUID('cc5741')
-    if available.Vagabond == 2 then
-        quest_board.destruct()
-        quest_deck.destruct()
-    else
-        quest_deck.shuffle()
-        local positions = {{32.98, 1.61, -2.89},
-                     {32.98, 1.61, 2.97},
-                     {32.99, 1.61, 8.90}}
-        local params = {}
-        params.smooth = true
-        params.flip = true
-        for _, x in ipairs(positions) do
-            params.position  = x
-            quest_deck.takeObject(params)
-        end
-    end
-end
