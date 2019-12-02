@@ -1,0 +1,52 @@
+--------------------------------
+---  Instances (Actual Data) ---
+--------------------------------
+sDefaultButtonColor = "#AD9F91"
+
+factionboardData = {}
+
+factionsValues = {}
+factionboardData["factions"] = factionsValues
+--Our special snowflake gets a few lines"#dbdbdb"
+local va = FactionData:new({"Black", 5}, {"Grey", 2})
+va:addVariants("Thief", "Tinker", "Scoundrel", "Arbiter", "Ranger", "Vagrant")
+--va:addVariant("Thief", 5) --example for different max on variant
+factionsValues["Vagabond"] = va
+
+
+
+--all others get one, get real ppl
+factionsValues["Corvid"]        = FactionData:new("Purple",3)
+factionsValues["Duchy"]         = FactionData:new("Brown", 8)
+factionsValues["Eyrie"]         = FactionData:new("Blue", 7)
+factionsValues["Lizard"]        = FactionData:new("Yellow", 2)
+factionsValues["Marquise"]      = FactionData:new("Orange", 10)
+factionsValues["Riverfolk"]     = FactionData:new("Teal", 5)
+factionsValues["Woodland"]      = FactionData:new("Green", 3)
+
+--These have no reach yet
+fanFactionsValues = {}
+factionboardData["fanFactions"] = fanFactionsValues
+
+fanFactionsValues["Arachnid"]      = FactionData:new("Purple", 0)
+fanFactionsValues["Boars"]         = FactionData:new("Brown", 0)
+fanFactionsValues["Fangus"]        = FactionData:new("Red", 0)
+fanFactionsValues["WeeklyCroak"]   = FactionData:new("Green",0)
+
+
+scenariosValues = {}
+factionboardData["scenarios"] = scenariosValues
+scenariosValues["Trickster"] = FactionData:new("Orange",0)
+
+--unused so far
+fanScenariosValues = {}
+factionboardData["fanScenarios"] = fanScenariosValues
+
+--TODO add bots
+botsValues = {}
+factionboardData["bots"] = botsValues
+
+
+--TODO add fan-bots
+fanBotsValues = {}
+factionboardData["fanBots"] = fanBotsValues

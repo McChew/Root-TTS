@@ -1,39 +1,41 @@
 
+#include factionDataClass
+#include uiHandler
+
+
 
 colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
           Purple=true, White=true, Red=true, Brown=true, Pink=true}
 
 factionboards = {}
 bot = false
--- par = {factionboard instance}
+
 function ImHere(par)
     factionboards[#factionboards+1] = par[1]
+    return uiXML
 end
 
--- par = {factionboard instance}
 function ImGone(par)
     local where = 0
     for x=1, #factionboards do
         if factionboards[x] == par[1] then
-            where = x
+            table.remove(factionboards, x)
+            break
         end
     end
-    table.remove(factionboards, where)
+
+    if #factionboards == 0 then
+      printToAll("Picking finished :)")
+    end
 end
 
--- par = {faction}
-function FactionChosen(par)
-    local faction = par[1]
-    available[faction].max = available[faction].max -1
+--TODO delete if not used
+function FactionChosen(faction)
     ShowAllButtons()
 end
 
-function ShowAllButtons()
-    for _, x in ipairs(factionboards) do
-        x.call('showButtons', {})
-    end
-end
 
+-- TODO not used, rewrite to generic "needsQuests" flag or something *shrug*
 function SetupQuests()
     local quest_board = getObjectFromGUID('afea2f')
     local quest_deck = getObjectFromGUID('cc5741')
@@ -53,4 +55,17 @@ function SetupQuests()
             quest_deck.takeObject(params)
         end
     end
+end
+
+function showAllButtons()
+    customizeUI()
+
+    for _, x in ipairs(factionboards) do
+        x.call('setUI', uiXML)
+    end
+    return 1
+end
+
+function onLoad(save_state)
+  showAllButtons()
 end

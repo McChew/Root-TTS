@@ -1,11 +1,11 @@
 -- fixed reach values
 tReachByPlayerCount = {0, 17,18,21,25,28}
-require("factionDataClass")
+--require("factionDataClass")
 
 tFactionValues["Eyrie"]:print()
 
 -- counts seatet players, without spectators
-nPlayerCount = 2
+nPlayerCount = 4
 
 
 
@@ -33,7 +33,7 @@ function checkForValidPicks( )
     -- to know if a pick is valid we create different table setups
     -- and then check if this assumed setup is valid
     for i, v in pairs(tReach) do
-        if(v ~= nil) then          
+        if(v ~= nil) then
             local tTemp = sCopy(tReach)
             tTemp[i] = nil
             if(  validateSetup(tTemp, v, nPlayerCount-1) ) then
@@ -46,7 +46,7 @@ function checkForValidPicks( )
 
     io.write("\n\n\nPickable Factions:")
     for i, v in pairs(tPicked) do
-      if v~=nil then 
+      if v~=nil then
         io.write("\n"..i)
       end
     end
@@ -67,13 +67,13 @@ function validateSetup(tPoss, nPsf, nPltp)
             if(nPltp <= 0) then
               return false
             end
-            
+
             local nTemp = nPsf + v
 
             if( nTemp >= tReachByPlayerCount[nPlayerCount]) then
                 return true
             end
-            
+
             -- new assumed score is not high enough so we clone the table and pick another faction from it
             tTemp[i] = nil
             --io.write("nested:")
@@ -84,7 +84,7 @@ function validateSetup(tPoss, nPsf, nPltp)
             end
         end
     end
-    
+
     return false -- no picks (nor their subsequent picks) managed to achieve our reach
 end
 
@@ -97,11 +97,11 @@ function sCopy(orig)
     if(orig_type == 'table') then
         copy = {}
         for orig_key, orig_value in pairs(orig) do
-            copy[orig_key] = orig_value 
+            copy[orig_key] = orig_value
         end
     else -- number, string, boolean, etc
         copy = orig
-    end  
+    end
     return copy
 end
 onPlayerChangeColor("white")

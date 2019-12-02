@@ -1,0 +1,138 @@
+#include factionsv2
+#include scenarios
+chosen_faction = nil  -- TODO remove this maybe
+
+
+function toggleButtons(player, value, id)
+    self.UI.setAttribute(id..'Buttons', 'active', value)
+end
+
+
+function spawnFunction(player, sFactionName, buttonName)
+  local factionName = cutNumeric(sFactionName)
+  local sGroup, faction = unpack(Global.call("getFactionName", {sGroup, factionName}))
+    --broadcastToAll("Picking "..sFactionName.."|"..faction.." from "..sGroup.." ("..faction..")")
+
+  if isSpectator(player) then
+      broadcastToColor("Sit down first", player.color, "Red")
+      return
+  end
+
+
+  if (not Global.call("isPickable", {sGroup, faction}))
+  then player.print(factionName.." has already been picked the maximum amount of times.", "Red") return
+  else end
+
+  self.UI.setAttribute("ToggleGroup", "active", "False")
+  self.UI.setAttribute("factionsButtons", "active", "False")
+
+
+
+  if Global.call("hasVariants", {sGroup, faction}) then --InnerGroup, factionName}) then
+    if factionName == faction then --This is a main with variants, so we show buttons
+      self.UI.setAttribute(factionName.."Buttons", "active", "True")
+    else -- we picked a variant from the submenu
+      spawnFaction(sGroup, faction, factionName)
+    end
+  else -- spawn a "normal" faction
+    spawnFaction(sGroup, factionName, "main")
+  end
+end
+
+
+function cutNumeric(name)
+  local cutLetter = string.sub(name, -1)
+  if tonumber(cutLetter) == nil then
+    return name
+  else
+    return string.sub(name, 1, -2)
+  end
+end
+
+
+function isSpectator(player)
+    if player.color == "Grey" then
+        return true
+    else
+        return false
+    end
+end
+
+function setColor(_, color)
+    local colors = Global.getTable('colors')
+    if not colors[color] then
+        for k,v in pairs(colors) do
+            self.UI.setAttribute(k, 'active', v)
+        end
+        return
+    end
+    spawnWithColor(chosen_faction, color)
+end
+
+function spawnFaction(sGroup, sFaction, sVariant)
+    Global.call("pickFaction", { sGroup, sFaction } )
+
+    local temp = {}
+    if(sVariant == "main") then
+      temp = tContent[sGroup][sFaction]
+    else
+      temp = tContent[sGroup][sFaction..sVariant]
+    end
+
+    spawnHere(temp)
+    Global.call("showAllButtons")
+end
+
+
+--obsolete for now
+function spawnWithColor(faction, variant, color)
+    local colors = Global.getTable('colors')
+    colors[color] = false
+    Global.setTable('colors', colors)
+    log(colors)
+    local closest = findClosestPosition()
+    closest.scale = {17.20, 5.40, 3.00}
+    val = false
+    while not val do --TODO fix colors first, then fix handtransform here
+        val = Player[color].setHandTransform(closest, 1)
+    end
+    spawnFaction(faction, variant)
+end
+
+function spawnHere(to_spawn)
+    my_pos = self.getPosition()
+    my_rot = self.getRotation()
+
+    for _,v in ipairs(to_spawn) do
+        local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
+        local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
+        local new_pos = {x, v.own_y, z}
+        spawnObjectJSON({
+            json              = v.json,
+            position          = new_pos,
+            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y+180, o.getRotation().z}) end
+        })
+    end
+    Global.call('ImGone', {self})
+    self.destruct()
+end
+
+
+
+function setUI(tUI)
+  self.UI.setXmlTable(tUI)
+end
+
+function showButtons()
+    Global.getTable("uiXML")
+    self.UI.setXmlTable(uiXML)
+end
+
+function deleteThis()
+    Global.call('ImGone', {self})
+    self.destruct()
+end
+
+function onLoad(save_state)
+  self.UI.setXmlTable(Global.call('ImHere', {self}))
+end

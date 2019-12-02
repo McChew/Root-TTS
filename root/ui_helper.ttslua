@@ -1,0 +1,96 @@
+--File Info
+-- In here go all functions that either provide UI elements
+-- or manipulate them
+-- Also everything that interacts with the API  UI interface
+-- in any meaningful way should be stored here
+-- This file will eventually become obsolete, once there is
+-- a useable ui wrapper class
+
+--api reference:
+-- everything is straight forward with one noteable exception,
+-- ui elements, even groups of them are always one table,
+-- fe, the main ui xml returns a table with a table as only content.
+-- likewise the "children" attribute also only contains one entry,
+-- being a table with all children inside.
+-- To my knowledge there is no reason to respect the outer table.
+--
+-- { { tag ="button", children={ { tag="image", ... } }   } }
+--
+
+
+function getFactionCell(sFName, factionData)
+    return [[{
+    tag="Cell"
+    id="]]..sFName..[[_cell"
+    children={
+    ]]..getFactionButtons(sFName, factionData)..[[
+
+    }
+  }
+  ]]
+end
+
+function getFactionButtons(sFName, factionData)
+        sReturn = ""
+
+        for i=1, factionData.max do
+            sReturn=sReturn..[[
+{
+      tag="Button"
+      class="mapButton"
+      onClick="spawnFunction(]]..sFName..[[)"
+      color="]]..factionData.color[i]..[["
+      children={
+          {
+            tag="Image"
+            id="]]..sFName..[[_image"
+            class="mapImage"
+            image="]]..sFName..[[-button"
+          }
+        }
+      }]]
+        end
+    return loadstring(sReturn)
+end
+
+--io.write(getFactionCell("Marquise", {max=2, color={"red","white"}}))
+
+
+--adds the new UI as children to the first element with matching ID
+-- tNewUi: ui code as lua table
+-- sID: unique ID of interface element
+-- xmlUI leave empty, or provide current wip-ui
+function addUIElementAtID(tNewUi, sID, tXmlUi)
+  for _, v in ipairs(tXmlUi or UI.getXmlTable()) do
+      if(v.id == sID) then
+          v.children = v.children or {}
+          table.insert(v.children, tNewUi)
+
+          return true, tXmlUI
+      end
+
+      if(v.children) then
+          return addUIElementAtID(tNewUi, sID, v.children)
+      end
+  end
+
+  return false, tXmlUI
+end
+
+--adds the new UI as children to the first element with matching ID
+-- tNewUi: ui code as lua table
+-- sID: unique ID of interface element
+-- xmlUI leave empty, or provide current wip-uilocal
+
+
+function printUI(uiv)
+  for k, v in pairs(uiv) do
+    if type(v) == "table" then
+      broadcastToAll(k.."-------------- -")
+      printUI(v)
+    else
+      broadcastToAll(k..": "..v)
+    end
+  end
+end
+--addUIElementAtID({tag="te3xt", lol="fufufu"}, "hi")

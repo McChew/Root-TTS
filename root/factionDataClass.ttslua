@@ -1,0 +1,435 @@
+
+--Style guidelines
+-- prefix on all non-generic variables in camelCase (iNumber, sText...)
+-- objects can use obj, of a acronym of the class-name
+-- PascalCase for classes
+-- camelCase for functoins
+-- ideally single words for variables
+
+-- Meta Class
+local FactionData = {
+    max = {},
+    picked = {},
+    color = {},
+    reach = {},
+    variants = {}
+}
+
+--Constructor
+-- either pass  color, reach for one faction
+-- or {color, reach}, {color, reach} ... for multiple
+-- main goal here is to keep faction creation as compact as possible
+function FactionData:new(...)
+    local arg = {...}
+
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+
+    o.max = 0
+    o.picked = 0
+    o.color = {}
+    o.reach = {}
+    o.variants = {}
+
+
+
+    if arg then
+        if(type(arg[1]) == "table") then
+            for _, a in ipairs(arg) do
+                o:addColor(a[1])
+                o:addReach(a[2])
+                --broadcastToAll(a[2].."."..a[1].."."..o.max)
+            end
+        else
+            o:addColor(arg[1])
+            o:addReach(arg[2])
+        end
+    end
+
+    return o
+end
+
+function FactionData:print()
+  printToAll("\nmax: "..self.max)
+  printToAll("\npicked: "..self.picked)
+  for i, v in ipairs(self.reach) do
+      printToAll("\n"..i..". reach: "..v)
+  end
+  for i, v in pairs(self.variants) do
+      printToAll("\n\t"..i..": "..v)
+  end
+end
+
+--------------------------------
+---      Class Functions     ---
+--------------------------------
+
+--max
+function FactionData:setMaxInstances(nAmount)
+  --  printToAll(tostring(nAmount))
+    self.max = nAmount
+end
+function FactionData:getMaxInstances()
+  return self.max
+end
+
+--color
+function FactionData:addColor(...)
+    local arg = varToTable(...)
+    for _, v in ipairs(arg) do
+      --  c = v
+      --  if c:find("#") then c = Color.fromHex(c) end
+        --integrate new Color class
+        table.insert(self.color, v)
+      --  Color.add()
+    end
+    --table.insert(self.color, sColor)
+end
+function FactionData:setColors(...)
+    self.color = arg
+end
+function FactionData:getCurrentColor()
+    local nColorCount = #(self.color)
+    if(self.picked+1 <= nColorCount) then
+        return self.color[self.picked+1]
+    else
+        return self.color[nColorCount]
+    end
+end
+
+
+--reach
+function FactionData:resetReach()
+    self:setReach()
+end
+function FactionData:setReach(tGivenReach)
+    if(tGivenReach == nil) then
+        self.reach = {}
+    end
+    self.reach = tGivenReach
+
+    self:setMaxInstances(#self.reach)
+end
+function FactionData:addReach(...)
+    local arg = {...} or {0}
+    for _, v in ipairs(arg) do
+        self.reach[#self.reach+1] = v -- table.insert(self.reach, v)
+    end
+    self.max = #(self.reach)
+    --self:setMaxInstances(#self.reach)
+end
+function FactionData:getCurrentReach()
+    local nReachCount = #self.reach
+    if(self.picked+1 <= nReachCount) then
+        return self.reach[self.picked+1]
+    else
+        return self.reach[nReachCount]
+    end
+end
+
+--variants
+function FactionData:addVariant(sVariantName, nMaxInstances)
+    if not nMaxInstances then
+        nMaxInstances = 1
+    end
+    self.variants[sVariantName] = nMaxInstances
+end
+function FactionData:addVariants(...)
+    local arg = {...}
+    for _,v in ipairs(arg) do
+        self:addVariant(v)
+    end
+end
+
+function FactionData:resetVariants()
+    self.variants = {}
+end
+
+function FactionData:getVariants()
+   local tTemp = {}
+   for name, _ in pairs(self.variants) do
+     tTemp[#tTemp+1] = name
+   end
+   return tTemp
+end
+
+function FactionData:getVariantCount()
+  local icount = 0
+  for name, max in pairs(self.variants) do
+    icount = icount + 1
+  end
+  return icount
+end
+
+
+--pick
+function FactionData:pick()
+    if(self:isPickable()) then
+        self.picked = self.picked + 1
+        return self
+    end
+
+    return self
+end
+function FactionData:unpick()
+    if(self.picked > 0) then
+        self.picked = self.picked - 1
+        return true
+    end
+
+    return false
+end
+
+function FactionData:isPickable()
+  --  broadcastToAll(self.picked.."."..self.max..".")
+    return (self.picked < self.max) and (self.max > 0)
+end
+
+function FactionData:getPickable()
+    if (self.picked < self.max) and (self.max > 0)
+    then return (self.max - self.picked)
+    else return 0 end
+end
+
+
+
+
+
+--------------------------------
+---   Data-Table Functions   ---
+--------------------------------
+
+--names
+function getFactionList()
+    local tNames = {}
+    for name, o in pairs(factionsValues) do
+        local iMax = o:getMaxInstances()
+        if(iMax > 0) then
+          for i = 1, iMax do
+              if(i > 1) then
+                tNames[#tNames+1] = name..tostring(i)
+              else
+                tNames[#tNames+1] = name
+              end
+          end
+        end
+    end
+
+    return tNames
+end
+
+--reach
+function getPickableReachList()
+    local tReachList = {}
+    for name, object in pairs(factionsValues) do
+        if(object:isPickable()) then
+            for i, r in ipairs(object.reach) do
+                if(tReachList[name])  then
+                    tReachList[name..i] = r
+                else
+                    tReachList[name] = r
+                end
+            end
+        end
+    end
+    return tReachList
+end
+
+function getCurrentReach(params)
+    local sGroup = params[1]
+    local sFactionName = params[2]
+    return factionsValues[sFactionName]:getCurrentReach()
+end
+
+
+function getCurrentColor(params)
+  local sGroup = params[1]
+  local sFactionName = params[2]
+  local bContained = false
+  for name, table in pairs(factionboardData) do
+    if name == sGroup then
+      bContained = true
+      break
+    end
+  end
+
+  if bContained then
+    for name, tFaction in pairs(factionboardData[sGroup]) do
+      if name == sFactionName then
+        return tFaction:getCurrentColor()
+      end
+    end
+  end
+--  broadcastToAll("Could not find color for: "..sGroup.." | "..sFactionName)
+  return sDefaultButtonColor
+end
+
+function getCurrentColor2(params)
+  local sGroup = params[1]
+  local sFactionName = params[2]
+--  broadcastToAll("group: "..sGroup.." faction: "..sFactionName)
+
+  --if (factionboardData[sGroup]) then
+
+    --  for name, tFaction in pairs(factionboardData[sGroup]) do
+  for name, tFaction in pairs(factionboardData) do
+  --  local tFaction = groupTable[sFactionName]
+    if name == sFactionName then
+      return tFaction:getCurrentColor()
+    end
+    for name, data in pairs(groupTable) do
+      if( #data.variants > 0 )then
+        for fname, _ in v.variants do
+          if( fname == sFactionName ) then
+            return getCurrentColor(name)
+          end
+        end
+      end
+    end
+  end
+
+
+--  end
+end
+
+--picking
+function getPickableFactions(sGroup)
+    local tNames = {}
+    for name, o in pairs(factionboardData[sGroup]) do --factionboardData[sGroup]) do
+        if(o:isPickable()) then
+            local current = o.picked + 1
+            if current > 1 then
+              table.insert(tNames, name..current)
+            else
+              table.insert(tNames, name)
+            end
+        end
+    end
+
+    return tNames
+end
+
+--function getData(sFactionName)
+--  return factionsValues[sFactionName]
+--end
+
+
+function hasVariants(params)
+  local sGroup = params[1]
+  local sFactionName = params[2]
+  --broadcastToAll(sGroup.."<>"..sFactionName)
+  if (factionboardData[sGroup][sFactionName]:getVariantCount() > 0) then
+    return true
+  else
+    return false
+  end
+end
+
+function getFactionName(params)
+  local sGroup = params[1]
+  local sVariantName = params[2]
+  for group, entries in pairs(factionboardData) do
+    for name, data in pairs(entries) do
+      if name == sVariantName then
+        return {group, name}
+      end
+      for varname, max in pairs(data.variants) do
+        --broadcastToAll(varname)
+        if varname == sVariantName then
+          return {group, name}
+        end
+      end
+    end
+  end
+  return { "", "" }
+end
+
+
+function pickFaction(param)
+    local sGroup = param[1]
+    local sFactionName = param[2]
+    --printToAll("sgpick:"..sGroup.." sfnpick:"..sFactionName)
+    return factionboardData[sGroup][sFactionName]:pick()
+end
+function unpickFaction(sGroup, sFactionName)
+    local sGroup = param[1]
+    local sFactionName = param[2]
+    return factionboardData[sGroup][sFactionName]:unpick()
+end
+function isPickable(param)
+    local sGroup = param[1]
+    local sFactionName = param[2]
+  --  broadcastToAll("isPickable|| group: "..sGroup.." faction: "..sFactionName)
+    for name, data in pairs(factionboardData[sGroup]) do
+      if name == sFactionName then
+        return data:isPickable()
+      end
+    end
+    return false --should work --factionboardData[sGroup][sFactionName]:isPickable()
+end
+function getPickable(param)
+    local sGroup = param[1]
+    local sFactionName = param[2]
+  --  broadcastToAll("isPickable|| group: "..sGroup.." faction: "..sFactionName)
+    return factionboardData[sGroup][sFactionName]:getPickable()
+end
+
+function getMaxPickable(param)
+    local sGroup = param[1]
+    local sFactionName = param[2]
+  --  broadcastToAll("isPickable|| group: "..sGroup.." faction: "..sFactionName)
+    return factionboardData[sGroup][sFactionName]:getMaxInstances()
+end
+
+
+
+function varToTable(...)
+  if type(...) == table then
+    return ...
+  else
+    return {...}
+  end
+end
+
+
+--------------------------------
+---  Testing/Debug Functions ---
+--------------------------------
+function testLoop()
+    for name, object in pairs(factionsValues) do
+        printToAll(name.." max: "..object.max.."\n")
+        printToAll("ReachValues: ")
+        for _, v in ipairs(object.reach) do
+            printToAll(v.." ")
+        end
+        printToAll("\n")
+        for name, max in pairs(object.variants) do
+            printToAll("\t"..name.." max: "..max.."\n")
+        end
+        printToAll("\n")
+    end
+end
+
+function reachTest()
+    printToAll("\n\n\n\nReachlist:")
+    for name, tReach in pairs(getPickableReachList()) do
+            printToAll("\n"..name..": "..tReach)
+    end
+end
+
+
+function outsideTest()
+    printToAll("\n\n"..factionsValues.Marquise.reach[1])
+    pickFaction("Marquise")
+    pickFaction("Marquise")
+    unpickFaction("Marquise")
+    pickFaction("Eyrie")
+    unpickFaction("Marquise")
+    unpickFaction("Marquise")
+end
+--testLoop()
+--outsideTest()
+--reachTest()
+
+#include factionDataObjects

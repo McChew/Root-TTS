@@ -1,0 +1,248 @@
+---IMPORTANT!
+--- assets and ui-classes need to exist before ui is generated
+
+--id naming and image naming
+--Group-Togglebuttons are named:
+-- id: sGroupName
+-- image: sGroupName.."-title"
+
+--Group containers:
+-- id: sElement.."Cell"
+-- -no image-
+
+--Group-element selection button:
+-- id: sElementName.."Button"
+-- image: sElementName.."-button" (if count = 1)
+-- image: sElementName..iNr.."-button" (if count > 1)
+-- image: sFaction..-..sVariant (if its a variant button)
+-- example image names:
+--    eyrie-button
+--    vagabond01-button
+--    vagabond-scoundrel
+
+
+--Setting Values:
+-- whats the maximum amount of rows we want?
+DefaultMaxRows = 5
+-- how many buttons does a group hold in a row?
+DefaultRowMax = 2
+
+--Working value, this gets changed by fucntions
+iRowMax = 0
+
+
+local uiDefaults = { }
+local uiCloseButton = { }
+local uiPanelTypeToggles = { }
+local uiPanel = { }
+uiXML  = { }
+
+--Sets "default empty tables" to be filled with buttons and fancy stuff
+function recreateUI()
+  uiDefaults = { tag="Defaults", children = { } }
+
+  uiCloseButton = { tag="Button", attributes={ id="closeButton", width=20, height=20, rectAlignment="UpperRight", color="rgba(1,0,0,1)",
+                                             textColor="rgba(1,1,1,1)", text="X", onClick="deleteThis" } }
+
+  uiPanelTypeToggles = {tag="HorizontalLayout", attributes={ color="rgba(0,0,0,0)", height=25, rectAlignment="UpperLeft", width=230, id="typeToggles" }, children={ } }
+
+  uiPanel = { tag="Panel", attributes={ scale="1 2", rotation="300 0 0", position="0 -5 -160", height=225, width=250, id="FactionSelection", color="rgba(0,0.2,0,0.65)" }, children={
+              { tag="ToggleGroup", attributes={id="ToggleGroup"}, children={  uiCloseButton, uiPanelTypeToggles  } }
+            } }
+
+  uiXML = { uiDefaults, uiPanel }
+end
+
+--backbone functions
+function addDefault(tContent)
+    uiDefaults.children[#uiDefaults.children+1] = tContent
+end
+
+function addTableLayout(sName, bActive)
+    local tl = { tag="TableLayout", attributes={ id=sName.."Buttons", active=bActive, class=sName.."Buttons" }, children={
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}},
+        {tag="Row", attributes={ class=sName.."Row"}, children={}}
+    } }
+
+    uiPanel.children[#uiPanel.children+1] = tl
+end
+
+function addToggleButton(sName, width)
+    local image = { tag="image", attributes={ id=sName.."Title", image=sName.."-title",height="20" }, children={} }
+    local button = { tag="ToggleButton", attributes={ id=sName, class="toggleButton" }, children={ image } }
+    uiPanelTypeToggles.children[#uiPanelTypeToggles.children+1] =  button
+end
+
+local tToggleButtons = {}
+function createToggleButtons()
+  local width = uiPanelTypeToggles.attributes.width/#tToggleButtons/10;
+  for _, sName in ipairs(tToggleButtons) do
+    addToggleButton(sName, width)
+  end
+end
+
+
+function createGroup(sName, bActive, bButton)
+    if( bButton == nil or bButton ) then
+        --we used to create the toggle buttons here
+        --but now we scale them according to tonumber
+        --so just register them in the table
+        tToggleButtons[#tToggleButtons+1 or 0] = sName
+    end
+    if(bActive == nil) then
+      bActive = false
+    end
+	  addTableLayout(sName, bActive)
+end
+
+
+function getUIElementByID(sID, tXmlUi)
+    local tui = tXmlUi  or {uiPanel}
+    for _, v in ipairs(tui) do
+        if( v.attributes.id == sID) then
+            return v
+        else
+          if v["children"] ~= nil then
+              tui = getUIElementByID(sID, v.children)
+          end
+        end
+    end
+
+    return tui
+end
+
+
+--this table holds values that are used for scaling the buttons
+local tCellsOccupied = {}
+
+
+--This is responsible for all "pick-buttons"
+function addButton(sGroup, sName)
+		--add a "pickbutton" to a group
+    if(sGroup == "colors") then
+      --TODO implement different behaviour for "color" group here
+      --(also maybe for variants... we'll see)
+    end
+
+
+    local sColor = Global.call("getCurrentColor", { sGroup, sName } )
+    local tButton = { tag="Cell", attributes={ id=sName.."Cell", class=sGroup.."Cell" }, children={
+        { tag="Button", attributes={ id=sGroup..sName.."Button", class=sGroup.."Button", onClick="spawnFunction("..sName..")", color=sColor }, children={
+            { tag="Image", attributes={ id=sGroup..sName.."Image", class=sGroup.."Image", image=string.lower(sName).."-button"} }
+        } }
+    } }
+
+    tCellsOccupied[sGroup] = tCellsOccupied[sGroup] + 1
+    local uiGroup = getUIElementByID(sGroup.."Buttons")
+    local row = math.ceil(tCellsOccupied[sGroup]/iRowMax)
+    local cell = tCellsOccupied[sGroup] - (row-1)*iRowMax
+
+    uiGroup.children[row].children[cell] = tButton
+end
+
+function generateGroupUI(sGroup)
+    return generateUiForGroupTable(sGroup, Global.call("getPickableFactions", sGroup))
+end
+--this is the core function we use to generate our table
+function generateUiForGroupTable(sGroup, tTable)
+    tCellsOccupied[sGroup] = 0
+    updateRowMax(#tTable)
+    for _, name in pairs(tTable) do
+
+        addButton(sGroup, name)
+
+        --we cut eventual numerics on the end (vagabond2 fe) to receive the correct data
+        local tData= Global.getTable(sGroup.."Values")[cutNumeric(name)]
+
+        if(tData ~= nil) then
+            createGroup(cutNumeric(name), false, false)
+            tCellsOccupied[cutNumeric(name)] = 0
+            for i2, v2 in pairs(tData.variants) do
+              addButton(cutNumeric(name), i2)
+            end
+        end
+    end
+    tCellsOccupied = {}
+end
+
+function updateRowMax(iGroupCount, iter)
+  local var = 1
+  if iter then
+    var = iter
+  end
+  if iter == 1 then
+     iRowMax = DefaultRowMax
+   end
+
+  local currentMax = iRowMax * DefaultMaxRows
+  --Do we have to many? If yes, increase rowmax to fit more buttons
+  if( iGroupCount > currentMax ) then
+      iRowMax = iRowMax + 1
+      updateRowMax( iGroupCount, var+1)
+  end
+end
+
+function cutNumeric(name)
+  local cutLetter = string.sub(name, -1)
+  if tonumber(cutLetter) == nil then
+    return name
+  else
+    return string.sub(name, 1, -2)
+  end
+end
+
+
+--this used to be called by the onload of the factionboards
+--now is usually called globally once upone refresh
+function customizeUI()
+  recreateUI()
+
+  addDefault({ tag="TableLayout", attributes={padding="2 2 2 2", cellspacing=2, height=200, offsetXY="0 -27", cellBackgroundColor="rgba(1,1,1,0)"} } )
+  addDefault({ tag="Row",           attributes={ preferredHeight="30" }, children={}})
+  addDefault({ tag="Image",         attributes={ height="27" }, children={}})
+  addDefault( {tag="ToggleButton",  attributes={ class="toggleButton", color="#434141", colors="Grey|Grey|Grey|Purple", onValueChanged="toggleButtons" } } )
+
+  addDefault({ tag="Button", attributes={ class="factionsButton", padding="6 6 6 6", textColor="#FFFFFF", colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)" } } )
+  addDefault({ tag="Image", attributes={ class="factionsImage", preserveAspect=true } } )
+
+  addDefault({ tag="TableLayout",   attributes={ class="VagabondButtons", cellspacing=5, padding="10 10 0 0", width=108, height=250, cellBackgroundColor="rgba(1,0,0,0)" } } )
+  addDefault({ tag="Image",         attributes={ class="VagabondImage", width=40, height=220, preserveAspect="true" } } )
+  addDefault({ tag="Button",        attributes={ class="VagabondButton", textColor="#FFFFFF", colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)" } } )
+  addDefault({ tag="Row",           attributes={ class="VagabondRow", preferredHeight="55" } })
+
+
+  tToggleButtons = {}
+  --- New data groups need to get their UI generated here
+  createGroup("factions", true)
+  generateGroupUI("factions")
+
+  createGroup("scenarios")
+  generateGroupUI("scenarios")
+
+  createGroup("bots")
+  generateGroupUI("bots")
+
+  createGroup("fanFactions")
+  generateGroupUI("fanFactions")
+
+  -- there is only one scenario so far, we dont need this yet
+--  createGroup("fanScenarios")
+--  generateGroupUI("fanScenarios")
+
+  createGroup("fanBots")
+  generateGroupUI("fanBots")
+
+  createGroup("colors", false, false)
+
+  --needs to be called AFTER the groups have been
+  --created as it scales the togglebuttons
+  createToggleButtons()
+
+end
