@@ -12,3 +12,27 @@ root/factionboard\.ttslua
 root/factions\.ttslua
 
 villains\.ttslua
+
+DiceThrone/
+
+EU/
+
+Iwari/
+
+stattracker/
+
+Roam/
+
+TangGarden/
+
+test/
+
+decker/
+
+UnicornFever/
+
+Villainous/
+
+utils/wait.ttslua
+
+utils/
