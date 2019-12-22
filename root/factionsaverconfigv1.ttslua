@@ -5,6 +5,7 @@ end
 
 SELECTED = ""
 URL = "https://raw.githubusercontent.com/McChew/Root-TTS/FactionEditor/root/factionsv3.ttslua"
+EVERYTHING = {}
 #include factionsv3
 
 function create_buttons()
@@ -160,9 +161,10 @@ function publish_everything()
             log(wr.error)
         else
             log(wr.url)
-            log(wr.text)
-            self.editInput({index=1, value=wr.text, color=Color.green})
+            local result = JSON.decode(wr.text)
+            log(result.paste_link)
+            self.editInput({index=1, value=result.paste_link, color=Color.green})
         end
     end
-    WebRequest.post("https://dpaste.de/api/", {content=body, lexer="lua", format="url", expires=3600}, callback)
+    WebRequest.post("https://psty.io/api", {code=body, lang="lua"}, callback)
 end
