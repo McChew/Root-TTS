@@ -2,9 +2,9 @@ board_xml = [[
 <Defaults>
     <ToggleButton class="toggleButton" color="#434141" colors="Grey|Grey|Grey|Purple" onValueChanged="toggleButtons"/>
     <TableLayout padding="2 2 2 2" cellspacing="2"  height="250" offsetXY="0 -27" cellBackgroundColor="rgba(1,1,1,0)" />
+    <TableLayout class="vagabondButtons" padding="2 2 2 2" cellspacing="2"  height="250" width="200" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" />
     <Button class="mapButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
     <Image class="mapImage" preserveAspect="true" height="25"/>
-    <TableLayout class="vagabondButtons" padding="2 2 2 2" cellspacing="2"  height="250" width="200" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" />
     <Image class="vagabondImage" width="76" preserveAspect="true"/>
     <Button class="vagabondButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
 </Defaults>

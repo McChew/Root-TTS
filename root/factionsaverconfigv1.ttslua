@@ -1,0 +1,168 @@
+function onLoad()
+    KEEPER = getObjectFromGUID("165258")
+    create_buttons()
+end
+
+SELECTED = ""
+URL = "https://raw.githubusercontent.com/McChew/Root-TTS/FactionEditor/root/factionsv3.ttslua"
+#include factionsv3
+
+function create_buttons()
+    self.clearButtons()
+    self.clearInputs()
+    local buttons = {}
+    table.insert(buttons, {click_function = "INSERT_FUNCTION", function_owner = self, label = "Data URL:", position = {-1.4, 0.100000001490116, -0.85}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, tooltip = "Data URL", alignment = 3})
+    table.insert(buttons, {click_function = "nil", function_owner = self, label = "Choose Subsection", position = {-0.9, 0.1, -0.5}, scale = {0.5, 0.5, 0.5}, width = 0, height = 0, alignment = 3})
+    table.insert(buttons, {click_function = "get_data", function_owner = self, label = "Get Data", position = {1.3, 0.100000001490116, -0.850000023841858}, scale = {0.5, 0.5, 0.5}, width = 500, color = {0.856, 0.1, 0.094, 1}, alignment = 3, tooltip="OVERWRITES EVERYTHING"})
+    table.insert(buttons, {click_function = "publish_everything", function_owner = self, label = "Create factions save", position = {0.7, 0.100000001490116, 0.65}, scale = {0.5, 0.5, 0.5}, width = 1000, tooltip = "Save all current loaded data to the web", alignment = 3, color=Color.green})
+    local counter = 0
+    for section, component in pairs(EVERYTHING) do
+        _G["click_"..section] = function() load_section(section) end
+        table.insert(buttons, {click_function = "click_"..section, function_owner = self, label = section, position = {-0.9, 0.1, -0.3+counter*0.15}, scale = {0.5, 0.5, 0.5}, width = 1100, alignment = 3, color=SELECTED==section and Color.green or Color.white})
+        counter = counter +1
+    end
+    for _, button in ipairs(buttons) do
+        self.createButton(button)
+    end
+    local input = {input_function = "set_url", function_owner = self, label = "Data URL", position = {-0.1, 0.100000001490116, -0.850000023841858}, scale = {0.5, 0.5, 0.5}, width = 1900, height = 150, font_size = 60, tooltip = "Data URL", alignment = 3, value = URL}
+    self.createInput(input)
+    local input = {input_function = "none", function_owner = self, label = "Saved data", position = {0.7, 0.100000001490116, 0.850000023841858}, scale = {0.5, 0.5, 0.5}, width = 1200, height = 120, font_size = 60, alignment = 3}
+    self.createInput(input)
+end
+
+function none() end
+
+function set_url(_, _, value)
+    URL = value
+end
+
+function load_section(section)
+    save_boards()
+    local boards = gather_boards()
+    for _, board in ipairs(boards) do
+        board.call('empty')
+        board.editInput({index=0, value=""})
+        board.editInput({index=1, value=""})
+        board.editInput({index=2, value="", color=Color.white})
+    end
+    for faction, info in pairs(EVERYTHING[section]) do
+        board = table.remove(boards, 1)
+        board.call('spawn_here', info.data)
+        board.editInput({index=0, value=section})
+        board.editInput({index=1, value=faction})
+        board.editInput({index=2, value=info.color, color=Color[info.color]})
+    end
+    SELECTED = section
+    create_buttons()
+end
+
+function gather_boards()
+    local ret = {}
+    for _, obj in ipairs(getAllObjects()) do
+        if obj.getName() == "Editor Board" then
+            table.insert(ret, obj)
+        end
+    end
+    return ret
+end
+
+function get_data()
+    function callback(wr)
+        repeat
+            --
+        until  wr.is_done
+        if wr.is_error then
+            print(wr.error)
+        else
+            KEEPER.setLuaScript(wr.text)
+            KEEPER = KEEPER.reload()
+            Wait.condition(function() EVERYTHING=KEEPER.getTable('EVERYTHING') end, ||not KEEPER.spawning)
+            Wait.time(create_buttons, 1)
+        end
+    end
+    WebRequest.get(URL, callback)
+end
+
+function onChat(message, player)
+    save_data()
+end
+
+function save_board(board, as_string)
+    local objects = {}
+    local my_pos = board.positionToLocal(board.getPosition())
+    local my_rot = board.getRotation()
+    local scale = board.getScale()
+
+    local objs = Physics.cast({
+        origin       = board.getPosition(),
+        type         = 3,
+        size         = board.getBoundsNormalized().size,
+        direction = {0,1,0},
+        max_distance = 0.5,
+        debug        = true,
+    })
+    for _, v in ipairs(objs) do
+        ob = v.hit_object
+        if not (ob == board) and not (ob.tag=="Surface") and not (ob.tag == "Board") then
+            ob_pos = board.positionToLocal(ob.getPosition()) *scale
+            -- ob_pos.y = ob_pos.y+0.2
+            move_to = ob_pos-my_pos
+            move_to = Vector(move_to:rotateOver("y", -my_rot.y))
+            objects[#objects+1] = {move_to=move_to, json=ob.getJSON():gsub("%\r%\n%s+", "")}
+        end
+    end
+    return objects
+end
+
+function save_boards()
+    local boards = gather_boards()
+    for _, board in ipairs(boards) do
+        if board.getInputs()[1].value ~= "" then
+            local group = board.getInputs()[1].value
+            local name = board.getInputs()[2].value
+            local color = board.getInputs()[3].value
+            local objects = save_board(board)
+            if EVERYTHING[group] == nil then
+                EVERYTHING[group] = {}
+            end
+            EVERYTHING[group][name] = {color=color, data=objects}
+        end
+    end
+end
+
+function onChat()
+    publish_everything()
+end
+
+function publish_everything()
+    self.editInput({index=1, value="", color=Color.red})
+    save_boards()
+    local body = "EVERYTHING = {}\n"
+    for section, factions in pairs(EVERYTHING) do
+        body = body.."EVERYTHING['"..section.."'] = {}\n"
+        for faction, info in pairs(factions) do
+            body = body.."EVERYTHING['"..section.."']['"..faction.."'] = {color='"..info.color.."', data={\n"
+            for _,ob in ipairs(info.data) do
+                body = body.."{move_to="..Vector(ob.move_to):string()..", "
+                body = body.."json=[["..ob.json.."]]},"
+            end
+            body = body.."}}\n"
+        end
+        body = body.."\n"
+    end
+
+    function callback(wr)
+        repeat
+            --
+        until  wr.is_done
+        if wr.is_error then
+            log(wr.url)
+            log(wr.error)
+        else
+            log(wr.url)
+            log(wr.text)
+            self.editInput({index=1, value=wr.text, color=Color.green})
+        end
+    end
+    WebRequest.post("https://dpaste.de/api/", {content=body, lexer="lua", format="url", expires=3600}, callback)
+end
