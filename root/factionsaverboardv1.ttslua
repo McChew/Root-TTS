@@ -20,18 +20,36 @@ function set_color(_, _, value)
 end
 
 function spawn_here(to_spawn)
-    local my_rot = self.getRotation()
-    local scale = self.getScale()
-    scale.x = 1/scale.x
-    scale.z = 1/scale.z
+    print(to_spawn[1].heading ~= nil)
+    if to_spawn[1].heading ~= nil then
+        my_pos = self.getPosition()
+        my_rot = self.getRotation()
+        -- self.destruct()
+        for _,v in ipairs(to_spawn) do
+            local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
+            local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
+            local new_pos = {x, v.own_y, z}
+            spawnObjectJSON({
+                json              = v.json,
+                position          = new_pos,
+                callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y+180, o.getRotation().z}) end
+            })
+        end
+    else
+        local my_rot = self.getRotation()
+        local scale = self.getScale()
 
-    for _,v in ipairs(to_spawn) do
-        local new_pos = self.positionToWorld(Vector(v.move_to) * scale)
-        spawnObjectJSON({
-            json              = v.json,
-            position          = new_pos,
-            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y, o.getRotation().z}) end
-        })
+        scale.x = 1/scale.x
+        scale.z = 1/scale.z
+
+        for _,v in ipairs(to_spawn) do
+            local new_pos = self.positionToWorld(Vector(v.move_to) * scale)
+            spawnObjectJSON({
+                json              = v.json,
+                position          = new_pos,
+                callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y, o.getRotation().z}) end
+            })
+        end
     end
 end
 
