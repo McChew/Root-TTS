@@ -4302,7 +4302,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
   ],
   "CustomDeck": {
     "76": {
-      "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+      "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
       "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
       "NumWidth": 3,
       "NumHeight": 3,
@@ -4348,7 +4348,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4409,7 +4409,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4470,7 +4470,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4531,7 +4531,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4592,7 +4592,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4653,7 +4653,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4714,7 +4714,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4775,7 +4775,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
@@ -4836,7 +4836,7 @@ factions["Duchy"] = {{distance=7.91487901427011, heading=5.43522679246126, own_y
       "SidewaysCard": false,
       "CustomDeck": {
         "76": {
-          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/787482532849530770/ED8FB9EC931204F0ED03995DE04F7B3F28E25E65/",
+          "FaceURL": "http://cloud-3.steamusercontent.com/ugc/768359624116701716/0BFE3C48FF51552BE08CEE6CFC7C0CE04AD10554/",
           "BackURL": "http://cloud-3.steamusercontent.com/ugc/787482532849531143/14919F1B906830F72FEBBD0FEEED773B1EDF359F/",
           "NumWidth": 3,
           "NumHeight": 3,
