@@ -5,6 +5,7 @@ function onLoad(save_state)
     self.createButton({click_function = "spawnLake", function_owner = self, label = "Lake Map (default)", position = {0, 1, 0}, rotation = {0, 180, 0}, scale = {2, 2, 2}, width = 2100, height = 400, font_size = 200, color = {0.2739, 0.8414, 0.2477, 1}})
     self.createButton({click_function = "spawnLakeRandom", function_owner = self, label = "Lake Map (random)", position = {0, 1, -2}, rotation = {0, 180, 0}, scale = {2, 2, 2}, width = 2100, height = 400, font_size = 200, color = {0.2739, 0.8414, 0.2477, 1}})
     self.createButton({click_function = "spawnMountain", function_owner = self, label = "Mountain Map", position = {0, 1, -4}, rotation = {0, 180, 0}, scale = {2, 2, 2}, width = 2100, height = 400, font_size = 200, color = {0.627, 0.125, 0.941, 1}})
+    self.createButton({click_function = "spawnMountainRandom", function_owner = self, label = "Mountain Map (random)", position = {0, 1, -6}, rotation = {0, 180, 0}, scale = {2, 2, 2}, width = 2100, height = 400, font_size = 200, color = {0.627, 0.125, 0.941, 1}})
     self.setName("Setup Map")
 end
 
@@ -25,6 +26,10 @@ function spawnLakeRandom()
 end
 
 function spawnMountain()
+    spawnMap("Mountain", false)
+end
+
+function spawnMountainRandom()
     spawnMap("Mountain", true)
 end
 
