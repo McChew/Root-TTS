@@ -1,4 +1,4 @@
-#include factionsv2
+#include factionsv3
 #include buttonsv2
 #include factionboardxml
 #include scenarios
@@ -33,11 +33,17 @@ function setColor(_, color)
         end
         return
     end
-    spawnWithColor(chosen_faction, color)
+    if chosen_faction == "Vagabond" then
+        spawnWithColor(nil, color, true)
+    else
+        spawnWithColor(chosen_faction, color)
+    end
 end
 
 
-function spawnFunction(player, faction)
+function spawnFunction(player, faction, id, fan)
+    local fan = fan or ''
+    print(faction)
     if isSpectator(player) then
         broadcastToColor("Sit down first", player.color, "Red")
         return
@@ -46,10 +52,19 @@ function spawnFunction(player, faction)
     local colors = Global.getTable('colors')
     if (avail[faction] < 1) then return end
     Global.call('FactionChosen', {faction})
-    local preferred_color = faction_colors[faction..tostring(avail[faction])]
+    local preferred_color = ""
+    if faction == "Vagabond" then
+        preferred_color = "White"
+    else
+        preferred_color = EVERYTHING[fan..'factions'][faction].color
+    end
     if not colors[preferred_color] then
         player.print("Preferred color for faction: "..faction.." alread taken.\nPlease pick another", red)
-        chosen_faction = faction
+        if faction == "Vagabond" then
+            chosen_faction = "Vagabond"
+        else
+            chosen_faction = EVERYTHING[fan..'factions'][faction].data
+        end
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("botsButtons", "active", "False")
         self.UI.setAttribute("scenariosButtons", "active", "False")
@@ -61,8 +76,16 @@ function spawnFunction(player, faction)
         end
         return
     else
-        spawnWithColor(faction, preferred_color)
+        if faction == "Vagabond" then
+            spawnWithColor(nil, preferred_color, true)
+        else
+            spawnWithColor(EVERYTHING[fan..'factions'][faction].data, preferred_color)
+        end
     end
+end
+
+function spawnFanFaction(player, faction, id)
+    spawnFunction(player, faction, id, 'fan')
 end
 
 function isSpectator(player)
@@ -73,24 +96,25 @@ function isSpectator(player)
     end
 end
 
-function spawnWithColor(faction, color)
+function spawnWithColor(faction, color, vagabond)
+    print("color: ",color)
     local colors = Global.getTable('colors')
     colors[color] = false
     Global.setTable('colors', colors)
     log(colors)
     local closest = findClosestPosition()
     closest.scale = {17.20, 5.40, 3.00}
-    val = false
+    local val = false
     while not val do
         val = Player[color].setHandTransform(closest, 1)
     end
-    if (faction == "Vagabond") then
+    if vagabond then
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("vagabondButtons", "active", "True")
         self.UI.setAttribute('typeToggles', "active", "False")
         self.UI.setAttribute("colorButtons", "active", "False")
     else
-        spawnFaction(faction)
+        spawnHere(faction)
     end
 end
 
@@ -115,10 +139,21 @@ function spawnBot(player, faction, fan)
         Global.setVar('bot', true)
     end
     Global.call('FactionChosen', {faction:sub(5,-1)})
-    local preferred_color = faction_colors[faction:sub(5,-1)..tostring(avail[faction:sub(5,-1)])]
+    local preferred_color = ""
+    print(preferred_color)
+    if fan then
+        preferred_color = EVERYTHING['fanbots'][faction].color
+    else
+        preferred_color = EVERYTHING['officialbots'][faction].color
+    end
+    print(preferred_color, colors[preferred_color])
     if not colors[preferred_color] then
         player.print("Preferred color for faction: "..faction.." alread taken.\nPlease pick another", red)
-        chosen_faction = faction
+        if fan then
+            chosen_faction = EVERYTHING['fanbots'][faction]
+        else
+            chosen_faction = EVERYTHING['officialbots'][faction]
+        end
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("botsButtons", "active", "False")
         self.UI.setAttribute("scenariosButtons", "active", "False")
@@ -130,7 +165,11 @@ function spawnBot(player, faction, fan)
         end
         return
     else
-        spawnWithColor(faction, preferred_color)
+        if fan then
+            spawnWithColor(EVERYTHING['fanbots'][faction].data, preferred_color)
+        else
+            spawnWithColor(EVERYTHING['officialbots'][faction].data, preferred_color)
+        end
     end
 end
 
@@ -150,7 +189,7 @@ function spawnVagabond(player, vaga)
     avail = Global.getTable('available')
     if (avail[vaga] < 1) then return end
     Global.call('FactionChosen', {vaga})
-    spawnFaction(vaga)
+    spawnHere(EVERYTHING['factions'][vaga].data)
 end
 
 function spawnScenario(player, scenario)
@@ -158,11 +197,7 @@ function spawnScenario(player, scenario)
         broadcastToColor("Sit down first", player.color, "Red")
         return
     end
-    spawnHere(scenarios[scenario])
-end
-
-function spawnFaction(faction)
-    spawnHere(factions[faction])
+    spawnHere(EVERYTHING['scenarios'][scenario].data)
 end
 
 function showButtons()
@@ -183,17 +218,18 @@ function deleteThis()
 end
 
 function spawnHere(to_spawn)
-    my_pos = self.getPosition()
-    my_rot = self.getRotation()
-    -- self.destruct()
+    local my_rot = self.getRotation()
+    local scale = self.getScale()
+
+    scale.x = 1/scale.x
+    scale.z = 1/scale.z
+
     for _,v in ipairs(to_spawn) do
-        local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
-        local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
-        local new_pos = {x, v.own_y, z}
+        local new_pos = self.positionToWorld(Vector(v.move_to) * scale)
         spawnObjectJSON({
             json              = v.json,
             position          = new_pos,
-            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y+180, o.getRotation().z}) end
+            callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y, o.getRotation().z}) end
         })
     end
     Global.call('ImGone', {self})

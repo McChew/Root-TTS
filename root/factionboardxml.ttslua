@@ -4,7 +4,7 @@ board_xml = [[
     <TableLayout padding="2 2 2 2" cellspacing="2"  height="250" offsetXY="0 -27" cellBackgroundColor="rgba(1,1,1,0)" />
     <Button class="mapButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
     <Image class="mapImage" preserveAspect="true" height="25"/>
-    <TableLayout class="vagabondButtons" padding="2 2 2 2" cellspacing="2"  height="250" width="200" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" />
+    <TableLayout class="vagabondButtons" padding="2 2 2 2" cellspacing="2"  height="250" offsetXY="0 -22" cellBackgroundColor="rgba(1,1,1,0)" />
     <Image class="vagabondImage" width="76" preserveAspect="true"/>
     <Button class="vagabondButton" padding="0 0 0 0" textColor="#FFFFFF" colors="#AD9F91|#C9B9A9|#756C63|rgba(0.78,0.78,0.78,0.5)"/>
 </Defaults>
@@ -14,7 +14,8 @@ board_xml = [[
     width="340"
     height="250"
     position="0 0 -40"
-    scale="0.75 0.75">
+    scale="0.75 0.75"
+    rotation="0 0 180">
 
     <ToggleGroup id="typeToggles">
     <HorizontalLayout height="25" rectAlignment="UpperLeft" width="300">
@@ -178,24 +179,24 @@ board_xml = [[
     <TableLayout id="fanButtons" active="False">
         <Row preferredHeight="30">
             <Cell id="Arachnid1">
-                <Button class="mapButton" onClick="spawnFunction(Arachnid)" color="purple">
+                <Button class="mapButton" onClick="spawnFanFaction(Arachnid)" color="purple">
                     <Image class="mapImage" image="arachnid-button" height="20"></Image>
                 </Button>
             </Cell>
             <Cell id="WeeklyCroak1">
-                <Button class="mapButton" onClick="spawnFunction(WeeklyCroak)" color="#8B9668">
+                <Button class="mapButton" onClick="spawnFanFaction(WeeklyCroak)" color="#8B9668">
                     <Image class="mapImage" image="weekly-croak-button" height="20"></Image>
                 </Button>
             </Cell>
             <Cell id="Fangus1">
-                <Button class="mapButton" onClick="spawnFunction(Fangus)" color="Pink">
+                <Button class="mapButton" onClick="spawnFanFaction(Fangus)" color="Pink">
                     <Image class="mapImage" image="fangus-button"></Image>
                 </Button>
             </Cell>
         </Row>
         <Row preferredHeight="30">
             <Cell id="Boars1">
-                <Button class="mapButton" onClick="spawnFunction(Boars)" color="Brown">
+                <Button class="mapButton" onClick="spawnFanFaction(Boars)" color="Brown">
                     <Image class="mapImage" Width="90%" image="boars-button"></Image>
                 </Button>
             </Cell>
@@ -220,8 +221,6 @@ board_xml = [[
                     <Image class="vagabondImage" image="vagabond-scoundrel" preserveAspect="true"></Image>
                 </Button>
             </Cell>
-        </Row>
-        <Row preferredHeight="85">
             <Cell id="VagaThief">
                 <Button class="vagabondButton" color="grey" onClick="spawnVagabond(VagaThief)">
                     <Image class="vagabondImage" image="vagabond-thief" preserveAspect="true"></Image>
@@ -232,11 +231,29 @@ board_xml = [[
                     <Image class="vagabondImage" image="vagabond-tinker" preserveAspect="true"></Image>
                 </Button>
             </Cell>
+        </Row>
+        <Row preferredHeight="85">
             <Cell id="VagaVagrant">
                 <Button class="vagabondButton" color="grey" onClick="spawnVagabond(VagaVagrant)">
                     <Image class="vagabondImage" image="vagabond-vagrant" preserveAspect="true"></Image>
                 </Button>
             </Cell>
+            <Cell id="VagaAdventurer">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="spawnVagabond(VagaAdventurer)">
+                    <Image class="vagabondImage" image="vagabond-adventurer" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaHarrier">
+                <Button class="vagabondButton" color="grey" onClick="spawnVagabond(VagaHarrier)">
+                    <Image class="vagabondImage" image="vagabond-harrier" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell id="VagaRonin">
+                <Button class="vagabondButton" color="#dbdbdb" onClick="spawnVagabond(VagaRonin)">
+                    <Image class="vagabondImage" image="vagabond-ronin" preserveAspect="true"></Image>
+                </Button>
+            </Cell>
+            <Cell />
         </Row>
     </TableLayout>
     <TableLayout id="colorButtons" active="False">
