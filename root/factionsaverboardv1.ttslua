@@ -20,7 +20,6 @@ function set_color(_, _, value)
 end
 
 function spawn_here(to_spawn)
-    print(to_spawn[1].heading ~= nil)
     if to_spawn[1].heading ~= nil then
         my_pos = self.getPosition()
         my_rot = self.getRotation()

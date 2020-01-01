@@ -4,9 +4,9 @@ function onLoad()
 end
 
 SELECTED = ""
-URL = "https://raw.githubusercontent.com/McChew/Root-TTS/FactionEditor/root/factionsv3.ttslua"
+URL = "https://raw.githubusercontent.com/McChew/Root-TTS/master/root/factionsv3.ttslua"
 EVERYTHING = {}
-#include factionsv3
+-- #include factionsv3
 
 function create_buttons()
     self.clearButtons()
