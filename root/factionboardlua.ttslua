@@ -43,7 +43,6 @@ end
 
 function spawnFunction(player, faction, id, fan)
     local fan = fan or ''
-    print(faction)
     if isSpectator(player) then
         broadcastToColor("Sit down first", player.color, "Red")
         return
@@ -97,7 +96,6 @@ function isSpectator(player)
 end
 
 function spawnWithColor(faction, color, vagabond)
-    print("color: ",color)
     local colors = Global.getTable('colors')
     colors[color] = false
     Global.setTable('colors', colors)
@@ -140,13 +138,11 @@ function spawnBot(player, faction, fan)
     end
     Global.call('FactionChosen', {faction:sub(5,-1)})
     local preferred_color = ""
-    print(preferred_color)
     if fan then
         preferred_color = EVERYTHING['fanbots'][faction].color
     else
         preferred_color = EVERYTHING['officialbots'][faction].color
     end
-    print(preferred_color, colors[preferred_color])
     if not colors[preferred_color] then
         player.print("Preferred color for faction: "..faction.." alread taken.\nPlease pick another", red)
         if fan then
