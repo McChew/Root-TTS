@@ -1,0 +1,111 @@
+objects = {}
+
+
+function onLoad(save_state)
+    local data = {input_function = "nothing", function_owner = self, label = "Base category", position = {-1.1, 0.100000001490116, -0.899999976158142}, scale = {0.5, 0.5, 0.5}, width = 1100, height = 130, alignment = 3, validation = 1, tooltip="Base category for this faction (ex. Factions, scenarios or fan factions)"}
+    self.createInput(data)
+    local data = {input_function = "nothing", function_owner = self, label = "Name", position = {0.1, 0.100000001490116, -0.899999976158142}, scale = {0.5, 0.5, 0.5}, width = 1100, height = 130, alignment = 3, validation = 1, tooltip="Name for this faction (ex. Eyrie, Woodland or Trickster)"}
+    self.createInput(data)
+    local data = {input_function = "set_color", function_owner = self, label = "Color", position = {1.2, 0.100000001490116, -0.899999976158142}, scale = {0.5, 0.5, 0.5}, width = 800, height = 130, color = Color.white, tooltip = "Preferred Color for this faction", alignment = 3}
+    self.createInput(data)
+end
+
+function nothing()
+end
+
+function set_color(_, _, value)
+    if Color[value] then
+        self.editInput({index=2, color=Color[value]})
+    end
+end
+
+function spawn_here(to_spawn)
+    print(to_spawn[1].heading ~= nil)
+    if to_spawn[1].heading ~= nil then
+        my_pos = self.getPosition()
+        my_rot = self.getRotation()
+        -- self.destruct()
+        for _,v in ipairs(to_spawn) do
+            local x = v.distance*math.sin(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.x;
+            local z = v.distance*math.cos(v.heading+(math.rad(my_rot.y)-math.pi)) + my_pos.z;
+            local new_pos = {x, v.own_y, z}
+            spawnObjectJSON({
+                json              = v.json,
+                position          = new_pos,
+                callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y+180, o.getRotation().z}) end
+            })
+        end
+    else
+        local my_rot = self.getRotation()
+        local scale = self.getScale()
+
+        scale.x = 1/scale.x
+        scale.z = 1/scale.z
+
+        for _,v in ipairs(to_spawn) do
+            local new_pos = self.positionToWorld(Vector(v.move_to) * scale)
+            spawnObjectJSON({
+                json              = v.json,
+                position          = new_pos,
+                callback_function = function(o) o.setRotation({o.getRotation().x, o.getRotation().y+my_rot.y, o.getRotation().z}) end
+            })
+        end
+    end
+end
+
+function empty()
+    local items = Physics.cast({
+        origin       = self.getPosition()+Vector(0,0.1,0),
+        direction    = {0,1,0},
+        type         = 3,
+        size         = self.getBoundsNormalized().size,
+        max_distance = 1,
+        debug        = false
+    }) -- returns {{Vector point, Vector normal, float distance, Object hit_object}, ...}
+    for _, item in ipairs(items) do
+        if item.hit_object ~= self and item.hit_object.tag ~= "Surface" then
+            item.hit_object.destruct()
+        end
+    end
+end
+
+function save_here(as_string)
+    objects = {}
+    my_pos = self.getPosition()
+    objs = Physics.cast({
+        origin       = self.getPosition(),
+        type         = 3,
+        size         = self.getBoundsNormalized().size,
+        direction = {0,1,0},
+        max_distance = 0.5,
+        debug        = true,
+    })
+    for _, v in ipairs(objs) do
+        ob = v.hit_object
+        if not (ob == self) and not (ob.tag=="Surface") and not (ob.tag=="Board") then
+            ob_pos = ob.getPosition()
+            distance = math.sqrt(((my_pos.x-ob_pos.x)^2+((my_pos.z-ob_pos.z)^2)))
+            heading = math.atan2(ob_pos.x-my_pos.x, ob_pos.z-my_pos.z)
+            if (heading < 0) then heading = 2*math.pi+heading end
+            objects[#objects+1] = {distance=distance, heading=heading, json=ob.getJSON():gsub("%\r%\n%s+", ""), own_y=ob_pos.y}
+        end
+    end
+    if as_string then
+        local body = "{\n"
+        for _,ob in ipairs(objects) do
+            body = body.."{distance="..ob.distance..", "
+            body = body.."heading="..ob.heading..", "
+            body = body.."own_y="..ob.own_y..", "
+            body = body.."json=[["..ob.json.."]]},\n"
+        end
+        body = body.."}"
+        -- Notes.addNotebookTab({
+        --     title = "Save",
+        --     body  = body,
+        --     color = "Black",
+        -- })
+        return body
+    else
+        return objects
+    end
+end
