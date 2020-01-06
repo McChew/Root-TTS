@@ -171,7 +171,12 @@ board_xml = [[
         <Row preferredHeight="30">
             <Cell id="ClocLizard1">
                 <Button class="mapButton" onClick="spawnFanBot(ClocLizard)" color="yellow">
-                    <Image class="mapImage" image="clockwork-cult"></Image>
+                    <Image class="mapImage" image="clockwork-cult-5"></Image>
+                </Button>
+            </Cell>
+            <Cell id="Clo6Lizard1">
+                <Button class="mapButton" onClick="spawnFanBot(Clo6Lizard)" color="yellow">
+                    <Image class="mapImage" image="clockwork-cult-6"></Image>
                 </Button>
             </Cell>
         </Row>
