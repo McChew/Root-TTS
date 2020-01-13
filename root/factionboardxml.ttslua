@@ -122,11 +122,15 @@ board_xml = [[
     <TableLayout id="scenariosButtons" active="False">
         <Row preferredHeight="30">
             <Cell>
+                <Button class="mapButton" onClick="spawnScenario(LearnToPlay)" color="Black">
+                    <Image class="mapImage" image="learntoplay-button" height="16" />
+                </Button>
+            </Cell>
+            <Cell>
                 <Button class="mapButton" onClick="spawnScenario(Trickster)" color="#f78b18">
                     <Image class="mapImage" image="trickster-button" height="20" />
                 </Button>
             </Cell>
-            <Cell />
             <Cell />
         </Row>
     </TableLayout>
