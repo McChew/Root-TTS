@@ -124,7 +124,13 @@ function spawnBot(player, faction, fan)
     local avail = Global.getTable('available')
     if (avail[faction:sub(5,-1)] < 1) then return end
     local colors = Global.getTable('colors')
-    bot = Global.getVar('bot')
+    local bot = nil
+    if fan then
+        bot = Global.getVar('fan_bot')
+    else
+        bot = Global.getVar('bot')
+    end
+    print(bot)
     if not bot then
         if fan then
             bot_pieces = fan_bot_stuff
