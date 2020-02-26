@@ -41,14 +41,6 @@ viral/
 
 matchbox/
 
-lander/card_class.ttslua
+lander/
 
-lander/global.ttslua
-
-lander/playerboard_class.ttslua
-
-lander/playerboard.ttslua
-
-planetunknown/global.ttslua
-
-planetunknown/lazysuzan.ttslua
+planetunknown/
