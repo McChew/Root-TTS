@@ -72,8 +72,8 @@ function spawnMap(map, random)
 
     -- clearing markers
     local clearingMarkerBag = getObjectFromGUID("e060fd")
-    if map_data[map]["clearing_markers"] ~= nil and random == true then
-        clearingMarkerBag.shuffle()
+    if map_data[map]["clearing_markers"] ~= nil then
+        if random == true then clearingMarkerBag.shuffle() end
         local params = {}
         params.callback_function = function(o) o.lock() end
         params.smooth = false

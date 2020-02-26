@@ -27,7 +27,6 @@ colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
 
 factionboards = {}
 bot = false
-fan_bot = false
 -- par = {factionboard instance}
 function ImHere(par)
     factionboards[#factionboards+1] = par[1]
