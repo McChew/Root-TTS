@@ -1,0 +1,65 @@
+COLOR = nil
+PIECES_NAMES = nil
+ID = nil
+function onLoad(save_state)
+    self.addContextMenuItem("Highlight Pieces", highlight_on)
+    local data = JSON.decode(self.getDescription())
+    COLOR = Color[data.Color]
+    PIECES = data.Pieces
+end
+
+function highlight_on(...)
+    self.clearContextMenu()
+    self.addContextMenuItem("Highlight off", highlight_off)
+    ID = routineColorChange(Color(0, 0, 0, 0), COLOR, find_objects_by_names(PIECES))
+end
+
+function highlight_off(...)
+    self.clearContextMenu()
+    self.addContextMenuItem("Highlight Pieces", highlight_on)
+    Wait.stop(ID)
+end
+
+
+function routineColorChange(from_color, to_color, objects)
+    local steps = 30
+    local step_time = 0.05
+    function change()
+        function co_change()
+            local time = os.clock()
+            for x=1, steps do
+                local color = from_color:lerp(to_color, (1/steps)*x)
+                for _, object in ipairs(objects) do
+                    object.highlightOn(color)
+                end
+                waitTime(step_time)
+            end
+            waitTime(0.1)
+            for x=1, steps do
+                local color = to_color:lerp(from_color, (1/steps)*x)
+                for _, object in ipairs(objects) do
+                    object.highlightOn(color)
+                end
+                waitTime(step_time)
+            end
+            return 1
+        end
+        startLuaCoroutine(self, 'co_change')
+    end
+    change()
+    return Wait.time(change, 4.5, -1)
+end
+
+function find_objects_by_names(names)
+    local objects = {}
+    for _, o in ipairs(getAllObjects()) do
+        for _, n in ipairs(names) do
+            if o.getName() == n then
+                table.insert(objects, o)
+            end
+        end
+    end
+    return objects
+end
+
+#include ..\utils\wait

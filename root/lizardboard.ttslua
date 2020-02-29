@@ -1,0 +1,81 @@
+mice = 0
+bunnies = 0
+foxes = 0
+wait_id = 0
+
+function onLoad(save_state)
+    wait_id = Wait.time(updateButtons, 1, -1)
+end
+
+function onDestroy()
+    Wait.stop(wait_id)
+end
+
+function nothing()
+end
+
+function addCard(suit)
+    suit = suit:lower()
+    if suit == "fox" then
+        foxes = foxes +1
+    elseif suit == "mouse" then
+        mice = mice + 1
+    elseif suit == "bunny" then
+        bunnies= bunnies + 1
+    end
+end
+
+function updateButtons()
+    mice = 0
+    foxes = 0
+    bunnies = 0
+    self.clearButtons()
+    items = Physics.cast({
+        origin       = self.positionToWorld({-0.90, 0.2, 0.55}),
+        direction    = self.getTransformUp(),
+        type         = 3,
+        size         = {3, 0.1, 6},
+        max_distance = 2,
+    })
+    for _, item in ipairs(items) do
+        if item.hit_object.tag == "Card" then
+            addCard(item.hit_object.getDescription())
+        end
+        if item.hit_object.tag == "Deck" then
+            for _, card in ipairs(item.hit_object.getObjects()) do
+                addCard(card.description)
+            end
+        end
+    end
+
+    self.createButton({
+        click_function = "nothing",
+        function_owner = self,
+        label = tostring(mice),
+        position = {0.7, 0.1, -0.17},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    })
+    self.createButton({
+        click_function = "nothing",
+        function_owner = self,
+        label = tostring(bunnies),
+        position = {0.9, 0.1, -0.17},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    })
+    self.createButton({
+        click_function = "nothing",
+        function_owner = self,
+        label = tostring(foxes),
+        position = {1.09, 0.1, -0.17},
+        scale = {0.5, 0.5, 0.5},
+        width = 0,
+        height = 0,
+        font_size = 120
+    })
+end
