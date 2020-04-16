@@ -27,6 +27,7 @@ colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
 
 factionboards = {}
 bot = false
+XML_UPDATED = false
 -- par = {factionboard instance}
 function ImHere(par)
     factionboards[#factionboards+1] = par[1]
@@ -54,4 +55,71 @@ function ShowAllButtons()
     for _, x in ipairs(factionboards) do
         x.call('showButtons', {})
     end
+end
+
+function update_faction_data()
+    local TEXT = ""
+    log("Global: Finding keeper of faction info")
+    KEEPER = find_object_by_name("The keeper of information")
+    log("Requesting latest Faction data")
+    function transfer()
+        TMP = find_object_by_name("TMP")
+        KEEPER.setTable("EVERYTHING", TMP.getTable("EVERYTHING"))
+        log("Newest data received")
+        TMP.destruct()
+    end
+    function spawned(o)
+        o.setLock(true)
+        o.setLuaScript(TEXT)
+        o.setName("TMP")
+        o.reload()
+        Wait.condition(transfer,||not o.spawning)
+    end
+    function callback(wr)
+        repeat
+            --
+        until  wr.is_done
+        if wr.is_error then
+            log("Something went wrong retreiving newest data")
+            log(wr.error)
+        else
+            log("Faction Data received.")
+            TEXT = wr.text
+            local TMP = spawnObject({type='backgammon_piece_white', position={5.00, -24.22, 0.00}, sound=false, callback_function=spawned})
+        end
+    end
+    WebRequest.get("https://raw.githubusercontent.com/McChew/Root-TTS/master/root/factionsv3.ttslua", callback)
+end
+
+function update_xml_data()
+    log("Global: Finding keeper of XML")
+    XMLKEEPER = find_object_by_name("The keeper of XML")
+    log("Requesting latest XML data")
+    function callback(wr)
+        repeat
+            --
+        until  wr.is_done
+        if wr.is_error then
+            log("Something went wrong retreiving XMLa")
+            log(wr.error)
+        else
+            log("XML Data received.")
+            XMLKEEPER.setLuaScript(wr.text)
+            XMLKEEPER.reload()
+            XML_UPDATED = true
+        end
+    end
+    WebRequest.get("https://raw.githubusercontent.com/McChew/Root-TTS/master/root/factionboardxml.ttslua", callback)
+end
+
+function onLoad(save_state)
+    update_xml_data()
+    update_faction_data()
+end
+
+function find_object_by_name(name)
+    for _, obj in ipairs(getAllObjects()) do
+        if obj.getName() == name then return obj end
+    end
+    return nil
 end

@@ -1,0 +1,9 @@
+-- called with a table {string section, string factionname}
+function get_faction_color(table)
+    return EVERYTHING[table[1]][table[2]].color
+end
+
+-- called with a table {string section, string factionname}
+function get_faction_data(table)
+    return EVERYTHING[table[1]][table[2]].data
+end

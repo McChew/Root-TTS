@@ -131,7 +131,11 @@ board_xml = [[
                     <Image class="mapImage" image="trickster-button" height="20" />
                 </Button>
             </Cell>
-            <Cell />
+            <Cell>
+                <Button class="mapButton" onClick="spawnScenario(Tavern)" color="Brown">
+                    <Image class="mapImage" image="tavern-button" height="20" />
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="fanbotButtons" active="False">
@@ -275,3 +279,149 @@ board_xml = [[
     </TableLayout>
 </Panel>
 ]]
+UIASSETS = {
+    {
+        name = "box-art",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791955263/F669EAAAE073188F7C34FD723B6C66F488338C11/"
+    },
+    {
+        name = "marquise-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791948574/E31DB0846BBD3D08BE3606665FBD724769B6AD47/"
+    },
+    {
+        name = "eyrie-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791947659/183DFFE14E18813FC26E7E5B5F208628A9768912/"
+    },
+    {
+        name = "alliance-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791954955/B7B3C484B6899398F07AFD3D9A10668D46FC2078/"
+    },
+    {
+        name = "vagabond-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791951084/F81EDE1A0756A464C4677F797FE8FD80C42C3AAF/"
+    },
+    {
+        name = "riverfolk-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791949530/BF546C3DB797C09F567273A13052A8639C20AB82/"
+    },
+    {
+        name = "lizard-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791946644/E132B1A7FEEADADC69E807F60807C4A1FC019F24/"
+    },
+    {
+        name = "corvid-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791946168/7A28C4D3D38BA672E26C1B2469A56E656FC83B62/"
+    },
+    {
+        name = "underground-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791946915/AC90F31B99BB4D243370698B9856A013FCB07D8E/"
+    },
+    {
+        name = "mech-marq2-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791949178/081FDF628B9B798822F76634B01B73C6DD58BA78/"
+    },
+    {
+        name = "electric-eyrie",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791947395/79331F94AA2D083589EEDE49117056238648EC42/"
+    },
+    {
+        name = "automated-alliance",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791945457/E61C3BDDCF847A76E242CC170E5C81EB104AD138/"
+    },
+    {
+        name = "vagabot",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791954681/CCD815BB28FCAE9077D11F3B9390C0CC1A051DEA/"
+    },
+    {
+        name = "clockwork-cult",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791945932/A643431C3BB2BB184A52FA91988B50CF9A99CCC8/"
+    },
+    {
+        name = "otter-overlords",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791948878/2D8D8AB3933F4C6BE46ACAD96630C57DBD8590C0/"
+    },
+    {
+        name = "vagabond-arbiter",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791951841/1440B9EB1B17E9AB149FB33C5021C2E8C5011570/"
+    },
+    {
+        name = "vagabond-ranger",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791952427/B40F2DD83339CD0ED68DAA3C2F41CBF9BD91CB8E/"
+    },
+    {
+        name = "vagabond-scoundrel",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791953029/7DCC24CFA623ACE43EDD1954FAD8F783DB93387D/"
+    },
+    {
+        name = "vagabond-thief",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791953784/6E08F3D2B7CFEB95266E45CDE4F0C131493260B5/"
+    },
+    {
+        name = "vagabond-tinker",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791954051/9C922B7487C00B7AEDE95AA820905A5DDBBA62F4/"
+    },
+    {
+        name = "vagabond-vagrant",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791954401/030AD078787CE0564E3B12D733EA03753702756E/"
+    },
+    {
+        name = "vagabond-adventurer",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791951450/6330D3549A0FA4D9A6CEE27834DC59B3396D4BD6/"
+    },
+    {
+        name = "vagabond-harrier",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791952096/F7EEAE9338B2AB0EF08BFC384C94B73853372BC1/"
+    },
+    {
+        name = "vagabond-ronin",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791952743/CD494DB2E6CA7403A24B4F029DE4CF416FC04F0A/"
+    },
+    {
+        name = "fangus-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791947898/4AC34C0FA07EAF3AE2660844292C08E2F42EC0EF/"
+    },
+    {
+        name = "arachnid-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791945243/22BCFB3B63FDDC4F572A46303AC29F270B09E8A1/"
+    },
+    {
+        name = "weekly-croak-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791946407/5683E8D3A4E0DA0F95A5B464208C5163963B9453/"
+    },
+    {
+        name = "boars-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791945718/11ABA8E110D265F95B0EA6064B1072916E2578B0/"
+    },
+    {
+        name = "trickster-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791950265/0FF759657E652C90E097D86D0ADC97C5684FEA92/"
+    },
+    {
+        name = "learntoplay-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791948244/5BEA2423D3C33F23E78B95342D5D0893D777D61E/"
+    },
+    {
+        name = "tavern-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/1021697128192348589/94778DFE9A03CE62752516CB533C50ADC108217C/"
+    },
+    {
+        name = "faction-title",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791955860/02D8E01A39FA04F5B87E22C0AAA36F58A77B72DC/"
+    },
+    {
+        name = "bots-title",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791956953/48C620B5284463FDBE749B9DFA105230614FFB6D/"
+    },
+    {
+        name = "scenarios-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791957287/1AFC52512FF2FA1DC6C04CE498BD968FFF599273/"
+    },
+    {
+        name = "fan-factions-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791956594/578B293DAAC2DE414DAC0AA70FA7F93D05850232/"
+    },
+    {
+        name = "fan-bots-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/792008966791956195/F40E6C3BF7213E4D5525ADA9C5451709D085E1AB/"
+    },
+}
