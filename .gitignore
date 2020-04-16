@@ -44,3 +44,101 @@ matchbox/
 lander/
 
 planetunknown/
+
+counter/counter.ttslua
+
+counter/injector.ttslua
+
+ExLibris/card_info.ttslua
+
+ExLibris/playerboard.ttslua
+
+ExLibris/root/buttons.ttslua
+
+ExLibris/root/buttonsv2.ttslua
+
+ExLibris/root/factionboard.ttslua
+
+ExLibris/root/factionboard.xml
+
+ExLibris/root/factionboardlua.ttslua
+
+ExLibris/root/factionboardxml.ttslua
+
+ExLibris/root/factions.ttslua
+
+ExLibris/root/factionsaverboardv1.ttslua
+
+ExLibris/root/factionsaverconfigv1.ttslua
+
+ExLibris/root/factionsv2.ttslua
+
+ExLibris/root/factionsv3.ttslua
+
+ExLibris/root/global.ttslua
+
+ExLibris/root/highlighter.ttslua
+
+ExLibris/root/lizardboard.ttslua
+
+ExLibris/root/maps.ttslua
+
+ExLibris/root/mapspawner.ttslua
+
+ExLibris/root/Saves/Faction Editor.json
+
+ExLibris/root/Saves/Faction Editor.png
+
+ExLibris/root/Saves/save 20191229.json
+
+ExLibris/root/Saves/save 20191229.png
+
+ExLibris/root/Saves/save 20191231.json
+
+ExLibris/root/Saves/save 20191231.png
+
+ExLibris/root/Saves/save 20200101.json
+
+ExLibris/root/Saves/save 20200101.png
+
+ExLibris/root/Saves/save 20200102.json
+
+ExLibris/root/Saves/save 20200102.png
+
+ExLibris/root/Saves/save 20200106.json
+
+ExLibris/root/Saves/save 20200106.png
+
+ExLibris/root/Saves/save 20200107.json
+
+ExLibris/root/Saves/save 20200107.png
+
+ExLibris/root/Saves/save 20200113.json
+
+ExLibris/root/Saves/save 20200113.png
+
+ExLibris/root/Saves/save_20200225.json
+
+ExLibris/root/Saves/save_20200225.png
+
+ExLibris/root/Saves/save_20200226.json
+
+ExLibris/root/Saves/save_20200226.png
+
+ExLibris/root/Saves/save_20200229.json
+
+ExLibris/root/Saves/save_20200229.png
+
+ExLibris/root/scenarios.ttslua
+
+ExLibris/root/v3/factionDataClass.ttslua
+
+ExLibris/root/v3/factionDataObjects.ttslua
+
+ExLibris/root/v3/stolen_global.ttslua
+
+ExLibris/root/v3/uiHandler.ttslua
+
+TEDino/TEDINO.ttslua
+
+viscounts/viscounts.ttslua
