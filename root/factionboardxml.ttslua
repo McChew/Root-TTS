@@ -177,7 +177,11 @@ board_xml = [[
                     <Image class="mapImage" Width="90%" image="boars-button"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="Aviators1">
+                <Button class="mapButton" onClick="spawnFanFaction(Aviators)" color="Pink">
+                    <Image class="mapImage" Width="90%" image="aviators-button"></Image>
+                </Button>
+            </Cell>
             <Cell />
         </Row>
     </TableLayout>
@@ -391,6 +395,10 @@ UIASSETS = {
     {
         name = "boars-button",
         url = "http://cloud-3.steamusercontent.com/ugc/792008966791945718/11ABA8E110D265F95B0EA6064B1072916E2578B0/"
+    },
+    {
+        name = "aviators-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/1021697407432607966/69466B41D817ADFE547E2D4FC7D05B2DBA84E0D7/"
     },
     {
         name = "trickster-button",

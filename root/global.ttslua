@@ -20,6 +20,7 @@ available = {
         Arachnid = 1,
         WeeklyCroak = 1,
         Boars = 1,
+        Aviators = 1,
 }
 
 colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
@@ -64,9 +65,18 @@ function update_faction_data()
     log("Requesting latest Faction data")
     function transfer()
         TMP = find_object_by_name("TMP")
-        KEEPER.setTable("EVERYTHING", TMP.getTable("EVERYTHING"))
+        local everything = TMP.getTable("EVERYTHING")
+        KEEPER.setTable("EVERYTHING", everything)
         log("Newest data received")
         TMP.destruct()
+        AVAILABLE = {Vagabond=2}
+        for faction, _ in pairs(everything.factions) do
+            AVAILABLE[faction] = 1
+        end
+        for faction, _ in pairs(everything.fanfactions) do
+            AVAILABLE[faction] = 1
+        end
+        print(logString(AVAILABLE))
     end
     function spawned(o)
         o.setLock(true)
