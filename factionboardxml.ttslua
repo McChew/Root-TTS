@@ -112,7 +112,7 @@ board_xml = [[
         </Row>
         <Row preferredHeight="30">
             <Cell id="rBotVagabond2">
-                <Buttonclass="mapButton" onClick="spawnOfficialBot(rBotVagabond)" color="#dbdbdb">
+                <Button class="mapButton" onClick="spawnOfficialBot(rBotVagabond)" color="#dbdbdb">
                     <Image class="mapImage" image="vagabot"></Image>
                 </Button>
             </Cell>
@@ -322,7 +322,6 @@ board_xml = [[
     </TableLayout>
 </Panel>
 ]]
-
 
 
 UIASSETS = {
