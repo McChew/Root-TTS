@@ -26,6 +26,15 @@ available = {
 colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
           Purple=true, White=true, Red=true, Brown=true, Pink=true}
 
+BUTTONS =
+        {
+            "Marquise1", "Eyrie1", "Woodland1", "Vagabond2", "Vagabond1", "Riverfolk1", "Lizard1", "Corvid1", "Duchy1",
+            "rBotMarquise1", "rBotEyrie1", "rBotWoodland1", "rBotVagabond2", "rBotVagabond1",
+            "VagaArbiter", "VagaRanger", "VagaScoundrel", "VagaThief", "VagaTinker", "VagaVagrant", "VagaAdventurer", "VagaHarrier", "VagaRonin",
+            "OverRiverfolk1", "ClocLizard1", "CybeCorvid1", "bbdcMarquise1", "bbdcEyrie1", "bbdcWoodland1", "bbdcVagabond",
+            "Arachnid1", "WeeklyCroak1", "Boars1", "Fangus1", "Aviators1",
+       }
+
 factionboards = {}
 bot = false
 XML_UPDATED = false
@@ -67,6 +76,11 @@ function update_faction_data()
         TMP = find_object_by_name("TMP")
         local everything = TMP.getTable("EVERYTHING")
         KEEPER.setTable("EVERYTHING", everything)
+        local buttons = TMP.getTable("BUTTONS")
+        if buttons ~= nil then
+            BUTTONS = buttons
+        end
+        print(logString(buttons))
         log("Newest data received")
         TMP.destruct()
         AVAILABLE = {Vagabond=2}
@@ -76,6 +90,7 @@ function update_faction_data()
         for faction, _ in pairs(everything.fanfactions) do
             AVAILABLE[faction] = 1
         end
+
         -- print(logString(AVAILABLE))
     end
     function spawned(o)

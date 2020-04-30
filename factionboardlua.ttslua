@@ -1,4 +1,3 @@
-#include buttonsv2
 #include scenarios
 
 chosen_faction = nil
@@ -209,6 +208,7 @@ end
 
 function showButtons()
     local avail = Global.getTable('available')
+    local buttons = Global.getTable('BUTTONS')
     for _, k in ipairs(buttons) do
         local set = false
         if (k:sub(1,-2)..tostring(avail[k:sub(1,-2)] or 0)  == k) or (k:sub(5,-2)..tostring(avail[k:sub(5,-2)] or 0) == k:sub(5,-1)) or (avail[k] and avail[k] > 0) then
