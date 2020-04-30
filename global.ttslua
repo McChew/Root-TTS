@@ -80,7 +80,6 @@ function update_faction_data()
         if buttons ~= nil then
             BUTTONS = buttons
         end
-        print(logString(buttons))
         log("Newest data received")
         TMP.destruct()
         AVAILABLE = {Vagabond=2}
@@ -138,8 +137,8 @@ function update_xml_data()
 end
 
 function onLoad(save_state)
-    -- update_xml_data()
-    -- update_faction_data()
+    update_xml_data()
+    update_faction_data()
 end
 
 function find_object_by_name(name)
