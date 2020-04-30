@@ -133,11 +133,20 @@ board_xml = [[
                     <Image class="mapImage" image="trickster-button" height="20" />
                 </Button>
             </Cell>
+            <Cell />
+        </Row>
+        <Row preferredHeight="30">
             <Cell>
-                <Button class="mapButton" onClick="spawnScenario(Tavern)" color="#Brown">
+                <Button class="mapButton" onClick="spawnScenario(Tavern)" color="Brown">
                     <Image class="mapImage" image="tavern-button" height="20" />
                 </Button>
             </Cell>
+            <Cell>
+                <Button class="mapButton" onClick="spawnScenario(Contraptions)" color="Yellow">
+                    <Image class="mapImage" image="contraptions-button" height="20" />
+                </Button>
+            </Cell>
+            <Cell />
         </Row>
     </TableLayout>
     <TableLayout id="fanbotButtons" active="False">
