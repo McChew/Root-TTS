@@ -7,10 +7,13 @@ XMLKEEPER = nil
 
 function setXml()
     log(self.guid..": setting xml")
+    XMLKEEPER = find_object_by_name("The keeper of XML")
+    local assets = XMLKEEPER.getTable("UIASSETS")
+    local xml = XMLKEEPER.getVar("board_xml")
     function routine()
-        self.UI.setCustomAssets(XMLKEEPER.getTable("UIASSETS"))
+        self.UI.setCustomAssets(assets)
         coroutine.yield()
-        self.UI.setXml(XMLKEEPER.getVar("board_xml"))
+        self.UI.setXml(xml)
         coroutine.yield()
         showButtons()
         return 1
