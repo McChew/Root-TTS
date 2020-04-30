@@ -57,11 +57,13 @@ board_xml = [[
             </Cell>
         </Row>
         <Row preferredHeight="30">
-            <Cell>
-                <Button id="Vagabond2" class="mapButton" onClick="spawnFunction(Vagabond)" color="#dbdbdb">
+            <Cell id="Vagabond2">
+                <Button  class="mapButton" onClick="spawnFunction(Vagabond)" color="#dbdbdb">
                     <Image class="mapImage" image="vagabond-button"></Image>
                 </Button>
-                <Button id="Vagabond1" class="mapButton" onClick="spawnFunction(Vagabond)" color="gray">
+            </Cell>
+            <Cell id="Vagabond1" active="false">
+                <Button class="mapButton" onClick="spawnFunction(Vagabond)" color="gray">
                     <Image class="mapImage" image="vagabond-button"></Image>
                 </Button>
             </Cell>
@@ -132,7 +134,7 @@ board_xml = [[
                 </Button>
             </Cell>
             <Cell>
-                <Button class="mapButton" onClick="spawnScenario(Tavern)" color="Brown">
+                <Button class="mapButton" onClick="spawnScenario(Tavern)" color="#Brown">
                     <Image class="mapImage" image="tavern-button" height="20" />
                 </Button>
             </Cell>
@@ -150,7 +152,33 @@ board_xml = [[
                     <Image class="mapImage" image="clockwork-cult"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="bbdcMarquise1">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcMarquise)" color="Orange">
+                    <Image class="mapImage" image="mech-marq2-dc-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="bbdcEyrie1">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcEyrie)" id="ElecEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie-dc"></Image>
+                </Button>
+            </Cell>
+            <Cell id="bbdcWoodland1">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcWoodland)" color="green">
+                    <Image class="mapImage" image="automated-alliance-dc"></Image>
+                </Button>
+            </Cell>
+            <Cell id="bbdcVagabond2">
+                <Button  class="mapButton" onClick="spawnFanBot(bbdcVagabond)" color="#dbdbdb">
+                    <Image class="mapImage" image="vagabot-dc"></Image>
+                </Button>
+            </Cell>
+            <Cell id="bbdcVagabond1" active="false">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcVagabond)" color="gray">
+                    <Image class="mapImage" image="vagabot-dc"></Image>
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="fanButtons" active="False">
@@ -177,11 +205,7 @@ board_xml = [[
                     <Image class="mapImage" Width="90%" image="boars-button"></Image>
                 </Button>
             </Cell>
-            <Cell id="Aviators1">
-                <Button class="mapButton" onClick="spawnFanFaction(Aviators)" color="Pink">
-                    <Image class="mapImage" Width="90%" image="aviators-button"></Image>
-                </Button>
-            </Cell>
+            <Cell />
             <Cell />
         </Row>
     </TableLayout>
@@ -283,6 +307,8 @@ board_xml = [[
     </TableLayout>
 </Panel>
 ]]
+
+
 UIASSETS = {
     {
         name = "box-art",
@@ -325,16 +351,32 @@ UIASSETS = {
         url = "http://cloud-3.steamusercontent.com/ugc/792008966791949178/081FDF628B9B798822F76634B01B73C6DD58BA78/"
     },
     {
+        name = "mech-marq2-dc-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/1022824296872270092/1BA43863588F3266DCD57087CD86FC5B75C82DC4/"
+    },
+    {
         name = "electric-eyrie",
         url = "http://cloud-3.steamusercontent.com/ugc/792008966791947395/79331F94AA2D083589EEDE49117056238648EC42/"
+    },
+    {
+        name = "electric-eyrie-dc",
+        url = "http://cloud-3.steamusercontent.com/ugc/1022824296872269642/F7A477CA11EF2B8984FFF539F7E8327D40E5366D/"
     },
     {
         name = "automated-alliance",
         url = "http://cloud-3.steamusercontent.com/ugc/792008966791945457/E61C3BDDCF847A76E242CC170E5C81EB104AD138/"
     },
     {
+        name = "automated-alliance-dc",
+        url = "http://cloud-3.steamusercontent.com/ugc/1022824296872269198/5F9B6190CF0AE8714E5C43A10DEE5F8A48C6340D/"
+    },
+    {
         name = "vagabot",
         url = "http://cloud-3.steamusercontent.com/ugc/792008966791954681/CCD815BB28FCAE9077D11F3B9390C0CC1A051DEA/"
+    },
+    {
+        name = "vagabot-dc",
+        url = "http://cloud-3.steamusercontent.com/ugc/1022824296872270397/84CBD80650F4902977167BB679E7BD1CC237DF43/"
     },
     {
         name = "clockwork-cult",

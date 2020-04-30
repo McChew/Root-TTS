@@ -31,7 +31,7 @@ BUTTONS =
             "Marquise1", "Eyrie1", "Woodland1", "Vagabond2", "Vagabond1", "Riverfolk1", "Lizard1", "Corvid1", "Duchy1",
             "rBotMarquise1", "rBotEyrie1", "rBotWoodland1", "rBotVagabond2", "rBotVagabond1",
             "VagaArbiter", "VagaRanger", "VagaScoundrel", "VagaThief", "VagaTinker", "VagaVagrant", "VagaAdventurer", "VagaHarrier", "VagaRonin",
-            "OverRiverfolk1", "ClocLizard1", "CybeCorvid1", "bbdcMarquise1", "bbdcEyrie1", "bbdcWoodland1", "bbdcVagabond",
+            "OverRiverfolk1", "ClocLizard1", "CybeCorvid1", "bbdcMarquise1", "bbdcEyrie1", "bbdcWoodland1", "bbdcVagabond1", "bbdcVagabond2",
             "Arachnid1", "WeeklyCroak1", "Boars1", "Fangus1", "Aviators1",
        }
 
@@ -113,7 +113,7 @@ function update_faction_data()
             local TMP = spawnObject({type='backgammon_piece_white', position={5.00, -24.22, 0.00}, sound=false, callback_function=spawned})
         end
     end
-    WebRequest.get("https://raw.githubusercontent.com/McChew/Root-TTS/master/root/factionsv3.ttslua", callback)
+    WebRequest.get("https://raw.githubusercontent.com/McChew/Root-TTS/master/factionsv3.ttslua", callback)
 end
 
 function update_xml_data()
@@ -134,12 +134,12 @@ function update_xml_data()
             XML_UPDATED = true
         end
     end
-    WebRequest.get("https://raw.githubusercontent.com/McChew/Root-TTS/master/root/factionboardxml.ttslua", callback)
+    WebRequest.get("https://raw.githubusercontent.com/McChew/Root-TTS/master/factionboardxml.ttslua", callback)
 end
 
 function onLoad(save_state)
-    update_xml_data()
-    update_faction_data()
+    -- update_xml_data()
+    -- update_faction_data()
 end
 
 function find_object_by_name(name)

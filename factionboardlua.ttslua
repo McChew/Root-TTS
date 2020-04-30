@@ -160,6 +160,12 @@ function spawnBot(player, faction, fan)
     end
     if not colors[preferred_color] then
         player.print("Preferred color for faction: "..faction.." alread taken.\nPlease pick another", red)
+        if fan then
+            chosen_faction = KEEPER.call('get_faction_data', {'fanbots', faction})
+        else
+            chosen_faction = KEEPER.call('get_faction_data', {'officialbots', faction})
+        end
+        print(#chosen_faction)
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("botsButtons", "active", "False")
         self.UI.setAttribute("scenariosButtons", "active", "False")

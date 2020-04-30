@@ -57,11 +57,13 @@ board_xml = [[
             </Cell>
         </Row>
         <Row preferredHeight="30">
-            <Cell>
-                <Button id="Vagabond2" class="mapButton" onClick="spawnFunction(Vagabond)" color="#dbdbdb">
+            <Cell id="Vagabond2">
+                <Button  class="mapButton" onClick="spawnFunction(Vagabond)" color="#dbdbdb">
                     <Image class="mapImage" image="vagabond-button"></Image>
                 </Button>
-                <Button id="Vagabond1" class="mapButton" onClick="spawnFunction(Vagabond)" color="gray">
+            </Cell>
+            <Cell id="Vagabond1" active="false">
+                <Button class="mapButton" onClick="spawnFunction(Vagabond)" color="gray">
                     <Image class="mapImage" image="vagabond-button"></Image>
                 </Button>
             </Cell>
@@ -150,7 +152,33 @@ board_xml = [[
                     <Image class="mapImage" image="clockwork-cult"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="bbdcMarquise1">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcMarquise)" color="Orange">
+                    <Image class="mapImage" image="mech-marq2-dc-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
+            <Cell id="bbdcEyrie1">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcEyrie)" id="ElecEyrie1" color="blue">
+                    <Image class="mapImage" image="electric-eyrie-dc"></Image>
+                </Button>
+            </Cell>
+            <Cell id="bbdcWoodland1">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcWoodland)" color="green">
+                    <Image class="mapImage" image="automated-alliance-dc"></Image>
+                </Button>
+            </Cell>
+            <Cell id="bbdcVagabond2">
+                <Button  class="mapButton" onClick="spawnFanBot(bbdcVagabond)" color="#dbdbdb">
+                    <Image class="mapImage" image="vagabot-dc"></Image>
+                </Button>
+            </Cell>
+            <Cell id="bbdcVagabond1" active="false">
+                <Button class="mapButton" onClick="spawnFanBot(bbdcVagabond)" color="gray">
+                    <Image class="mapImage" image="vagabot-dc"></Image>
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="fanButtons" active="False">
