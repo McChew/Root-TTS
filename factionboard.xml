@@ -218,10 +218,14 @@ board_xml = [[
             </Cell>
             <Cell id="Aviators1">
                 <Button class="mapButton" onClick="spawnFanFaction(Aviators)" color="Pink">
-                    <Image class="mapImage" Width="90%" image="Aviators-button"></Image>
+                    <Image class="mapImage" Width="90%" image="aviators-button"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="Republic1">
+                <Button class="mapButton" onClick="spawnFanFaction(Republic)" color="Red">
+                    <Image class="mapImage" Width="90%" image="republic-button"></Image>
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
