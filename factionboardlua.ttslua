@@ -189,6 +189,7 @@ function spawnBot(player, faction, fan)
 end
 
 function spawnFanBot(player, faction)
+    print("Fanbot")
     spawnBot(player, faction, true)
 end
 

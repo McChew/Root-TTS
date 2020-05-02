@@ -163,13 +163,18 @@ board_xml = [[
                     <Image class="mapImage" image="clockwork-cult"></Image>
                 </Button>
             </Cell>
+            <Cell id="CybeCorvid1">
+                <Button class="mapButton" onClick="spawnFanBot(CybeCorvid)" color="Purple">
+                    <Image class="mapImage" image="cybercorvid-button"></Image>
+                </Button>
+            </Cell>
+        </Row>
+        <Row preferredHeight="30">
             <Cell id="bbdcMarquise1">
                 <Button class="mapButton" onClick="spawnFanBot(bbdcMarquise)" color="Orange">
                     <Image class="mapImage" image="mech-marq2-dc-button"></Image>
                 </Button>
             </Cell>
-        </Row>
-        <Row preferredHeight="30">
             <Cell id="bbdcEyrie1">
                 <Button class="mapButton" onClick="spawnFanBot(bbdcEyrie)" id="ElecEyrie1" color="blue">
                     <Image class="mapImage" image="electric-eyrie-dc"></Image>
@@ -180,6 +185,8 @@ board_xml = [[
                     <Image class="mapImage" image="automated-alliance-dc"></Image>
                 </Button>
             </Cell>
+        </Row>
+        <Row preferredHeight="30">
             <Cell id="bbdcVagabond2">
                 <Button  class="mapButton" onClick="spawnFanBot(bbdcVagabond)" color="#dbdbdb">
                     <Image class="mapImage" image="vagabot-dc"></Image>
@@ -190,6 +197,8 @@ board_xml = [[
                     <Image class="mapImage" image="vagabot-dc"></Image>
                 </Button>
             </Cell>
+            <Cell />
+            <Cell />
         </Row>
     </TableLayout>
     <TableLayout id="fanButtons" active="False">

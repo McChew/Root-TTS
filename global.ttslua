@@ -91,7 +91,7 @@ function update_faction_data()
             AVAILABLE[faction] = 1
         end
 
-        -- print(logString(AVAILABLE))
+        print(logString(AVAILABLE))
     end
     function spawned(o)
         o.setLock(true)
@@ -125,7 +125,7 @@ function update_xml_data()
             --
         until  wr.is_done
         if wr.is_error then
-            log("Something went wrong retreiving XMLa")
+            log("Something went wrong retreiving XML")
             log(wr.error)
         else
             log("XML Data received.")
