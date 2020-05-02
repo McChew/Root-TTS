@@ -91,7 +91,7 @@ function update_faction_data()
             AVAILABLE[faction] = 1
         end
 
-        print(logString(AVAILABLE))
+        -- print(logString(AVAILABLE))
     end
     function spawned(o)
         o.setLock(true)
@@ -138,8 +138,8 @@ function update_xml_data()
 end
 
 function onLoad(save_state)
-    -- update_xml_data()
-    -- update_faction_data()
+    update_xml_data()
+    update_faction_data()
 end
 
 function find_object_by_name(name)

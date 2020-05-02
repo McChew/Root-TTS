@@ -168,7 +168,6 @@ function spawnBot(player, faction, fan)
         else
             chosen_faction = KEEPER.call('get_faction_data', {'officialbots', faction})
         end
-        print(#chosen_faction)
         self.UI.setAttribute("factionsButtons", "active", "False")
         self.UI.setAttribute("botsButtons", "active", "False")
         self.UI.setAttribute("scenariosButtons", "active", "False")
@@ -189,7 +188,6 @@ function spawnBot(player, faction, fan)
 end
 
 function spawnFanBot(player, faction)
-    print("Fanbot")
     spawnBot(player, faction, true)
 end
 
