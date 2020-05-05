@@ -139,8 +139,8 @@ function update_xml_data()
 end
 
 function onLoad(save_state)
-    -- update_xml_data()
-    -- update_faction_data()
+    update_xml_data()
+    update_faction_data()
 end
 
 function find_object_by_name(name)
