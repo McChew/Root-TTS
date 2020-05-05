@@ -84,15 +84,15 @@ function update_faction_data()
         end
         log("Newest data received")
         TMP.destruct()
-        AVAILABLE = {Vagabond=2}
+        available = {Vagabond=2}
         for faction, _ in pairs(everything.factions) do
-            AVAILABLE[faction] = 1
+            available[faction] = 1
         end
         for faction, _ in pairs(everything.fanfactions) do
-            AVAILABLE[faction] = 1
+            available[faction] = 1
         end
 
-        -- print(logString(AVAILABLE))
+        -- print(logString(available))
     end
     function spawned(o)
         o.setLock(true)
