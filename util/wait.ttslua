@@ -1,0 +1,6 @@
+function waitTime(x)
+    local time = os.clock()
+    while time + x > os.clock() do
+        coroutine.yield()
+    end
+end
