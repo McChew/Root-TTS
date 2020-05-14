@@ -242,7 +242,11 @@ board_xml = [[
                     <Image class="mapImage" Width="90%" image="necropossums-button"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="Shrewd1">
+                <Button class="mapButton" onClick="spawnFanFaction(Shrewd)" color="Brown">
+                    <Image class="mapImage" Width="90%" image="shrewd-button"></Image>
+                </Button>
+            </Cell>
             <Cell />
         </Row>
     </TableLayout>
@@ -490,6 +494,10 @@ UIASSETS = {
     {
         name = "necropossums-button",
         url = "http://cloud-3.steamusercontent.com/ugc/1022824683405070724/8800BA76C919CDF4C0E26AAF93BFE6F2173A7348/"
+    },
+    {
+        name = "shrewd-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/1028455020027570580/552EC90B9F5F995330B83A76C95099B1AB76B08E/"
     },
     {
         name = "trickster-button",

@@ -242,7 +242,11 @@ board_xml = [[
                     <Image class="mapImage" Width="90%" image="necropossums-button"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="Shrewd1">
+                <Button class="mapButton" onClick="spawnFanFaction(Shrewd)" color="Brown">
+                    <Image class="mapImage" Width="90%" image="shrewd-button"></Image>
+                </Button>
+            </Cell>
             <Cell />
         </Row>
     </TableLayout>

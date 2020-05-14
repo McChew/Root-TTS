@@ -23,6 +23,7 @@ available = {
         Aviators = 1,
         Republic = 1,
         Necropossums = 1,
+        Shrewd = 1,
 }
 
 colors = {Blue=true, Orange=true, Teal=true, Yellow=true, Green=true,
@@ -34,7 +35,7 @@ BUTTONS =
             "rBotMarquise1", "rBotEyrie1", "rBotWoodland1", "rBotVagabond2", "rBotVagabond1",
             "VagaArbiter", "VagaRanger", "VagaScoundrel", "VagaThief", "VagaTinker", "VagaVagrant", "VagaAdventurer", "VagaHarrier", "VagaRonin",
             "OverRiverfolk1", "ClocLizard1", "CybeCorvid1", "bbdcMarquise1", "bbdcEyrie1", "bbdcWoodland1", "bbdcVagabond1", "bbdcVagabond2",
-            "Arachnid1", "WeeklyCroak1", "Boars1", "Fangus1", "Aviators1", "Republic1", "Necropossums1",
+            "Arachnid1", "WeeklyCroak1", "Boars1", "Fangus1", "Aviators1", "Republic1", "Necropossums1", "Shrewd1",
        }
 
 factionboards = {}
