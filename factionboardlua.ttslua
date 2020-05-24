@@ -237,6 +237,7 @@ function spawnHere(to_spawn)
 
     scale.x = 1/scale.x
     scale.z = 1/scale.z
+    scale.y = 1/scale.y
 
     for _,v in ipairs(to_spawn) do
         local new_pos = self.positionToWorld(Vector(v.move_to) * scale)
