@@ -4,6 +4,7 @@ foxes = 0
 wait_id = 0
 
 function onLoad(save_state)
+    createButtons()
     wait_id = Wait.time(updateButtons, 1, -1)
 end
 
@@ -25,11 +26,43 @@ function addCard(suit)
     end
 end
 
+function createButtons()
+  self.createButton({
+      click_function = "nothing",
+      function_owner = self,
+      label = '0',
+      position = {0.7, 0.1, -0.17},
+      scale = {0.5, 0.5, 0.5},
+      width = 0,
+      height = 0,
+      font_size = 120
+  })
+  self.createButton({
+      click_function = "nothing",
+      function_owner = self,
+      label = '0',
+      position = {0.9, 0.1, -0.17},
+      scale = {0.5, 0.5, 0.5},
+      width = 0,
+      height = 0,
+      font_size = 120
+  })
+  self.createButton({
+      click_function = "nothing",
+      function_owner = self,
+      label = '0',
+      position = {1.09, 0.1, -0.17},
+      scale = {0.5, 0.5, 0.5},
+      width = 0,
+      height = 0,
+      font_size = 120
+  })
+end
+
 function updateButtons()
     mice = 0
     foxes = 0
     bunnies = 0
-    self.clearButtons()
     items = Physics.cast({
         origin       = self.positionToWorld({-0.90, 0.2, 0.55}),
         direction    = self.getTransformUp(),
@@ -48,34 +81,7 @@ function updateButtons()
         end
     end
 
-    self.createButton({
-        click_function = "nothing",
-        function_owner = self,
-        label = tostring(mice),
-        position = {0.7, 0.1, -0.17},
-        scale = {0.5, 0.5, 0.5},
-        width = 0,
-        height = 0,
-        font_size = 120
-    })
-    self.createButton({
-        click_function = "nothing",
-        function_owner = self,
-        label = tostring(bunnies),
-        position = {0.9, 0.1, -0.17},
-        scale = {0.5, 0.5, 0.5},
-        width = 0,
-        height = 0,
-        font_size = 120
-    })
-    self.createButton({
-        click_function = "nothing",
-        function_owner = self,
-        label = tostring(foxes),
-        position = {1.09, 0.1, -0.17},
-        scale = {0.5, 0.5, 0.5},
-        width = 0,
-        height = 0,
-        font_size = 120
-    })
+    self.editButton({index=0,label=tostring(mice)})
+    self.editButton({index=1,label=tostring(bunnies)})
+    self.editButton({index=2,label=tostring(foxes)})
 end
