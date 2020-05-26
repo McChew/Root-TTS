@@ -255,7 +255,7 @@ function findClosestPosition()
     local own_pos = self.getPosition()
     local closest = nil
     local smallest_distance = 100000000
-    local places = {{position={-50.00, 5.00, -64.50}, rotation={0, 0, 0}}, {position={0.00, 5.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 5.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={0.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={-50.00, 5.00, 64.50},  rotation={0.00, 180.00, 0.00}}}
+    local places = {{position={-50.00, 15.00, -64.50}, rotation={0, 0, 0}}, {position={0.00, 15.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 15.00, -64.50},  rotation={0, 0, 0}}, {position={50.00, 15.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={0.00, 15.00, 64.50},  rotation={0.00, 180.00, 0.00}}, {position={-50.00, 15.00, 64.50},  rotation={0.00, 180.00, 0.00}}}
     for _, place in ipairs(places) do
         pos = place.position
         local distance = math.sqrt(math.pow(own_pos.x-pos[1], 2)+math.pow(own_pos.z-pos[3], 2))
