@@ -1,0 +1,780 @@
+-- this script should be placed on a standard cube object with a color tint with alpha = 0
+
+local testPlayers = false
+local testPlayerCount = 6
+
+local ignoreReach = false
+
+local allDice = {}
+
+local playmats = {}
+
+local factions = {
+   { name = "Marquise de Cat", color = "Orange", reachVal = 10, setupName = "Marquise"},
+   { name = "Underground Duchy", color = "Brown", reachVal = 8, setupName = "Duchy"},
+   { name = "Eyrie Dynasties", color = "Blue", reachVal = 7, setupName = "Eyrie"},
+   { name = "Vagabond", color = "White", reachVal = 5, setupName = "Vagabond"},
+   { name = "Riverfolk Company", color = "Teal", reachVal = 5, setupName = "Riverfolk"},
+   { name = "Woodland Alliance", color = "Green", reachVal = 3, setupName = "Woodland"},
+   { name = "Corvid Conspiracy", color = "Purple", reachVal = 3, setupName = "Corvid"},
+   { name = "Vagabond (Second)", color = "Red", reachVal = 2, setupName = "Vagabond"},
+   { name = "Lizard Cult", color = "Yellow", reachVal = 2, setupName = "Lizard"},
+}
+
+local reachMins = {
+   [1] = 0, -- for testing
+   [2] = 17,
+   [3] = 18,
+   [4] = 21,
+   [5] = 25,
+   [6] = 28,
+}
+
+local selections = {}
+local selectionOrder = {}
+local turnOrder = {}
+local currentReach = 0
+
+local xmlDefaults = {
+   tag = "Defaults",
+   children = {
+      {
+         tag = "Button",
+         attributes = {
+            textColor = "#dcdccc",
+            color = "#1c1c1c",
+            fontSize = "90",
+         }
+      },
+      {
+         tag = "Text",
+         attributes = {
+            color = "#dcdccc",
+            fontSize = "90",
+         }
+      }
+   }
+}
+
+local xmlPanelStart = {
+   tag = "Panel",
+   attributes = {
+      id = "start",
+      width = "900",
+      height = "600",
+   },
+   children = {
+      {
+         tag = "VerticalLayout",
+         attributes = {
+            spacing = "7"
+         },
+         children = {
+            { tag = "Button", attributes = {text = "Start Draft", onClick="start"}},
+            { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}}
+         }
+      }
+   }
+}
+
+local xmlPanelPlayerList = {
+   tag = "Panel",
+   attributes = {
+      id = "start",
+      width = "900",
+      height = "900",
+   },
+   children = {
+      { tag = "VerticalLayout", attributes = { spacing = "7", color="#1c1c1c"}, children = {}}
+   }
+}
+
+function onSpawn()
+   onLoad()
+end
+
+function onLoad()
+   self.setColorTint(Color(0, 0, 0, 0))
+   self.setLock(true)
+
+   self.UI.setXmlTable({xmlDefaults, xmlPanelStart})
+
+   playmats = find_objects_by_name("Faction Selection")
+end
+
+function getPlayers()
+   local allPlayers = Player.getPlayers()
+   local players = {}
+   for _, p in pairs(allPlayers) do
+      if p.color ~= "Black" then
+         table.insert(players, p)
+      end
+   end
+   if not testPlayers then
+      return players
+   end
+
+   local colors = Player.getAvailableColors()
+   while #players < testPlayerCount do
+      table.insert(players, {
+                      steam_name = "player" .. #players,
+                      steam_id = #players,
+                      color = colors[#players]
+      })
+   end
+
+   return players
+   
+end
+
+function start(player, value, element)
+   if value == "noreach" then
+      ignoreReach = true
+   end
+   log("starting draft")
+   local players = getPlayers()
+   for _, player in ipairs(players) do
+      if player.changeColor then
+         player.changeColor("Grey")
+      end
+   end
+
+   selections = {}
+
+   local dice = {}
+   for i, p in ipairs(players) do
+      local pname = p.steam_name or p.color
+      dice[i] = {
+         color = "",
+         name = pname,
+         description = p.steam_id or ""
+      }
+   end
+
+
+   self.UI.setXmlTable({{}})
+   allDice = spawnDice(dice)
+
+   Wait.time(function() rollForOrder(allDice) end, 1)
+end
+
+function rollForOrder(dice)
+   if #dice < 1 then
+      return
+   end
+   callAttention(Vector(0, 0, 0), 20)
+   for _, die in ipairs(dice) do
+      -- die.interactable = false
+      die.setLock(false)
+      die.randomize()
+   end
+
+   waitForRest(
+      dice,
+      function()
+         displayOrder(dice, Vector(0, 0, 4))
+      end
+   )
+   
+end
+
+function waitForRest(dice, callback)
+   Wait.condition(
+      function()
+         Wait.time(callback, 1)
+      end,
+      function()
+         for _, die in ipairs(dice) do
+            if not die.resting then
+               return false
+            end
+         end
+         return true
+      end
+   )
+end
+
+function startDraft()
+   currentReach = 0
+   local turns = {}
+   local i = #allDice
+   for _, d in spairs(allDice, function(t, a, b) return t[a].getPosition().z < t[b].getPosition().z end) do
+      selectionOrder[i] = {name = d.getName(), id = d.getDescription()}
+      selections[d.getDescription()] = nil
+      i = i-1
+      -- d.destruct()
+   end
+
+
+   local factionButtons = {
+      {
+         tag = "Text",
+         attributes = {
+            id = "reach-counter",
+            color = "#dcdccc",
+            fontSize = 30,
+            text = "Reach: 0/" .. reachMins[#selectionOrder]
+         }
+      },
+      {
+         tag = "Text",
+         attributes = {
+            id = "turn-display",
+            color = "#dcdccc",
+            fontSize = 30,
+            text = selectionOrder[1].name .. "'s Pick"
+         }
+      }
+   }
+
+   for i, f in ipairs(factions) do
+      factionButtons[i+2] = {
+         tag = "Button",
+         attributes = {
+            id = "btn-faction-"..i,
+            text = f.name .. " (" .. f.reachVal .. ")",
+            color = f.color,
+            fontSize = 30,
+            textColor = "#1c1c1c",
+            onClick = "selectFaction(".. i .. ")"
+         }
+      }
+
+      if i == 8 then
+         factionButtons[i+2].attributes.active = false
+      end
+   end
+   
+   local pickerHeight = #factions * 100
+   local factionPicker = {
+      tag = "Panel",
+      attributes = {
+         position = "0 " .. (-1*(pickerHeight/2)) .. " -50",
+         width = "400",
+         color = "#1c1c1c",
+         padding = 7,
+         height = pickerHeight,
+      },
+      children = {
+         {
+            tag = "VerticalLayout",
+            attributes = {
+               spacing = 7,
+            },
+            children = factionButtons
+         }
+      }
+   }
+
+   self.UI.setXmlTable({factionPicker})
+   callAttention(Vector(0, 0, -4))
+   Wait.frames(function() hideUnavailable() end, 7)
+   
+end
+
+function callAttention(pos, distance)
+   for _, p in ipairs(Player.getPlayers()) do
+      p.lookAt({
+            position = self.positionToWorld(pos),
+            pitch = 80,
+            yaw = 0,
+            distance = distance or 10,
+      })
+   end
+end
+
+function hideUnavailable(choices)
+   if ignoreReach then
+      return
+   end
+   local playerCount = #selectionOrder
+   local minReach = reachMins[playerCount]
+   
+   local available = {}
+   for i, f in ipairs(factions) do
+      self.UI.setAttribute("btn-faction-"..i, "interactable", false)
+      self.UI.setAttribute("btn-faction-"..i, "color", "#3f3f3f")
+      local taken = false
+      for _, s in pairs(selections) do
+         if s ~= nil then
+            if s.color == f.color then
+               taken = true
+            end
+         end
+      end
+      if not taken then
+         table.insert(available, {
+                         id = i,
+                         faction = f,
+         })
+      end
+   end
+
+   local selectedCount = 0
+   for _, s in pairs(selections) do
+      if s ~= nil then
+         selectedCount = selectedCount + 1
+      end
+   end
+   
+   
+   local pickable = {}
+   for i, v in pairs(available) do
+      if(v ~= nil) then
+         local tTemp = sCopy(available)
+         tTemp[i] = nil
+         if(  validateSetup(tTemp, currentReach+v.faction.reachVal, playerCount - selectedCount-1) ) then
+            table.insert(pickable, v)
+         end
+      end
+   end
+
+   
+   for i, v in pairs(pickable) do
+      if v ~= nil then
+         self.UI.setAttribute("btn-faction-"..v.id, "color", v.faction.color)
+         self.UI.setAttribute("btn-faction-"..v.id, "interactable", true)
+      end
+   end
+end
+
+function validateSetup(possible, reach, playersLeft)
+   local playerCount = #selectionOrder
+   local minReach = reachMins[playerCount]
+
+   if reach >= minReach then
+      return true
+   end
+
+   for i, v in pairs(possible) do
+      if(v ~= nil) then
+         local tTemp = sCopy(possible)
+         if(playersLeft <= 0) then
+            return false
+         end
+
+         local reachTmp = reach + v.faction.reachVal
+
+         if(reachTmp >= minReach) then
+            return true
+         end
+
+         tTemp[i] = nil
+         if( validateSetup(tTemp, reachTmp, playersLeft-1) ) then
+            return true
+         else
+            possible[i] = nil
+         end
+      end
+   end
+end
+
+function selectFaction(player, value, elem)
+   
+   local nextID = ""
+   local nextName = ""
+   local currentOrderIndex = -1
+   for i, c in ipairs(selectionOrder) do
+      if selections[c.id] == nil then
+         nextID = c.id
+         nextName = c.name
+         currentOrderIndex = i
+         break
+      end
+   end
+
+
+   if player.steam_id ~= nextID and #(tostring(nextID)) > 1 then
+      broadcastToColor("Not your turn yet", player.color)
+      return
+   end
+
+   local faction = factions[tonumber(value)]
+   if testPlayers then
+      selections[nextID] = faction
+   else
+      selections[player.steam_id] = faction
+   end
+   currentReach = currentReach + faction.reachVal
+
+   self.UI.setAttribute("reach-counter", "text", "Reach: " .. currentReach .. "/" .. reachMins[#selectionOrder])
+   self.UI.setAttribute("reach-counter", "color", "#dcdccc")
+
+   local bgColor = self.UI.getAttribute("btn-faction-"..value, "color")
+   local fgColor = self.UI.getAttribute("btn-faction-"..value, "textColor")
+   local text = self.UI.getAttribute("btn-faction-"..value, "text")
+   self.UI.setAttribute("btn-faction-"..value, "color", fgColor)
+   self.UI.setAttribute("btn-faction-"..value, "text", text .. "\n" .. nextName .. " (" .. currentOrderIndex .. ")")
+   self.UI.setAttribute("btn-faction-"..value, "textColor", bgColor)
+   self.UI.setAttribute("btn-faction-"..value, "interactable", false)
+   
+   player.changeColor(faction.color)
+   table.insert(turnOrder, 1, faction.color)
+
+   if value == "4" then
+      self.UI.setAttribute("btn-faction-8", "active", true)
+   end
+
+   local playmat = getNextPlaymat()
+   
+   Wait.frames(
+      function()
+         if playmat == nil then
+            return
+         end
+         playmat.call("spawnRemote", {
+                         player = Player[faction.color],
+                         faction = faction.setupName,
+         })
+      end,
+      7
+   )
+   
+   if selectionOrder[currentOrderIndex+1] ~= nil then
+      self.UI.setAttribute("turn-display", "text", selectionOrder[currentOrderIndex+1].name .. "'s Pick")
+      hideUnavailable()
+   else
+      self.UI.setAttribute("turn-display", "text", "Draft Finished! GLHF!")
+      Wait.frames(endDraft, 7)
+   end
+
+   
+end
+
+function getNextPlaymat()
+   for i, playmat in ipairs(playmats) do
+      if playmat ~= "" then
+         playmats[i] = ""
+         return playmat
+      end
+   end
+   return nil
+end
+
+function playerName(playerID)
+   for i, p in ipairs(Player.getPlayers()) do
+      if tostring(p.steam_id) == tostring(playerID) then
+         return p.steam_name or player.color
+      end
+   end
+   return tostring(playerID)
+end
+
+function endDraft()
+   for _, d in ipairs(allDice) do
+      d.destruct()
+   end
+   Turns.enable = true
+   Turns.type = 2
+   Turns.order = turnOrder
+   Turns.turn_color = turnOrder[1]
+   for i, f in ipairs(factions) do
+      self.UI.setAttribute("btn-faction-"..i, "interactable", false)
+   end
+
+   local factionButtons = {
+      {
+         tag = "Text",
+         attributes = {
+            id = "turn-display",
+            color = "#dcdccc",
+            fontSize = 30,
+            text = "Draft Finished! GLHF!"
+         }
+      },
+      {
+         tag = "Text",
+         attributes = {
+            id = "turn-display",
+            color = "#dcdccc",
+            fontSize = 30,
+            text = "Turn Order:"
+         }
+      }
+   }
+
+   for i, c in ipairs(turnOrder) do
+      local id = (Player[c].steam_id) or c
+      local faction = nil
+      for i, f in ipairs(factions) do
+         if c == f.color then
+            faction = f
+            break
+         end
+      end
+
+      table.insert(
+         factionButtons,
+         {
+            tag = "Button",
+            attributes = {
+               id = "btn-faction-"..i,
+               text = faction.name .. "\n" .. playerName(id),
+               textColor = faction.color,
+               interactable = false,
+               fontSize = 30,
+               color = "#1c1c1c",
+            }
+         }
+      )
+   end
+
+   table.insert(
+      factionButtons,
+      {
+         tag = "Button",
+         attributes = {
+            text = "Remove",
+            textColor = "#dcdccc",
+            fontSize = 30,
+            color = "#1c1c1c",
+            onClick = "destruct()"
+         }
+      }
+   )
+   
+   local pickerHeight = #factions * 100
+   local factionPicker = {
+      tag = "Panel",
+      attributes = {
+         position = "0 " .. (-1*(pickerHeight/2)) .. " -50",
+         width = "400",
+         color = "#1c1c1c",
+         padding = 7,
+         height = pickerHeight,
+      },
+      children = {
+         {
+            tag = "VerticalLayout",
+            attributes = {
+               spacing = 7,
+            },
+            children = factionButtons
+         }
+      }
+   }
+
+   self.UI.setXmlTable({factionPicker})
+
+   -- Wait.time(function() self.destruct() end, 2)
+end
+
+function destruct()
+   self.destruct()
+end
+
+function displayOrder(dice, pos)
+   local i = 0
+   local groups = {}
+   for _, d in spairs(dice, function(t, a, b) return t[a].getRotationValue() < t[b].getRotationValue() end) do
+      local val = d.getRotationValue()
+      d.setPositionSmooth(self.positionToWorld(pos + Vector(0, 0.5, i*1.5)))
+      i = i+1
+      if groups[val] == nil then
+         groups[val] = {}
+      end
+      table.insert(groups[val], d)
+      broadcastToAll(d.getName() .. " rolled " .. val)
+   end
+   callAttention(self.positionToLocal(dice[1].getPosition()), 20)
+
+   waitForRest(
+      dice,
+      function()
+         local rollingOff = false
+         for _, g in pairs(groups) do
+            if #g > 1 then
+               -- local rDice = spawnDice(g)
+               -- Wait.time(function() doRolloff(rDice) end, 1)
+               local roPlayers = {}
+               for _, d in ipairs(g) do
+                  table.insert(roPlayers, d.getName())
+               end
+               broadcastToAll("Rolling off for tie: " .. table.concat(roPlayers, ", "))
+               rollingOff = true
+               Wait.time(function() doRolloff(g) end, 1)
+            end
+         end
+         if not rollingOff then
+            Wait.time(
+               function()
+                  waitForRest(allDice, startDraft)
+               end,
+               1
+            )
+         end
+      end
+   )
+end
+
+function doRolloff(dice)
+   if #dice < 2 then
+      return
+   end
+   
+   local origin = self.positionToLocal(dice[1].getPosition())
+   -- local origin = Vector(2, 0, 4)
+   
+   callAttention(origin, 20)
+   for _, die in ipairs(dice) do
+      die.setLock(true)
+      die.setPositionSmooth(die.getPosition()+Vector(0, 2, 0))
+   end
+
+
+   
+   waitForRest(
+      dice,
+      function()
+         for _, die in ipairs(dice) do
+            die.setLock(false)
+            die.randomize()
+         end
+         waitForRest(
+            dice,
+            function()
+               displayOrder(dice, origin)
+            end
+         )
+      end
+   )
+
+   
+end
+
+function spairs(t, order)
+   -- collect the keys
+   local keys = {}
+   for k in pairs(t) do keys[#keys+1] = k end
+
+   -- if order function given, sort by it by passing the table and keys a, b,
+   -- otherwise just sort the keys 
+   if order then
+      table.sort(keys, function(a,b) return order(t, a, b) end)
+   else
+      table.sort(keys)
+   end
+
+   -- return the iterator function
+   local i = 0
+   return function()
+      i = i + 1
+      if keys[i] then
+         return keys[i], t[keys[i]]
+      end
+   end
+end
+
+function spawnDice(toSpawn)
+   local dice = {}
+   for i, dieConf in ipairs(toSpawn) do
+      local color = Color[dieConf.color] or Color.Black
+      local name = dieConf.name or ""
+      local angleStep = 360 / (#dice+1)
+      for i, die in ipairs(dice) do
+         local pos = findGlobalPosWithLocalDirection(angleStep*(i-1))
+         die.setPositionSmooth(pos, false, true)
+      end
+      
+      local rollLocation = findGlobalPosWithLocalDirection(360-angleStep)
+      
+      local r, g, b, a = color:get()
+
+      if (r+g+b)/3 > 0.5 then
+         color:set(r*0.75, g*0.75, b*0.75, a)
+      end
+      
+      local spawnedDie = spawnObject({
+            type = "Die_20",
+            rotation = randomRotation(),
+            position = rollLocation,
+            sound = false,
+            callback_function = function(die)
+               die.setLock(true)
+               die.setColorTint(color)
+               die.setName(name)
+               die.setDescription(dieConf.description or "")
+            end
+      })
+      table.insert(dice, spawnedDie)
+   end
+   return dice
+end
+
+
+local radialOffset = 2.2
+local heightOffset = 2.2
+
+function randomRotation()
+   --Credit for this function goes to Revinor (forums)
+   --Get 3 random numbers
+   local u1 = math.random()
+   local u2 = math.random()
+   local u3 = math.random()
+   --Convert them into quats to avoid gimbal lock
+   local u1sqrt = math.sqrt(u1)
+   local u1m1sqrt = math.sqrt(1-u1)
+   local qx = u1m1sqrt *math.sin(2*math.pi*u2)
+   local qy = u1m1sqrt *math.cos(2*math.pi*u2)
+   local qz = u1sqrt *math.sin(2*math.pi*u3)
+   local qw = u1sqrt *math.cos(2*math.pi*u3)
+   --Apply rotation
+   local ysqr = qy * qy
+   local t0 = -2.0 * (ysqr + qz * qz) + 1.0
+   local t1 = 2.0 * (qx * qy - qw * qz)
+   local t2 = -2.0 * (qx * qz + qw * qy)
+   local t3 = 2.0 * (qy * qz - qw * qx)
+   local t4 = -2.0 * (qx * qx + ysqr) + 1.0
+   --Correct
+   if t2 > 1.0 then t2 = 1.0 end
+   if t2 < -1.0 then ts = -1.0 end
+   --Convert back to X/Y/Z
+   local xr = math.asin(t2)
+   local yr = math.atan2(t3, t4)
+   local zr = math.atan2(t1, t0)
+   --Return result
+   return {math.deg(xr),math.deg(yr),math.deg(zr)}
+end
+
+function findGlobalPosWithLocalDirection(angle)
+   local object, distance = self, radialOffset * self.getScale().x
+   local oPos, oRot = object.getPosition(), object.getRotation()
+   local posX = oPos.x + math.sin( math.rad(angle+oRot.y) ) * distance
+   local posY = oPos.y + heightOffset
+   local posZ = oPos.z + math.cos( math.rad(angle+oRot.y) ) * distance
+   return {x=posX, y=posY, z=posZ}
+end
+
+local function reversedipairsiter(t, i)
+   i = i - 1
+   if i ~= 0 then
+      return i, t[i]
+   end
+end
+function reversedipairs(t)
+   return reversedipairsiter, t, #t + 1
+end
+
+function sCopy(orig)
+   local orig_type = type(orig)
+   local copy
+   if(orig_type == 'table') then
+      copy = {}
+      for orig_key, orig_value in pairs(orig) do
+         copy[orig_key] = orig_value
+      end
+   else -- number, string, boolean, etc
+      copy = orig
+   end
+   return copy
+end
+
+function find_objects_by_name(name)
+   local objects = {}
+   for _, obj in ipairs(getAllObjects()) do
+      if obj.getName() == name then
+         table.insert(objects, obj)
+      end
+   end
+   return objects
+end
