@@ -59,6 +59,9 @@ function setColor(_, color)
     end
 end
 
+function spawnRemote(params)
+   spawnFunction(params.player, params.faction, params.id, params.fan)
+end
 
 function spawnFunction(player, faction, id, fan)
     local fan = fan or ''
