@@ -426,6 +426,14 @@ function selectFaction(player, value, elem)
                          player = Player[faction.color],
                          faction = faction.setupName,
          })
+         Wait.frames(
+            function()
+               if value == "8" then
+                  playmat.call("setColorRemote", faction.color)
+               end
+            end,
+            3
+         )
       end,
       7
    )
