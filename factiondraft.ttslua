@@ -1,5 +1,6 @@
 -- this script should be placed on a standard cube object with a color tint with alpha = 0
 
+
 local testPlayers = false
 local testPlayerCount = 6
 
@@ -61,7 +62,9 @@ local xmlPanelStart = {
    attributes = {
       id = "start",
       width = "900",
-      height = "600",
+      height = "800",
+      showAnimation = "Grow",
+      hideAnimation = "Shrink",
    },
    children = {
       {
@@ -71,21 +74,9 @@ local xmlPanelStart = {
          },
          children = {
             { tag = "Button", attributes = {text = "Start Draft", onClick="start"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}}
+            { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}},
          }
       }
-   }
-}
-
-local xmlPanelPlayerList = {
-   tag = "Panel",
-   attributes = {
-      id = "start",
-      width = "900",
-      height = "900",
-   },
-   children = {
-      { tag = "VerticalLayout", attributes = { spacing = "7", color="#1c1c1c"}, children = {}}
    }
 }
 
@@ -130,6 +121,8 @@ end
 function start(player, value, element)
    if value == "noreach" then
       ignoreReach = true
+   elseif value == "mock" then
+      testPlayers = true
    end
    log("starting draft")
    local players = getPlayers()
@@ -236,7 +229,9 @@ function startDraft()
             color = f.color,
             fontSize = 30,
             textColor = "#1c1c1c",
-            onClick = "selectFaction(".. i .. ")"
+            onClick = "selectFaction(".. i .. ")",
+            showAnimation = "Grow",
+            hideAnimation = "Shrink",
          }
       }
 
@@ -254,6 +249,10 @@ function startDraft()
          color = "#1c1c1c",
          padding = 7,
          height = pickerHeight,
+         id = "btns-draft-selection",
+         showAnimation = "Grow",
+         hideAnimation = "Shrink",
+         active = false,
       },
       children = {
          {
@@ -268,7 +267,13 @@ function startDraft()
 
    self.UI.setXmlTable({factionPicker})
    callAttention(Vector(0, 0, -4))
-   Wait.frames(function() hideUnavailable() end, 7)
+   Wait.frames(
+      function()
+         self.UI.show("btns-draft-selection")
+         hideUnavailable()
+      end,
+      7
+   )
    
 end
 
@@ -400,6 +405,7 @@ function selectFaction(player, value, elem)
    self.UI.setAttribute("reach-counter", "text", "Reach: " .. currentReach .. "/" .. reachMins[#selectionOrder])
    self.UI.setAttribute("reach-counter", "color", "#dcdccc")
 
+   self.UI.hide("btn-faction-"..value)
    local bgColor = self.UI.getAttribute("btn-faction-"..value, "color")
    local fgColor = self.UI.getAttribute("btn-faction-"..value, "textColor")
    local text = self.UI.getAttribute("btn-faction-"..value, "text")
@@ -407,12 +413,12 @@ function selectFaction(player, value, elem)
    self.UI.setAttribute("btn-faction-"..value, "text", text .. "\n" .. nextName .. " (" .. currentOrderIndex .. ")")
    self.UI.setAttribute("btn-faction-"..value, "textColor", bgColor)
    self.UI.setAttribute("btn-faction-"..value, "interactable", false)
+   self.UI.show("btn-faction-"..value)
    
-   player.changeColor(faction.color)
    table.insert(turnOrder, 1, faction.color)
 
    if value == "4" then
-      self.UI.setAttribute("btn-faction-8", "active", true)
+      self.UI.show("btn-faction-8")
    end
 
    local playmat = getNextPlaymat()
@@ -434,8 +440,9 @@ function selectFaction(player, value, elem)
             end,
             3
          )
+         player.changeColor(faction.color)
       end,
-      7
+      30
    )
    
    if selectionOrder[currentOrderIndex+1] ~= nil then
@@ -479,6 +486,7 @@ function endDraft()
    for i, f in ipairs(factions) do
       self.UI.setAttribute("btn-faction-"..i, "interactable", false)
    end
+   self.UI.hide("btns-draft-selection")
 
    local factionButtons = {
       {
@@ -548,8 +556,12 @@ function endDraft()
          position = "0 " .. (-1*(pickerHeight/2)) .. " -50",
          width = "400",
          color = "#1c1c1c",
+         id = "btns-draft-selection",
          padding = 7,
          height = pickerHeight,
+         showAnimation = "Grow",
+         hideAnimation = "Shrink",
+         active = false,
       },
       children = {
          {
@@ -562,9 +574,16 @@ function endDraft()
       }
    }
 
-   self.UI.setXmlTable({factionPicker})
+   Wait.frames(
+      function()
+         self.UI.setXmlTable({factionPicker})
 
-   -- Wait.time(function() self.destruct() end, 2)
+         Wait.frames(
+            function()
+               self.UI.show("btns-draft-selection")
+            end, 3)
+      end
+      , 3)
 end
 
 function destruct()
