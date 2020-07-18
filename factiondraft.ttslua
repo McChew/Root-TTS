@@ -75,14 +75,11 @@ local xmlPanelStart = {
          children = {
             { tag = "Button", attributes = {text = "Start Draft", onClick="start"}},
             { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}},
+            { tag = "Button", attributes = {text = "Start Draft\n(Mock Draft)", onClick="start(mock)"}}
          }
       }
    }
 }
-
-function onSpawn()
-   onLoad()
-end
 
 function onLoad()
    self.setColorTint(Color(0, 0, 0, 0))
@@ -138,7 +135,6 @@ function start(player, value, element)
    for i, p in ipairs(players) do
       local pname = p.steam_name or p.color
       dice[i] = {
-         color = "",
          name = pname,
          description = p.steam_id or ""
       }
@@ -195,7 +191,6 @@ function startDraft()
       selectionOrder[i] = {name = d.getName(), id = d.getDescription()}
       selections[d.getDescription()] = nil
       i = i-1
-      -- d.destruct()
    end
 
 
@@ -297,8 +292,13 @@ function hideUnavailable(choices)
    
    local available = {}
    for i, f in ipairs(factions) do
-      self.UI.setAttribute("btn-faction-"..i, "interactable", false)
-      self.UI.setAttribute("btn-faction-"..i, "color", "#3f3f3f")
+      self.UI.setAttributes(
+         "btn-faction-"..i,
+         {
+            interactable = false,
+            color =  "#3f3f3f"
+         }
+      )
       local taken = false
       for _, s in pairs(selections) do
          if s ~= nil then
@@ -337,8 +337,13 @@ function hideUnavailable(choices)
    
    for i, v in pairs(pickable) do
       if v ~= nil then
-         self.UI.setAttribute("btn-faction-"..v.id, "color", v.faction.color)
-         self.UI.setAttribute("btn-faction-"..v.id, "interactable", true)
+         self.UI.setAttributes(
+            "btn-faction-"..v.id,
+            {
+               color = v.faction.color,
+               interactable = true,
+            }
+         )
       end
    end
 end
@@ -402,17 +407,27 @@ function selectFaction(player, value, elem)
    end
    currentReach = currentReach + faction.reachVal
 
-   self.UI.setAttribute("reach-counter", "text", "Reach: " .. currentReach .. "/" .. reachMins[#selectionOrder])
-   self.UI.setAttribute("reach-counter", "color", "#dcdccc")
+   self.UI.setAttributes(
+      "reach-counter",
+      {
+         text = "Reach: " .. currentReach .. "/" .. reachMins[#selectionOrder],
+         color = "#dcdccc",
+      }
+   )
 
    self.UI.hide("btn-faction-"..value)
    local bgColor = self.UI.getAttribute("btn-faction-"..value, "color")
    local fgColor = self.UI.getAttribute("btn-faction-"..value, "textColor")
    local text = self.UI.getAttribute("btn-faction-"..value, "text")
-   self.UI.setAttribute("btn-faction-"..value, "color", fgColor)
-   self.UI.setAttribute("btn-faction-"..value, "text", text .. "\n" .. nextName .. " (" .. currentOrderIndex .. ")")
-   self.UI.setAttribute("btn-faction-"..value, "textColor", bgColor)
-   self.UI.setAttribute("btn-faction-"..value, "interactable", false)
+   self.UI.setAttributes(
+      "btn-faction-"..value,
+      {
+         color = fgColor,
+         text = text .. "\n" .. nextName .. " (" .. currentOrderIndex .. ")",
+         textColor = bgColor,
+         interactable = false,
+      }
+   )
    self.UI.show("btn-faction-"..value)
    
    table.insert(turnOrder, 1, faction.color)
@@ -598,9 +613,10 @@ function displayOrder(dice, pos)
       d.setPositionSmooth(self.positionToWorld(pos + Vector(0, 0.5, i*1.5)))
       i = i+1
       if groups[val] == nil then
-         groups[val] = {}
+         groups[val] = {d}
+      else
+         table.insert(groups[val], d)
       end
-      table.insert(groups[val], d)
       broadcastToAll(d.getName() .. " rolled " .. val)
    end
    callAttention(self.positionToLocal(dice[1].getPosition()), 20)
@@ -611,8 +627,6 @@ function displayOrder(dice, pos)
          local rollingOff = false
          for _, g in pairs(groups) do
             if #g > 1 then
-               -- local rDice = spawnDice(g)
-               -- Wait.time(function() doRolloff(rDice) end, 1)
                local roPlayers = {}
                for _, d in ipairs(g) do
                   table.insert(roPlayers, d.getName())
@@ -640,7 +654,6 @@ function doRolloff(dice)
    end
    
    local origin = self.positionToLocal(dice[1].getPosition())
-   -- local origin = Vector(2, 0, 4)
    
    callAttention(origin, 20)
    for _, die in ipairs(dice) do
@@ -695,7 +708,6 @@ end
 function spawnDice(toSpawn)
    local dice = {}
    for i, dieConf in ipairs(toSpawn) do
-      local color = Color[dieConf.color] or Color.Black
       local name = dieConf.name or ""
       local angleStep = 360 / (#dice+1)
       for i, die in ipairs(dice) do
@@ -705,12 +717,6 @@ function spawnDice(toSpawn)
       
       local rollLocation = findGlobalPosWithLocalDirection(360-angleStep)
       
-      local r, g, b, a = color:get()
-
-      if (r+g+b)/3 > 0.5 then
-         color:set(r*0.75, g*0.75, b*0.75, a)
-      end
-      
       local spawnedDie = spawnObject({
             type = "Die_20",
             rotation = randomRotation(),
@@ -718,7 +724,7 @@ function spawnDice(toSpawn)
             sound = false,
             callback_function = function(die)
                die.setLock(true)
-               die.setColorTint(color)
+               die.setColorTint(Color.Black)
                die.setName(name)
                die.setDescription(dieConf.description or "")
             end
