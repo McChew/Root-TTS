@@ -62,7 +62,7 @@ local xmlPanelStart = {
    attributes = {
       id = "start",
       width = "900",
-      height = "800",
+      height = "1000",
       showAnimation = "Grow",
       hideAnimation = "Shrink",
    },
@@ -75,7 +75,9 @@ local xmlPanelStart = {
          children = {
             { tag = "Button", attributes = {text = "Start Draft", onClick="start"}},
             { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Mock Draft)", onClick="start(mock)"}}
+            { tag = "Button", attributes = {text = "Start Draft\n(Mock Draft)", onClick="start(mock)"}},
+            { tag = "Button", attributes = {text = "No Draft", onClick="destruct()"}}
+
          }
       }
    }
