@@ -452,6 +452,9 @@ function selectFaction(player, value, elem)
                if value == "8" then
                   playmat.call("setColorRemote", faction.color)
                end
+               if value == "4" or value == "8" then
+                  playmat.UI.setAttribute("subpanel", "active", false)
+               end
             end,
             3
          )
