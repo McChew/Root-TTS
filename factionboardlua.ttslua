@@ -44,6 +44,10 @@ function toggleButtons(player, value, id)
     self.UI.setAttribute(id..'Buttons', 'active', value)
 end
 
+function setColorRemote(color)
+   setColor(nil, color)
+end
+
 function setColor(_, color)
     local colors = Global.getTable('colors')
     if not colors[color] then
