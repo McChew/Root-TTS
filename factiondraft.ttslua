@@ -6,7 +6,7 @@ local testPlayerCount = 6
 
 local ignoreReach = false
 
-local allDice = {}
+local allChits = {}
 
 local playmats = {}
 
@@ -42,9 +42,28 @@ local xmlDefaults = {
       {
          tag = "Button",
          attributes = {
+            tooltipFontSize="50",
+            tooltipTextColor="#dcdccc",
+            tooltipWidth="1000",
+            tooltipPadding="15",
+            tooltipBorderColor="#1c1c1c",
+            tooltipBackgroundColor="rgba(0.11, 0.11, 0.11, 0.8)",
             textColor = "#dcdccc",
             color = "#1c1c1c",
             fontSize = "90",
+         }
+      },
+      {
+         tag = "ToggleButton",
+         attributes = {
+            selectedTextColor = "#dcdccc",
+            deselectedTextColor = "#dcdccc",
+            deselectedColor = "#1c1c1c",
+            selectedColor = "#1c1c1c",
+            color = "#1c1c1c",
+            colors = "#1c1c1c|#1c1c1c|#3f3f3f|#1c1c1c",
+            textColors = "#dcdccc|#dcdccc|#dcdccc|#dcdccc",
+            fontSize = "50",
          }
       },
       {
@@ -53,7 +72,15 @@ local xmlDefaults = {
             color = "#dcdccc",
             fontSize = "90",
          }
-      }
+      },
+      {
+         tag = "InputField",
+         attributes = {
+            textColor = "#dcdccc",
+            colors = "#1c1c1c|#1c1c1c|#1c1c1c|#1c1c1c",
+            fontSize = "90",
+         }
+      },
    }
 }
 
@@ -62,9 +89,10 @@ local xmlPanelStart = {
    attributes = {
       id = "start",
       width = "900",
-      height = "1000",
+      height = "450",
       showAnimation = "Grow",
       hideAnimation = "Shrink",
+      padding = "7",
    },
    children = {
       {
@@ -73,14 +101,39 @@ local xmlPanelStart = {
             spacing = "7"
          },
          children = {
-            { tag = "Button", attributes = {text = "Start Draft", onClick="start"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Mock Draft)", onClick="start(mock)"}},
-            { tag = "Button", attributes = {text = "No Draft", onClick="destruct()"}}
-
+            { tag = "Button", attributes = {
+                 text = "Draft",
+                 onClick="chooseOptions",
+                 tooltip="Turn and draft order are selected and then players choose from all available factions. Minimum reach is required by default, but can be disabled."
+            }},
+            { tag = "Button", attributes = {
+                 text = "No Draft",
+                 onClick="destruct()",
+                 tooltip="This will remove the drafting tool from your table."
+            }}
          }
       }
    }
+}
+
+local xmlLabelDraftOrder = {
+   tag = "Text",
+   attributes = {
+      color = "#dcdccc",
+      position = "-200 500 -5",
+      fontSize = "40",
+      text = "Draft\nOrder\n↓"
+   },
+}
+
+local xmlLabelTurnOrder = {
+   tag = "Text",
+   attributes = {
+      color = "#dcdccc",
+      position = "200 500 -5",
+      fontSize = "40",
+      text = "↑\nTurn\nOrder"
+   },
 }
 
 function onLoad()
@@ -117,12 +170,147 @@ function getPlayers()
    
 end
 
-function start(player, value, element)
-   if value == "noreach" then
-      ignoreReach = true
-   elseif value == "mock" then
-      testPlayers = true
+function chooseOptions(player, arg, el)
+   self.UI.hide("start")
+   
+   local options = {
+      tag = "Panel",
+      attributes = {
+         id = "options",
+         active = "false",
+         color = "#1c1c1c",
+         width = "900",
+         height = "800",
+         showAnimation = "Grow",
+         hideAnimation = "Shrink",
+         padding = "7",
+      },
+      children = {
+         {
+            tag = "VerticalLayout",
+            attributes = {
+               spacing = "7"
+            },
+            children = {
+               { tag = "Text",
+                 attributes = {
+                    text = "Draft"
+               }},
+               {
+                  tag = "HorizontalLayout",
+                  attributes = {
+                     padding = "10",
+                  },
+                  children = {
+                     { tag = "Text", attributes = { text = "Ignore Reach?" }},
+                     { tag = "ToggleButton",
+                       attributes = {
+                          id = "toggle-reach",
+                          text = "No",
+                          onValueChanged = "setIgnoreReach",
+                     }},
+               }},
+               {
+                  tag = "HorizontalLayout",
+                  attributes = {
+                     padding = "10" 
+                  },
+                  children = {
+                     { tag = "Text", attributes = { text = "Mock Draft?" }},
+                     { tag = "ToggleButton",
+                       attributes = {
+                          id = "toggle-mock",
+                          text = "No",
+                          onValueChanged = "setMockDraft",
+                     }},
+               }},
+               { tag = "HorizontalLayout",
+                 attributes = {
+                    id = "layout-mock",
+                    spacing = "7",
+                    active = "false",
+                 },
+                 children = {
+                    { tag = "Text",
+                      attributes = {
+                         fontSize = "70",
+                         text = "Mock Player Count: ",
+                    }},
+                    { tag = "InputField",
+                      attributes = {
+                         id = "input-mock",
+                         text = "",
+                         fontSize = "70",
+                         onValueChanged = "setMockPlayerCount",
+                         characterValidation="Integer"
+                    }},
+                 }
+               },
+               { tag = "Button",
+                 attributes = {
+                    text = "Start",
+                    onClick="start",
+               }},
+            }
+         }
+      }
+   }
+
+   local showOptionsUI = function()
+      self.UI.show("options")
    end
+   
+   local setOptionsUI = function()
+      self.UI.setXmlTable({
+            xmlDefaults,
+            options,
+      })
+      -- wait to show the UI until it exists (show enables the animation)
+      Wait.frames(showOptionsUI, 3)
+   end
+
+   -- wait for the previous UI to fully hide (otherwise tooltips get "stuck")
+   Wait.frames(setOptionsUI, 10)
+end
+
+function setIgnoreReach(player, value, el)
+   ignoreReach = not ignoreReach
+   self.UI.setAttribute("toggle-reach", "isOn", ignoreReach)
+   self.UI.setAttribute("toggle-reach", "text", (ignoreReach and "Yes" or "No"))
+   self.UI.setAttribute("toggle-reach", "color", "#1c1c1c")
+   self.UI.setAttribute("toggle-reach", "textColor", "#dcdccc")
+end
+
+function setMockDraft(player, value, el)
+   testPlayers = not testPlayers
+   self.UI.setAttribute("toggle-mock", "isOn", testPlayers)
+   self.UI.setAttribute("toggle-mock", "text", (testPlayers and "Yes" or "No"))
+   self.UI.setAttribute("toggle-mock", "color", "#1c1c1c")
+   self.UI.setAttribute("toggle-mock", "textColor", "#dcdccc")
+   if testPlayers then
+      self.UI.show("layout-mock")
+      self.UI.setAttribute("input-mock", "text", tostring(testPlayerCount))
+      self.UI.setAttribute("options", "height", 950)
+   else
+      self.UI.hide("layout-mock")
+      self.UI.setAttribute("options", "height", 800)
+   end
+end
+
+function setMockPlayerCount(player, value, el)
+   testPlayerCount = tonumber(value)
+   if testPlayerCount == nil then
+      testPlayerCount = 3
+   end
+   if testPlayerCount > 6 then
+      testPlayerCount = 6
+   end
+   self.UI.setAttribute("input-mock", "text", tostring(testPlayerCount))
+end
+
+function start(player, value, element)
+   self.UI.hide("options")
+
    log("starting draft")
    local players = getPlayers()
    for _, player in ipairs(players) do
@@ -133,50 +321,111 @@ function start(player, value, element)
 
    selections = {}
 
-   local dice = {}
+   local chits = {}
    for i, p in ipairs(players) do
       local pname = p.steam_name or p.color
-      dice[i] = {
+      chits[i] = {
          name = pname,
          description = p.steam_id or ""
       }
    end
 
 
-   self.UI.setXmlTable({{}})
-   allDice = spawnDice(dice)
+   callAttention(Vector(0, 0, 0), 20)
+   allChits = spawnChits(chits)
 
-   Wait.time(function() rollForOrder(allDice) end, 1)
+   local selectOrder = function()
+      self.UI.setXmlTable({{}})
+      rollForOrder(allChits)
+   end
+
+   Wait.time(selectOrder, 1)
 end
 
-function rollForOrder(dice)
-   if #dice < 1 then
+function rollForOrder(chits)
+   if #chits < 1 then
       return
    end
-   callAttention(Vector(0, 0, 0), 20)
-   for _, die in ipairs(dice) do
-      -- die.interactable = false
-      die.setLock(false)
-      die.randomize()
+
+   self.UI.setXmlTable({
+         xmlLabelTurnOrder,
+         xmlLabelDraftOrder,
+   })
+   
+   local bagPos = self.positionToWorld(Vector(0, 0, 0))
+   
+   local bag = spawnObject({
+         type = "Bag",
+         position = bagPos,
+         callback_function = function(o)
+            for i, chit in ipairs(chits) do
+               chit.setLock(false)
+               chit.setPositionSmooth(bagPos + Vector(0, 2+(i*1.25), 0), false, false)
+            end
+         end
+   })
+
+   local finishedOrderSelection = function()
+      log("chits at rest again")
+      bag.destruct()
+      allChits = chits
+      startDraft()
+   end
+   
+   local shuffleAndPick = function()
+      log("chits in bag")
+      bag.randomize()
+      bag.randomize()
+
+      for i = 1, #chits, 1 do
+
+         local takeCallback = function (o)
+            chits[i] = o
+            if i == #chits then
+               waitForRest(chits, finishedOrderSelection)
+            end
+         end
+         
+         Wait.time(function() takeChit(bag, i, takeCallback) end, i*0.5)
+      end
    end
 
-   waitForRest(
-      dice,
-      function()
-         displayOrder(dice, Vector(0, 0, 4))
+   local chitsInBag = function()
+      for _, chit in ipairs(chits) do
+         if getObjectFromGUID(chit.guid) ~= nil then
+            return false
+         end
       end
-   )
+      return true
+   end
    
+   Wait.condition(shuffleAndPick, chitsInBag)
 end
 
-function waitForRest(dice, callback)
+function takeChit(bag, i, cb)
+   local pos = self.positionToWorld(Vector(0, 1, 1+(i*1.25)))
+   chit = bag.takeObject({
+         position = pos,
+         smooth = true,
+         callback_function = function(o)
+            cb(o)
+         end
+   })
+   setChitUI(chit)
+   return chit
+end
+
+function waitForRest(chits, callback, waitSec)
+   if waitSec == nil then
+      waitSec = 1
+   end
    Wait.condition(
       function()
-         Wait.time(callback, 1)
+         Wait.time(callback, waitSec)
       end,
       function()
-         for _, die in ipairs(dice) do
-            if not die.resting then
+         for _, chit in ipairs(chits) do
+            if not chit.resting then
                return false
             end
          end
@@ -188,8 +437,8 @@ end
 function startDraft()
    currentReach = 0
    local turns = {}
-   local i = #allDice
-   for _, d in spairs(allDice, function(t, a, b) return t[a].getPosition().z < t[b].getPosition().z end) do
+   local i = #allChits
+   for _, d in spairs(allChits, function(t, a, b) return t[a].getPosition().z < t[b].getPosition().z end) do
       selectionOrder[i] = {name = d.getName(), id = d.getDescription()}
       selections[d.getDescription()] = nil
       i = i-1
@@ -203,7 +452,7 @@ function startDraft()
             id = "reach-counter",
             color = "#dcdccc",
             fontSize = 30,
-            text = "Reach: 0/" .. reachMins[#selectionOrder]
+            text = "Reach: 0/" .. getMinReach(#selectionOrder),
          }
       },
       {
@@ -262,12 +511,17 @@ function startDraft()
       }
    }
 
-   self.UI.setXmlTable({factionPicker})
-   callAttention(Vector(0, 0, -4))
+   self.UI.setXmlTable({
+         factionPicker,
+         xmlLabelTurnOrder,
+         xmlLabelDraftOrder,
+   })
+   callAttention(Vector(0, 0, -4), 25)
    Wait.frames(
       function()
          self.UI.show("btns-draft-selection")
          hideUnavailable()
+         broadcastToAll("Draft started! If you cannot see the faction buttons, leave and re-join the game.")
       end,
       7
    )
@@ -278,7 +532,7 @@ function callAttention(pos, distance)
    for _, p in ipairs(Player.getPlayers()) do
       p.lookAt({
             position = self.positionToWorld(pos),
-            pitch = 80,
+            pitch = 75,
             yaw = 0,
             distance = distance or 10,
       })
@@ -290,7 +544,7 @@ function hideUnavailable(choices)
       return
    end
    local playerCount = #selectionOrder
-   local minReach = reachMins[playerCount]
+   local minReach = getMinReach(playerCount)
    
    local available = {}
    for i, f in ipairs(factions) do
@@ -350,9 +604,19 @@ function hideUnavailable(choices)
    end
 end
 
+function getMinReach(playerCount)
+   if playerCount < 2 then
+      return 0
+   end
+   if ignoreReach then
+      return 0
+   end
+   return reachMins[playerCount]
+end
+
 function validateSetup(possible, reach, playersLeft)
-   local playerCount = #selectionOrder
-   local minReach = reachMins[playerCount]
+   local playerCount = #(getPlayers())
+   local minReach = getMinReach(playerCount)
 
    if reach >= minReach then
       return true
@@ -412,7 +676,7 @@ function selectFaction(player, value, elem)
    self.UI.setAttributes(
       "reach-counter",
       {
-         text = "Reach: " .. currentReach .. "/" .. reachMins[#selectionOrder],
+         text = "Reach: " .. currentReach .. "/" .. getMinReach(#selectionOrder),
          color = "#dcdccc",
       }
    )
@@ -434,44 +698,55 @@ function selectFaction(player, value, elem)
    
    table.insert(turnOrder, 1, faction.color)
 
-   if value == "4" then
+   if faction.setupName == "Vagabond" then
       self.UI.show("btn-faction-8")
    end
 
    local playmat = getNextPlaymat()
    
-   Wait.frames(
-      function()
-         if playmat == nil then
-            return
-         end
-         playmat.call("spawnRemote", {
-                         player = Player[faction.color],
-                         faction = faction.setupName,
-         })
-         Wait.frames(
-            function()
-               if value == "8" then
-                  playmat.call("setColorRemote", faction.color)
-               end
-               if value == "4" or value == "8" then
-                  playmat.UI.setAttribute("subpanel", "active", false)
-               end
-            end,
-            3
-         )
-         player.changeColor(faction.color)
-      end,
-      30
-   )
-   
-   if selectionOrder[currentOrderIndex+1] ~= nil then
-      self.UI.setAttribute("turn-display", "text", selectionOrder[currentOrderIndex+1].name .. "'s Pick")
-      hideUnavailable()
-   else
-      self.UI.setAttribute("turn-display", "text", "Draft Finished! GLHF!")
-      Wait.frames(endDraft, 7)
+   local prepForNextSelection = function()
+      if selectionOrder[currentOrderIndex+1] ~= nil then
+         self.UI.setAttribute("turn-display", "text", selectionOrder[currentOrderIndex+1].name .. "'s Pick")
+         hideUnavailable()
+      else
+         self.UI.setAttribute("turn-display", "text", "Draft Finished! GLHF!")
+         Wait.frames(endDraft, 7)
+      end
    end
+
+   local handleVagabond = function()
+      if faction.name == "Vagabond (Second)" then
+         playmat.call("setColorRemote", faction.color)
+      end
+      if faction.setupName == "Vagabond" then
+         playmat.UI.setAttribute("subpanel", "active", false)
+      end
+   end
+   
+   local seatPlayer = function()
+      player.changeColor(faction.color)
+      
+      if playmat == nil then
+         prepForNextSelection()
+         return
+      end
+      playmat.call(
+         "spawnRemote",
+         {
+            player = Player[faction.color],
+            faction = faction.setupName,
+      })
+      
+      Wait.frames(
+         function()
+            handleVagabond()
+            prepForNextSelection()
+         end,
+         3
+      )
+   end
+   
+   Wait.frames(seatPlayer, 30)
 
    
 end
@@ -496,7 +771,7 @@ function playerName(playerID)
 end
 
 function endDraft()
-   for _, d in ipairs(allDice) do
+   for _, d in ipairs(allChits) do
       d.destruct()
    end
    Turns.enable = true
@@ -539,13 +814,16 @@ function endDraft()
          end
       end
 
+      local text = faction.name .. "\n" .. playerName(id)
+
+      
       table.insert(
          factionButtons,
          {
             tag = "Button",
             attributes = {
                id = "btn-faction-"..i,
-               text = faction.name .. "\n" .. playerName(id),
+               text = text,
                textColor = faction.color,
                interactable = false,
                fontSize = 30,
@@ -569,7 +847,7 @@ function endDraft()
       }
    )
    
-   local pickerHeight = #factions * 100
+   local pickerHeight = 300 + (#factions * 100)
    local factionPicker = {
       tag = "Panel",
       attributes = {
@@ -610,83 +888,53 @@ function destruct()
    self.destruct()
 end
 
-function displayOrder(dice, pos)
-   local i = 0
-   local groups = {}
-   for _, d in spairs(dice, function(t, a, b) return t[a].getRotationValue() < t[b].getRotationValue() end) do
-      local val = d.getRotationValue()
-      d.setPositionSmooth(self.positionToWorld(pos + Vector(0, 0.5, i*1.5)))
-      i = i+1
-      if groups[val] == nil then
-         groups[val] = {d}
-      else
-         table.insert(groups[val], d)
+function spawnChits(toSpawn)
+   local chits = {}
+   for i, chitConf in ipairs(toSpawn) do
+      local name = chitConf.name or ""
+      local angleStep = 360 / (#chits+1)
+      for i, chit in ipairs(chits) do
+         local pos = findGlobalPosWithLocalDirection(angleStep*(i-1))
+         chit.setPositionSmooth(pos, false, true)
       end
-      broadcastToAll(d.getName() .. " rolled " .. val)
-   end
-   callAttention(self.positionToLocal(dice[1].getPosition()), 20)
-
-   waitForRest(
-      dice,
-      function()
-         local rollingOff = false
-         for _, g in pairs(groups) do
-            if #g > 1 then
-               local roPlayers = {}
-               for _, d in ipairs(g) do
-                  table.insert(roPlayers, d.getName())
-               end
-               broadcastToAll("Rolling off for tie: " .. table.concat(roPlayers, ", "))
-               rollingOff = true
-               Wait.time(function() doRolloff(g) end, 1)
+      
+      local rollLocation = findGlobalPosWithLocalDirection(360-angleStep)
+      
+      local spawnedChit = spawnObject({
+            type = "BlockSquare",
+            position = rollLocation,
+            scale = Vector(1, 0.1, 1),
+            sound = false,
+            callback_function = function(chit)
+               chit.setLock(true)
+               chit.setColorTint(Color.Black)
+               chit.setName(name)
+               chit.setDescription(chitConf.description or "")
+               setChitUI(chit)
             end
-         end
-         if not rollingOff then
-            Wait.time(
-               function()
-                  waitForRest(allDice, startDraft)
-               end,
-               1
-            )
-         end
-      end
-   )
+      })
+      table.insert(chits, spawnedChit)
+   end
+   return chits
 end
 
-function doRolloff(dice)
-   if #dice < 2 then
-      return
-   end
-   
-   local origin = self.positionToLocal(dice[1].getPosition())
-   
-   callAttention(origin, 20)
-   for _, die in ipairs(dice) do
-      die.setLock(true)
-      die.setPositionSmooth(die.getPosition()+Vector(0, 2, 0))
-   end
-
-
-   
-   waitForRest(
-      dice,
-      function()
-         for _, die in ipairs(dice) do
-            die.setLock(false)
-            die.randomize()
-         end
-         waitForRest(
-            dice,
-            function()
-               displayOrder(dice, origin)
-            end
-         )
-      end
-   )
-
-   
+function setChitUI(chit)
+   chit.UI.setXmlTable({{
+            tag = "Text",
+            attributes = {
+               position = "0 0 -52",
+               width = "90",
+               height = "90",
+               text = chit.getName(),
+               color="#dcdccc",
+               resizeTextForBestFit=true
+            }
+   }})
 end
 
+-- util functions
+
+-- iterate an "array" table using a function to deterime the sort order
 function spairs(t, order)
    -- collect the keys
    local keys = {}
@@ -710,69 +958,9 @@ function spairs(t, order)
    end
 end
 
-function spawnDice(toSpawn)
-   local dice = {}
-   for i, dieConf in ipairs(toSpawn) do
-      local name = dieConf.name or ""
-      local angleStep = 360 / (#dice+1)
-      for i, die in ipairs(dice) do
-         local pos = findGlobalPosWithLocalDirection(angleStep*(i-1))
-         die.setPositionSmooth(pos, false, true)
-      end
-      
-      local rollLocation = findGlobalPosWithLocalDirection(360-angleStep)
-      
-      local spawnedDie = spawnObject({
-            type = "Die_20",
-            rotation = randomRotation(),
-            position = rollLocation,
-            sound = false,
-            callback_function = function(die)
-               die.setLock(true)
-               die.setColorTint(Color.Black)
-               die.setName(name)
-               die.setDescription(dieConf.description or "")
-            end
-      })
-      table.insert(dice, spawnedDie)
-   end
-   return dice
-end
-
-
 local radialOffset = 2.2
 local heightOffset = 2.2
 
-function randomRotation()
-   --Credit for this function goes to Revinor (forums)
-   --Get 3 random numbers
-   local u1 = math.random()
-   local u2 = math.random()
-   local u3 = math.random()
-   --Convert them into quats to avoid gimbal lock
-   local u1sqrt = math.sqrt(u1)
-   local u1m1sqrt = math.sqrt(1-u1)
-   local qx = u1m1sqrt *math.sin(2*math.pi*u2)
-   local qy = u1m1sqrt *math.cos(2*math.pi*u2)
-   local qz = u1sqrt *math.sin(2*math.pi*u3)
-   local qw = u1sqrt *math.cos(2*math.pi*u3)
-   --Apply rotation
-   local ysqr = qy * qy
-   local t0 = -2.0 * (ysqr + qz * qz) + 1.0
-   local t1 = 2.0 * (qx * qy - qw * qz)
-   local t2 = -2.0 * (qx * qz + qw * qy)
-   local t3 = 2.0 * (qy * qz - qw * qx)
-   local t4 = -2.0 * (qx * qx + ysqr) + 1.0
-   --Correct
-   if t2 > 1.0 then t2 = 1.0 end
-   if t2 < -1.0 then ts = -1.0 end
-   --Convert back to X/Y/Z
-   local xr = math.asin(t2)
-   local yr = math.atan2(t3, t4)
-   local zr = math.atan2(t1, t0)
-   --Return result
-   return {math.deg(xr),math.deg(yr),math.deg(zr)}
-end
 
 function findGlobalPosWithLocalDirection(angle)
    local object, distance = self, radialOffset * self.getScale().x
