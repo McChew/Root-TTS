@@ -427,6 +427,7 @@ function startDraft()
    Wait.frames(
       function()
          self.UI.show("btns-draft-selection")
+         broadcastToAll("Draft started! If you cannot see the faction buttons, leave and re-join the game.")
          hideUnavailable()
       end,
       7
