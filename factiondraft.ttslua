@@ -49,12 +49,33 @@ local xmlDefaults = {
          }
       },
       {
+         tag = "ToggleButton",
+         attributes = {
+            selectedTextColor = "#dcdccc",
+            deselectedTextColor = "#dcdccc",
+            deselectedColor = "#1c1c1c",
+            selectedColor = "#1c1c1c",
+            color = "#1c1c1c",
+            colors = "#1c1c1c|#1c1c1c|#3f3f3f|#1c1c1c",
+            textColors = "#dcdccc|#dcdccc|#dcdccc|#dcdccc",
+            fontSize = "50",
+         }
+      },
+      {
          tag = "Text",
          attributes = {
             color = "#dcdccc",
             fontSize = "90",
          }
-      }
+      },
+      {
+         tag = "InputField",
+         attributes = {
+            textColor = "#dcdccc",
+            colors = "#1c1c1c|#1c1c1c|#1c1c1c|#1c1c1c",
+            fontSize = "90",
+         }
+      },
    }
 }
 
@@ -63,9 +84,10 @@ local xmlPanelStart = {
    attributes = {
       id = "start",
       width = "900",
-      height = "1400",
+      height = "450",
       showAnimation = "Grow",
       hideAnimation = "Shrink",
+      padding = "7",
    },
    children = {
       {
@@ -74,13 +96,9 @@ local xmlPanelStart = {
             spacing = "7"
          },
          children = {
-            { tag = "Button", attributes = {text = "Start Draft", onClick="start"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Mock Draft)", onClick="start(mock)"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Plus One Pool)", onClick="start(plusonepool)"}},
-            { tag = "Button", attributes = {text = "Start Draft\n(Mock Plus One Pool)", onClick="start(plusonepoolmock)"}},
+            { tag = "Button", attributes = {text = "Normal Draft", onClick="chooseOptions"}},
+            { tag = "Button", attributes = {text = "Plus One Pool Draft", onClick="chooseOptions(plusonepool)"}},
             { tag = "Button", attributes = {text = "No Draft", onClick="destruct()"}}
-
          }
       }
    }
@@ -120,21 +138,151 @@ function getPlayers()
    
 end
 
+function chooseOptions(player, arg, el)
+   self.UI.hide("start")
+   if arg == "plusonepool" then
+      plusOnePool = true
+   end
+   
+   local options = {
+      tag = "Panel",
+      attributes = {
+         id = "options",
+         active = "false",
+         color = "#1c1c1c",
+         width = "900",
+         height = "800",
+         showAnimation = "Grow",
+         hideAnimation = "Shrink",
+         padding = "7",
+      },
+      children = {
+         {
+            tag = "VerticalLayout",
+            attributes = {
+               spacing = "7"
+            },
+            children = {
+               { tag = "Text",
+                 attributes = {
+                    text = (plusOnePool and "Plus One Pool" or "Draft"),
+               }},
+               {
+                  tag = "HorizontalLayout",
+                  attributes = {
+                    padding = "10",
+                    active = (not plusOnePool),
+                  },
+                  children = {
+                     { tag = "Text", attributes = { text = "Ignore Reach?" }},
+                     { tag = "ToggleButton",
+                       attributes = {
+                          id = "toggle-reach",
+                          text = "No",
+                          onValueChanged = "setIgnoreReach",
+                     }},
+               }},
+               {
+                  tag = "HorizontalLayout",
+                  attributes = {
+                    padding = "10" 
+                  },
+                  children = {
+                     { tag = "Text", attributes = { text = "Mock Draft?" }},
+                     { tag = "ToggleButton",
+                       attributes = {
+                          id = "toggle-mock",
+                          text = "No",
+                          onValueChanged = "setMockDraft",
+                     }},
+               }},
+               { tag = "HorizontalLayout",
+                 attributes = {
+                    id = "layout-mock",
+                    spacing = "7",
+                    active = "false",
+                 },
+                 children = {
+                    { tag = "Text",
+                      attributes = {
+                         fontSize = "70",
+                         text = "Mock Player Count: ",
+                    }},
+                    { tag = "InputField",
+                      attributes = {
+                         id = "input-mock",
+                         text = "",
+                         fontSize = "70",
+                         onValueChanged = "setMockPlayerCount",
+                         characterValidation="Integer"
+                    }},
+                 }
+               },
+               { tag = "Button",
+                 attributes = {
+                    text = "Start",
+                    onClick="start",
+               }},
+            }
+         }
+      }
+   }
+
+   self.UI.setXmlTable({
+         xmlDefaults,
+         options,
+   })
+   Wait.frames(
+      function()
+         log(self.UI.getXml())
+         self.UI.show("options")
+      end,
+      3
+   )
+end
+
+function setIgnoreReach(player, value, el)
+   ignoreReach = not ignoreReach
+   self.UI.setAttribute("toggle-reach", "isOn", ignoreReach)
+   self.UI.setAttribute("toggle-reach", "text", (ignoreReach and "Yes" or "No"))
+   self.UI.setAttribute("toggle-reach", "color", "#1c1c1c")
+   self.UI.setAttribute("toggle-reach", "textColor", "#dcdccc")
+end
+
+function setMockDraft(player, value, el)
+   testPlayers = not testPlayers
+   self.UI.setAttribute("toggle-mock", "isOn", testPlayers)
+   self.UI.setAttribute("toggle-mock", "text", (testPlayers and "Yes" or "No"))
+   self.UI.setAttribute("toggle-mock", "color", "#1c1c1c")
+   self.UI.setAttribute("toggle-mock", "textColor", "#dcdccc")
+   if testPlayers then
+      self.UI.show("layout-mock")
+      self.UI.setAttribute("input-mock", "text", tostring(testPlayerCount))
+      self.UI.setAttribute("options", "height", 950)
+   else
+      self.UI.hide("layout-mock")
+      self.UI.setAttribute("options", "height", 800)
+   end
+end
+
+function setMockPlayerCount(player, value, el)
+   testPlayerCount = tonumber(value)
+   if testPlayerCount == nil then
+      testPlayerCount = 3
+   end
+   if testPlayerCount > 6 then
+      testPlayerCount = 6
+   end
+   self.UI.setAttribute("input-mock", "text", tostring(testPlayerCount))
+end
+
 function start(player, value, element)
-   if value == "noreach" then
-      ignoreReach = true
-   elseif value == "mock" then
-      testPlayers = true
-   elseif value == "plusonepool" then
-      plusOnePool = true
-      broadcastToAll("Attempting to generate faction pool")
-      factions = generateFactionPool()
-   elseif value == "plusonepoolmock" then
-      testPlayers = true
-      plusOnePool = true
+
+   if plusOnePool then
       broadcastToAll("Attempting to generate faction pool")
       factions = generateFactionPool()
    end
+   
    log("starting draft")
    local players = getPlayers()
    for _, player in ipairs(players) do
