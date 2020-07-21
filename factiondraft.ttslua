@@ -2,9 +2,10 @@
 
 
 local testPlayers = false
-local testPlayerCount = 6
+local testPlayerCount = 4
 
 local ignoreReach = false
+local plusOnePool = false
 
 local allDice = {}
 
@@ -62,7 +63,7 @@ local xmlPanelStart = {
    attributes = {
       id = "start",
       width = "900",
-      height = "1000",
+      height = "1400",
       showAnimation = "Grow",
       hideAnimation = "Shrink",
    },
@@ -76,6 +77,8 @@ local xmlPanelStart = {
             { tag = "Button", attributes = {text = "Start Draft", onClick="start"}},
             { tag = "Button", attributes = {text = "Start Draft\n(Ignore Reach)", onClick="start(noreach)"}},
             { tag = "Button", attributes = {text = "Start Draft\n(Mock Draft)", onClick="start(mock)"}},
+            { tag = "Button", attributes = {text = "Start Draft\n(Plus One Pool)", onClick="start(plusonepool)"}},
+            { tag = "Button", attributes = {text = "Start Draft\n(Mock Plus One Pool)", onClick="start(plusonepoolmock)"}},
             { tag = "Button", attributes = {text = "No Draft", onClick="destruct()"}}
 
          }
@@ -122,6 +125,15 @@ function start(player, value, element)
       ignoreReach = true
    elseif value == "mock" then
       testPlayers = true
+   elseif value == "plusonepool" then
+      plusOnePool = true
+      broadcastToAll("Attempting to generate faction pool")
+      factions = generateFactionPool()
+   elseif value == "plusonepoolmock" then
+      testPlayers = true
+      plusOnePool = true
+      broadcastToAll("Attempting to generate faction pool")
+      factions = generateFactionPool()
    end
    log("starting draft")
    local players = getPlayers()
@@ -203,7 +215,7 @@ function startDraft()
             id = "reach-counter",
             color = "#dcdccc",
             fontSize = 30,
-            text = "Reach: 0/" .. reachMins[#selectionOrder]
+            text = "Reach: 0/" .. getMinReach(#selectionOrder),
          }
       },
       {
@@ -290,7 +302,7 @@ function hideUnavailable(choices)
       return
    end
    local playerCount = #selectionOrder
-   local minReach = reachMins[playerCount]
+   local minReach = getMinReach(playerCount)
    
    local available = {}
    for i, f in ipairs(factions) do
@@ -350,9 +362,100 @@ function hideUnavailable(choices)
    end
 end
 
+local maxGenerationAttempts = 50
+
+function factionSort(a, b)
+   return a.reachVal > b.reachVal
+end
+
+function generateFactionPool(attemptsLeft)
+   if attemptsLeft == nil then
+      attemptsLeft = maxGenerationAttempts
+   end
+   local playerCount = #(getPlayers())
+   local selection = pullRandomFactions(factions, playerCount+1)
+   local left = selection.left
+   local newFactions = selection.selected
+
+   attemptsLeft = attemptsLeft-1
+   while not all17(newFactions, playerCount) do
+      if #left == 0 then
+         if attemptsLeft < 5 then
+            broadcastToAll("Faction pool invalid!\n" .. attemptsLeft .. " attempts left.")
+         end
+         if attemptsLeft == 0 then
+            return factions
+         else
+            return generateFactionPool(attemptsLeft)
+         end
+      end
+      table.remove(newFactions, #newFactions)
+      table.insert(newFactions, left[#left])
+      table.remove(left, #left)
+   end
+   
+   table.sort(newFactions, factionSort)
+   
+   broadcastToAll("Faction pool valid!\n"..maxGenerationAttempts-attemptsLeft .. " attempts.")
+
+   return newFactions
+end
+
+function all17(options, playerCount)
+
+   if #options == playerCount then
+      local reach = 0
+      for _, f in ipairs(options) do
+         reach = reach + f.reachVal
+      end
+      return reach >= 17
+   end
+
+   for i, f in ipairs(options) do
+      local opts = sCopy(options)
+      table.remove(opts, i)
+      if not all17(opts, playerCount) then
+         return false
+      end
+   end
+   return true
+end
+
+function pullRandomFactions(source, count)
+   local newFactions = {}
+   local unselected = sCopy(source)
+   for i = 1, count, 1 do
+      local faction = { name = "Vagabond (Second)"}
+      -- don't allow second vagabond
+      local randI = 0
+      while faction.name == "Vagabond (Second)" do
+         randI = math.random(1, #unselected)
+         faction = unselected[randI]
+      end
+      table.insert(newFactions, faction)
+      table.remove(unselected, randI)
+   end
+   table.sort(newFactions, factionSort)
+   table.sort(unselected, factionSort)
+   return {selected = newFactions, left = unselected}
+end
+
+function getMinReach(playerCount)
+   if playerCount < 2 then
+      return 0
+   end
+   if plusOnePool then
+      return 17
+   end
+   if ignoreReach then
+      return 0
+   end
+   return reachMins[playerCount]
+end
+
 function validateSetup(possible, reach, playersLeft)
-   local playerCount = #selectionOrder
-   local minReach = reachMins[playerCount]
+   local playerCount = #(getPlayers())
+   local minReach = getMinReach(playerCount)
 
    if reach >= minReach then
       return true
@@ -412,7 +515,7 @@ function selectFaction(player, value, elem)
    self.UI.setAttributes(
       "reach-counter",
       {
-         text = "Reach: " .. currentReach .. "/" .. reachMins[#selectionOrder],
+         text = "Reach: " .. currentReach .. "/" .. getMinReach(#selectionOrder),
          color = "#dcdccc",
       }
    )
@@ -434,7 +537,7 @@ function selectFaction(player, value, elem)
    
    table.insert(turnOrder, 1, faction.color)
 
-   if value == "4" then
+   if faction.setupName == "Vagabond" and not plusOnePool then
       self.UI.show("btn-faction-8")
    end
 
@@ -442,6 +545,7 @@ function selectFaction(player, value, elem)
    
    Wait.frames(
       function()
+         player.changeColor(faction.color)
          if playmat == nil then
             return
          end
@@ -451,16 +555,15 @@ function selectFaction(player, value, elem)
          })
          Wait.frames(
             function()
-               if value == "8" then
+               if faction.name == "Vagabond (Second)" then
                   playmat.call("setColorRemote", faction.color)
                end
-               if value == "4" or value == "8" then
+               if faction.setupName == "Vagabond" then
                   playmat.UI.setAttribute("subpanel", "active", false)
                end
             end,
             3
          )
-         player.changeColor(faction.color)
       end,
       30
    )
@@ -539,13 +642,23 @@ function endDraft()
          end
       end
 
+      local text = faction.name .. "\n" .. playerName(id)
+      if plusOnePool then
+         local cardDraw = "Draw " .. (2+i) .. " cards"
+         text = text .. "\n" .. cardDraw
+         if Player[faction.color] and Player[faction.color].seated then
+            broadcastToColor(cardDraw, faction.color)
+         end
+      end
+
+      
       table.insert(
          factionButtons,
          {
             tag = "Button",
             attributes = {
                id = "btn-faction-"..i,
-               text = faction.name .. "\n" .. playerName(id),
+               text = text,
                textColor = faction.color,
                interactable = false,
                fontSize = 30,
@@ -569,7 +682,7 @@ function endDraft()
       }
    )
    
-   local pickerHeight = #factions * 100
+   local pickerHeight = 300 + (#factions * (plusOnePool and 150 or 100))
    local factionPicker = {
       tag = "Panel",
       attributes = {
