@@ -43,6 +43,12 @@ local xmlDefaults = {
       {
          tag = "Button",
          attributes = {
+            tooltipFontSize="50",
+            tooltipTextColor="#dcdccc",
+            tooltipWidth="1000",
+            tooltipPadding="15",
+            tooltipBorderColor="#1c1c1c",
+            tooltipBackgroundColor="rgba(0.11, 0.11, 0.11, 0.8)",
             textColor = "#dcdccc",
             color = "#1c1c1c",
             fontSize = "90",
@@ -99,17 +105,17 @@ local xmlPanelStart = {
             { tag = "Button", attributes = {
                  text = "Normal Draft",
                  onClick="chooseOptions",
-                 tooltip="<size=50>Turn and draft order are selected and then players\nchoose from all available factions. Minimum reach is\nrequired by default, but can be disabled.</size>"
+                 tooltip="Turn and draft order are selected and then players choose from all available factions. Minimum reach is required by default, but can be disabled."
             }},
             { tag = "Button", attributes = {
                  text = "Plus One Pool Draft",
                  onClick="chooseOptions(plusonepool)",
-                 tooltip="<size=50>Turn and draft order are selected and then players\nchoose from a randomly generated pool of factions.\nA minimum reach of 17 is required.</size>"
+                 tooltip="Turn and draft order are selected and then players choose from a randomly generated pool of factions. A minimum reach of 17 is required."
             }},
             { tag = "Button", attributes = {
                  text = "No Draft",
                  onClick="destruct()",
-                 tooltip="<size=50>This will remove the drafting tool from your table.</size>"
+                 tooltip="This will remove the drafting tool from your table."
             }}
          }
       }
