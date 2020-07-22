@@ -96,9 +96,21 @@ local xmlPanelStart = {
             spacing = "7"
          },
          children = {
-            { tag = "Button", attributes = {text = "Normal Draft", onClick="chooseOptions"}},
-            { tag = "Button", attributes = {text = "Plus One Pool Draft", onClick="chooseOptions(plusonepool)"}},
-            { tag = "Button", attributes = {text = "No Draft", onClick="destruct()"}}
+            { tag = "Button", attributes = {
+                 text = "Normal Draft",
+                 onClick="chooseOptions",
+                 tooltip="<size=50>Turn and draft order are selected and then players\nchoose from all available factions. Minimum reach is\nrequired by default, but can be disabled.</size>"
+            }},
+            { tag = "Button", attributes = {
+                 text = "Plus One Pool Draft",
+                 onClick="chooseOptions(plusonepool)",
+                 tooltip="<size=50>Turn and draft order are selected and then players\nchoose from a randomly generated pool of factions.\nA minimum reach of 17 is required.</size>"
+            }},
+            { tag = "Button", attributes = {
+                 text = "No Draft",
+                 onClick="destruct()",
+                 tooltip="<size=50>This will remove the drafting tool from your table.</size>"
+            }}
          }
       }
    }
