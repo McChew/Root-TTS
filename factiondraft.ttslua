@@ -116,6 +116,26 @@ local xmlPanelStart = {
    }
 }
 
+local xmlLabelDraftOrder = {
+   tag = "Text",
+   attributes = {
+      color = "#dcdccc",
+      position = "-200 500 -5",
+      fontSize = "40",
+      text = "Draft\nOrder\n↓"
+   },
+}
+
+local xmlLabelTurnOrder = {
+   tag = "Text",
+   attributes = {
+      color = "#dcdccc",
+      position = "200 500 -5",
+      fontSize = "40",
+      text = "↑\nTurn\nOrder"
+   },
+}
+
 function onLoad()
    self.setColorTint(Color(0, 0, 0, 0))
    self.setLock(true)
@@ -330,6 +350,10 @@ function rollForOrder(dice)
       -- die.interactable = false
       die.setLock(false)
       die.randomize()
+   self.UI.setXmlTable({
+         xmlLabelTurnOrder,
+         xmlLabelDraftOrder,
+   })
    end
 
    waitForRest(
@@ -434,8 +458,13 @@ function startDraft()
       }
    }
 
-   self.UI.setXmlTable({factionPicker})
    callAttention(Vector(0, 0, -4))
+   self.UI.setXmlTable({
+         factionPicker,
+         xmlLabelTurnOrder,
+         xmlLabelDraftOrder,
+   })
+   callAttention(Vector(0, 0, -4), 25)
    Wait.frames(
       function()
          self.UI.show("btns-draft-selection")
