@@ -97,12 +97,14 @@ local function _putDiscardCard(cardObject, lostSouls, color)
     local rot = {}
     local 	rot_onset = {x=0, y=0, z=0}
     local s = ''
+
     if lostSouls then
         lizards = getObjectFromGUID(Global.getVar('lost_souls'))
-	        pos = lizards.positionToWorld({-0.90, 0.2, 0.5})
+        pos = lizards.positionToWorld({-0.90, 0.2, 0.5})
         rot = lizards.getRotation()
         cardPos = cardObject.getPosition()
         s='Discarded to Lost Souls'
+
         if Vector.equals(cardPos, pos, 1) then
             pos = self.positionToWorld(pos_discard)
             rot = self.getRotation()
@@ -113,25 +115,25 @@ local function _putDiscardCard(cardObject, lostSouls, color)
         rot = self.getRotation()
         s='Discarded'
     end
+
     local nearby = { x = pos.x * 0.8, y = pos.y + 5, z = pos.z * 0.8 }
-    	rot = {rot.x+rot_onset.x, rot.y+rot_onset.y, rot.z+rot_onset.z}
-    	cardObject.setPosition(nearby)
-    	cardObject.setRotation(rot)
-    	cardObject.setPositionSmooth(pos)
-    	printToAll(s, color)
+    rot = {rot.x+rot_onset.x, rot.y+rot_onset.y, rot.z+rot_onset.z}
+    cardObject.setPosition(nearby)
+    cardObject.setRotation(rot)
+    cardObject.setPositionSmooth(pos)
+    printToAll(s, color)
 end
 
 local function _discardCard(playerColor, card)
-if Global.getVar('lost_souls') == nil then
-    	_putDiscardCard(card, false, playerColor)
-else
-    	_putDiscardCard(card, true, playerColor)
-end
-
+    if Global.getVar('lost_souls') == nil then
+        _putDiscardCard(card, false, playerColor)
+    else
+        _putDiscardCard(card, true, playerColor)
+    end
 end
 
 local function _applyContextMenuItems(card)
-card.addContextMenuItem('Discard', function(playerColor) _discardCard(playerColor, card) end, false)
+    card.addContextMenuItem('Discard', function(playerColor) _discardCard(playerColor, card) end, false)
 end
 
 function onObjectSpawn(object)
