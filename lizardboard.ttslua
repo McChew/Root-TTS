@@ -6,9 +6,11 @@ wait_id = 0
 function onLoad(save_state)
     createButtons()
     wait_id = Wait.time(updateButtons, 1, -1)
+    Global.setVar('lost_souls',self.guid)
 end
 
 function onDestroy()
+    Global.setVar('lost_souls',nil)
     Wait.stop(wait_id)
 end
 
