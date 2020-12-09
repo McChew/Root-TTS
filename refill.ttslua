@@ -95,7 +95,7 @@ end
 local function _putDiscardCard(cardObject, lostSouls, color)
     local pos = {}
     local rot = {}
-    local 	rot_onset = {x=0, y=0, z=0}
+    local rot_onset = {x=0, y=0, z=0}
     local s = ''
 
     if lostSouls then
