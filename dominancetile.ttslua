@@ -1,0 +1,8 @@
+function onLoad(save_state)
+    Global.setVar('dominance_tile',self.guid)
+    self.setGMNotes('Discarded Dominance Cards');
+end
+
+function onDestroy()
+    Global.setVar('dominance_tile',nil)
+end

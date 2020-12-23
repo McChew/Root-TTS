@@ -1,3 +1,13 @@
+function find_object_by_gm_note(gm_note)
+   local objects = {}
+   for _, obj in ipairs(getAllObjects()) do
+      if obj.getName() == gm_note then
+         table.insert(objects, obj)
+      end
+   end
+   return objects[1]
+end
+
 --Creates invisible button onload, hidden under the "REFILL" on the deck pad
 function onLoad()
     self.createButton({
@@ -15,9 +25,18 @@ function onLoad()
     --Local positions for each pile of cards
     pos_discard = {-0.957, 0.178, 0.222}
     pos_draw = {0.957, 0.178, 0.222}
+    fox_loc = {2.0853, 0.178, 0.1574}
+    rabbit_loc = {0.7033, 0.178, 0.1573}
+    mouse_loc = {-0.6839, 0.178, 0.1572}
+    bird_loc = {-2.0679, 0.178, 0.1571}
+    positions = {}
+    last_card = {}
+    one_left = false
 
     --This is which way is face down for a card or deck relative to the tool
     rot_offset = {x=0, y=0, z=180}
+
+    addHotkey("Discard Hotkey", discardHotkey)
 end
 
 --Activates when button is clicked
@@ -92,44 +111,140 @@ function timer_shuffle()
     end
 end
 
+--Put Dominance Cards on Dominance track
+local function _putDominance(cardObject)
+    local pos_dom = {}
+    one_left = false
+    last_card = nil
+    dominance = find_object_by_gm_note('Discarded Dominance Cards')
+    if dominance == nil then
+        dominance = getObjectFromGUID(Global.getVar('dominance_tile'))
+    end
+    local rot_d = dominance.getRotation()
+    if cardObject.tag == 'Deck' then
+        local objects = cardObject.getObjects()
+        local prev_card
+        for index, card in ipairs(objects) do
+            if cardObject.remainder == nil then
+                if string.match(card.name, "Dominance") then
+                    if string.match(card.name, "Fox") then
+                        pos_dom = fox_loc
+                    elseif string.match(card.name, "Rabbit") then
+                        pos_dom = rabbit_loc
+                    elseif string.match(card.name, "Mouse") then
+                        pos_dom = mouse_loc
+                    elseif string.match(card.name, "Bird") then
+                        pos_dom = bird_loc
+                    end
+                    cardTaken = cardObject.takeObject({guid = card.guid})
+                    cardTaken.setRotation(rot_d)
+                    pos_dom = dominance.positionToWorld(pos_dom)
+                    cardTaken.setPositionSmooth(pos_dom)
+                end
+            end
+        end
+        positions["pos"] = self.positionToWorld(pos_discard)
+        positions["rot"] = self.getRotation()
+        last_card = cardObject.remainder
+    end
+    if last_card ~= nil then
+        one_left = true
+        cardObject = last_card
+    end
+    if cardObject.tag == 'Card' then
+        if string.match(cardObject.getName(), "Dominance") then
+            if string.match(cardObject.getName(), "Fox") then
+                pos_dom = fox_loc
+            elseif string.match(cardObject.getName(), "Rabbit") then
+                pos_dom = rabbit_loc
+            elseif string.match(cardObject.getName(), "Mouse") then
+                pos_dom = mouse_loc
+            elseif string.match(cardObject.getName(), "Bird") then
+                pos_dom = bird_loc
+            end
+            positions["pos"] = dominance.positionToWorld(pos_dom)
+            positions["rot"] = rot_d
+        end
+    end
+end
+
+--Put cards on discard tile or lizard cult lost souls tile
 local function _putDiscardCard(cardObject, lostSouls, color)
     local pos = {}
     local rot = {}
     local rot_onset = {x=0, y=0, z=0}
     local s = ''
+    local card_list = ''
+    local has_dominance = false
+    positions = {}
 
+    if cardObject.tag == 'Card' then
+        card_list = cardObject.getName()
+        if string.match(card_list, "Dominance") then
+            has_dominance = true
+        end
+    elseif cardObject.tag == 'Deck' then
+        local objects = cardObject.getObjects()
+        local t = {}
+        for index, card in ipairs(objects) do
+            table.insert(t, '| ' .. card.name .. ' ')
+            if string.match(card.name, "Dominance") then
+                has_dominance = true
+            end
+        end
+        card_list = table.concat(t)
+    end
     if lostSouls then
-        lizards = getObjectFromGUID(Global.getVar('lost_souls'))
-        pos = lizards.positionToWorld({-0.90, 0.2, 0.5})
+        one_left = false
+        lizards = find_object_by_gm_note('The Lizard Cult board')
+        if lizards == nil then
+            lizards = getObjectFromGUID(Global.getVar('lost_souls'))
+        end
+	    pos = lizards.positionToWorld({-0.90, 0.2, 0.5})
         rot = lizards.getRotation()
         cardPos = cardObject.getPosition()
-        s='Discarded to Lost Souls'
-
+        s='Discarded to Lost Souls: '
         if Vector.equals(cardPos, pos, 1) then
-            pos = self.positionToWorld(pos_discard)
-            rot = self.getRotation()
-            s='Lost Souls Discarded'
+            if has_dominance then
+                _putDominance(cardObject)
+            else
+                positions["pos"] = self.positionToWorld(pos_discard)
+                positions["rot"] = self.getRotation()
+            end
+            pos = positions["pos"]
+            rot = positions["rot"]
+            s='Lost Souls Discarded: '
         end
     else
-        pos = self.positionToWorld(pos_discard)
-        rot = self.getRotation()
-        s='Discarded'
+        if has_dominance then
+            _putDominance(cardObject)
+        else
+            positions["pos"] = self.positionToWorld(pos_discard)
+            positions["rot"] = self.getRotation()
+        end
+        pos = positions["pos"]
+        rot = positions["rot"]
+        s='Discarded: '
     end
-
-    local nearby = { x = pos.x * 0.8, y = pos.y + 5, z = pos.z * 0.8 }
-    rot = {rot.x+rot_onset.x, rot.y+rot_onset.y, rot.z+rot_onset.z}
-    cardObject.setPosition(nearby)
-    cardObject.setRotation(rot)
-    cardObject.setPositionSmooth(pos)
-    printToAll(s, color)
+        local nearby = { x = pos.x * 0.8, y = pos.y + 5, z = pos.z * 0.8 }
+    	rot = {rot.x+rot_onset.x, rot.y+rot_onset.y, rot.z+rot_onset.z}
+    	if one_left then
+    	    one_left = false
+    	    cardObject = last_card
+    	end
+    	cardObject.setPosition(nearby)
+    	cardObject.setRotation(rot)
+    	cardObject.setPositionSmooth(pos)
+    	printToAll(s .. card_list, color)
 end
 
 local function _discardCard(playerColor, card)
-    if Global.getVar('lost_souls') == nil then
-        _putDiscardCard(card, false, playerColor)
-    else
-        _putDiscardCard(card, true, playerColor)
-    end
+if Global.getVar('lost_souls') == nil and find_object_by_gm_note('The Lizard Cult board') == nil  then
+    	_putDiscardCard(card, false, playerColor)
+else
+    	_putDiscardCard(card, true, playerColor)
+end
+
 end
 
 local function _applyContextMenuItems(card)
@@ -137,9 +252,23 @@ local function _applyContextMenuItems(card)
 end
 
 function onObjectSpawn(object)
-    if object.tag == 'Card' then
-        _applyContextMenuItems(object)
-elseif object.tag == 'Deck' then
-        _applyContextMenuItems(object)
+    if string.match(object.getGMNotes(), "Quest") then
+    else
+        if object.tag == 'Card' and object.getDescription() ~= '' then
+            _applyContextMenuItems(object)
+        elseif object.tag == 'Deck' then
+            _applyContextMenuItems(object)
+        end
+    end
+end
+
+function discardHotkey(player_color, hovered_object, world_position, key_down_up)
+    if string.match(hovered_object.getDescription(), "Quest") then
+    else
+        if hovered_object.tag == 'Card' and hovered_object.getDescription() ~= '' then
+            _discardCard(player_color, hovered_object)
+        elseif hovered_object.tag == 'Deck' then
+            _discardCard(player_color, hovered_object)
+        end
     end
 end

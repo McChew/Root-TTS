@@ -7,6 +7,7 @@ function onLoad(save_state)
     createButtons()
     wait_id = Wait.time(updateButtons, 1, -1)
     Global.setVar('lost_souls',self.guid)
+    self.setGMNotes('The Lizard Cult board');
 end
 
 function onDestroy()
@@ -69,7 +70,7 @@ function updateButtons()
         origin       = self.positionToWorld({-0.90, 0.2, 0.55}),
         direction    = self.getTransformUp(),
         type         = 3,
-        size         = {3, 0.1, 6},
+        size         = {3, 0.2, 6},
         max_distance = 2,
     })
     for _, item in ipairs(items) do
