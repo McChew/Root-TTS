@@ -118,9 +118,6 @@ local function _putDominance(cardObject)
     one_left = false
     last_card = nil
     dominance = find_object_by_gm_note('Discarded Dominance Cards')
-    if dominance == nil then
-        dominance = getObjectFromGUID(Global.getVar('dominance_tile'))
-    end
     local rot_d = dominance.getRotation()
     if cardObject.tag == 'Deck' then
         local objects = cardObject.getObjects()
@@ -198,9 +195,6 @@ local function _putDiscardCard(cardObject, lostSouls, color)
     if lostSouls then
         one_left = false
         lizards = find_object_by_gm_note('The Lizard Cult board')
-        if lizards == nil then
-            lizards = getObjectFromGUID(Global.getVar('lost_souls'))
-        end
 	    pos = lizards.positionToWorld({-0.90, 0.2, 0.5})
         rot = lizards.getRotation()
         cardPos = cardObject.getPosition()
@@ -242,7 +236,7 @@ local function _putDiscardCard(cardObject, lostSouls, color)
 end
 
 local function _discardCard(playerColor, card)
-if Global.getVar('lost_souls') == nil and find_object_by_gm_note('The Lizard Cult board') == nil  then
+if find_object_by_gm_note('The Lizard Cult board') == nil  then
     	_putDiscardCard(card, false, playerColor)
 else
     	_putDiscardCard(card, true, playerColor)
