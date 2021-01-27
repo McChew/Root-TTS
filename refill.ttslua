@@ -25,10 +25,11 @@ function onLoad()
     --Local positions for each pile of cards
     pos_discard = {-0.957, 0.178, 0.222}
     pos_draw = {0.957, 0.178, 0.222}
-    fox_loc = {2.0853, 0.178, 0.1574}
-    rabbit_loc = {0.7033, 0.178, 0.1573}
-    mouse_loc = {-0.6839, 0.178, 0.1572}
-    bird_loc = {-2.0679, 0.178, 0.1571}
+    pos_discard_top = {-0.957, 2, 0.222}
+    fox_loc = {2.0853, 2, 0.1574}
+    rabbit_loc = {0.7033, 2, 0.1573}
+    mouse_loc = {-0.6839, 2, 0.1572}
+    bird_loc = {-2.0679, 2, 0.1571}
     positions = {}
     last_card = {}
     one_left = false
@@ -143,7 +144,7 @@ local function _putDominance(cardObject)
                 end
             end
         end
-        positions["pos"] = self.positionToWorld(pos_discard)
+        positions["pos"] = self.positionToWorld(pos_discard_top)
         positions["rot"] = self.getRotation()
         last_card = cardObject.remainder
     end
@@ -208,18 +209,20 @@ local function _putDiscardCard(cardObject, lostSouls, color)
             if has_dominance then
                 _putDominance(cardObject)
             else
-                positions["pos"] = self.positionToWorld(pos_discard)
+                positions["pos"] = self.positionToWorld(pos_discard_top)
                 positions["rot"] = self.getRotation()
             end
             pos = positions["pos"]
             rot = positions["rot"]
             s='Lost Souls Discarded: '
+        else
+            pos = lizards.positionToWorld({-0.90, 2, 0.5})
         end
     else
         if has_dominance then
             _putDominance(cardObject)
         else
-            positions["pos"] = self.positionToWorld(pos_discard)
+            positions["pos"] = self.positionToWorld(pos_discard_top)
             positions["rot"] = self.getRotation()
         end
         pos = positions["pos"]
