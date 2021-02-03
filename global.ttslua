@@ -100,7 +100,7 @@ function update_faction_data()
         o.setLuaScript(TEXT)
         o.setName("TMP")
         o.reload()
-        Wait.condition(transfer,||not o.spawning)
+        Wait.time(transfer, 0.5)
     end
     function callback(wr)
         repeat
