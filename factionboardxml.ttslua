@@ -148,7 +148,11 @@ board_xml = [[
                     <Image class="mapImage" image="contraptions-button" height="20" />
                 </Button>
             </Cell>
-            <Cell />
+            <Cell>
+                <Button class="mapButton" onClick="spawnScenario(gametools)" color="Brown">
+                    <Image class="mapImage" image="gametools-button" height="20" />
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="fanbotButtons" active="False">
@@ -522,6 +526,10 @@ UIASSETS = {
     {
         name = "contraptions-button",
         url = "http://cloud-3.steamusercontent.com/ugc/1022824296872628070/829A48D0EF229E20FD969DE6FC82B96FB9F70EAA/"
+    },
+    {
+        name = "gametools-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/1771572958566741326/33B024F77914392F9DB44741E725D986832C2F97/"
     },
     {
         name = "faction-title",
