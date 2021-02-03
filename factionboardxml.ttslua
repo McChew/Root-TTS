@@ -247,7 +247,11 @@ board_xml = [[
                     <Image class="mapImage" Width="90%" image="shrewd-button"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="WorkshopMarquise1">
+                <Button class="mapButton" onClick="spawnFanFaction(WorkshopMarquise)" color="Orange">
+                    <Image class="mapImage" Width="90%" image="WorkshopMarquise-button"></Image>
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
@@ -498,6 +502,10 @@ UIASSETS = {
     {
         name = "shrewd-button",
         url = "http://cloud-3.steamusercontent.com/ugc/1028455020027570580/552EC90B9F5F995330B83A76C95099B1AB76B08E/"
+    },
+    {
+        name = "WorkshopMarquise-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/1771572958566591644/F0E33457330E7B27616E3EA47903E932D3BA7FC0/"
     },
     {
         name = "trickster-button",

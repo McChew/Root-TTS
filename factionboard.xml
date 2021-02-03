@@ -247,7 +247,11 @@ board_xml = [[
                     <Image class="mapImage" Width="90%" image="shrewd-button"></Image>
                 </Button>
             </Cell>
-            <Cell />
+            <Cell id="WorkshopMarquise1">
+                <Button class="mapButton" onClick="spawnFanFaction(WorkshopMarquise)" color="Orange">
+                    <Image class="mapImage" Width="90%" image="WorkshopMarquise-button"></Image>
+                </Button>
+            </Cell>
         </Row>
     </TableLayout>
     <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
