@@ -67,7 +67,7 @@ function updateButtons()
         origin       = self.positionToWorld({-0.90, 0.2, 0.55}),
         direction    = self.getTransformUp(),
         type         = 3,
-        size         = {3, 0.1, 6},
+        size         = {3, 0.2, 6},
         max_distance = 2,
     })
     for _, item in ipairs(items) do
