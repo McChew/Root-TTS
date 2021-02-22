@@ -257,6 +257,15 @@ board_xml = [[
                 </Button>
             </Cell>
         </Row>
+        <Row preferredHeight="30">
+            <Cell id="Raggoon1">
+                <Button class="mapButton" onClick="spawnFanFaction(Raggoon)" color="White">
+                    <Image class="mapImage" Width="90%" image="Raggoon-button"></Image>
+                </Button>
+            </Cell>
+            <Cell />
+            <Cell />
+        </Row>
     </TableLayout>
     <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
         <Row preferredHeight="85">
@@ -510,6 +519,10 @@ UIASSETS = {
     {
         name = "WorkshopMarquise-button",
         url = "http://cloud-3.steamusercontent.com/ugc/1771572958566591644/F0E33457330E7B27616E3EA47903E932D3BA7FC0/"
+    },
+    {
+        name = "Raggoon-button",
+        url = "http://cloud-3.steamusercontent.com/ugc/1773826537201931260/62875B32FA239FC2A3BE898C48D39F215D6BD185/"
     },
     {
         name = "trickster-button",

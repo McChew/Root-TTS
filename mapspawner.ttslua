@@ -43,9 +43,9 @@ function spawnMap(map, random)
 
     -- ruins and ruin items
     available = Global.getTable('available')
-
+    print(logString(available))
     -- Spawn items if we have Boars and no vagabonds
-    vagabonds = math.max(2-available.Vagabond, 1-available.Boars)
+    vagabonds = math.max(2-available.Vagabond, 1-available.Boars, 1-available.Raggoon)
     local params = {}
     params.rotation = {0, 180, 0}
     params.smooth = false

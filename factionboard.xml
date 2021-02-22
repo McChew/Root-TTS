@@ -257,6 +257,15 @@ board_xml = [[
                 </Button>
             </Cell>
         </Row>
+        <Row preferredHeight="30">
+            <Cell id="Raggoon1">
+                <Button class="mapButton" onClick="spawnFanFaction(Raggoon)" color="White">
+                    <Image class="mapImage" Width="90%" image="Raggoon-button"></Image>
+                </Button>
+            </Cell>
+            <Cell />
+            <Cell />
+        </Row>
     </TableLayout>
     <TableLayout id="vagabondButtons" class="vagabondButtons" active="false">
         <Row preferredHeight="85">
