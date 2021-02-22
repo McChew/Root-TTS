@@ -6,7 +6,7 @@ end
 SELECTED = ""
 URL = "https://raw.githubusercontent.com/McChew/Root-TTS/master/factionsv3.ttslua"
 EVERYTHING = {}
-#include factionsv3
+-- #include factionsv3
 
 function create_buttons()
     self.clearButtons()
@@ -99,7 +99,7 @@ function save_board(board, as_string)
         type         = 3,
         size         = board.getBoundsNormalized().size,
         direction = {0,1,0},
-        max_distance = 0.5,
+        max_distance = 2,
         debug        = true,
     })
     for _, v in ipairs(objs) do
