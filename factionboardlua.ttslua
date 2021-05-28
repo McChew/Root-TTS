@@ -1,3 +1,5 @@
+-- Licensed under Creative Commons By 4.0 (https://creativecommons.org/licenses/by/4.0/legalcode)
+
 #include scenarios
 
 chosen_faction = nil

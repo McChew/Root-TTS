@@ -1,3 +1,5 @@
+-- Licensed under Creative Commons By 4.0 (https://creativecommons.org/licenses/by/4.0/legalcode)
+
 #include maps
 function onLoad(save_state)
     self.createButton({click_function = "spawnAutumn", function_owner = self, label = "Autumn Map", position = {0, 1, 4}, rotation = {0, 180, 0}, scale = {2, 2, 2}, width = 2100, height = 400, font_size = 300, color = {0.956, 0.392, 0.113, 1}})

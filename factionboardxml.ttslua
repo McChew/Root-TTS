@@ -1,3 +1,5 @@
+-- Licensed under Creative Commons By 4.0 (https://creativecommons.org/licenses/by/4.0/legalcode)
+
 board_xml = [[
 <Defaults>
     <ToggleButton class="toggleButton" color="#434141" colors="Grey|Grey|Grey|Purple" onValueChanged="toggleButtons"/>

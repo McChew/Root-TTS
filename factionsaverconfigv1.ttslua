@@ -1,3 +1,5 @@
+-- Licensed under Creative Commons By 4.0 (https://creativecommons.org/licenses/by/4.0/legalcode)
+
 function onLoad()
     KEEPER = getObjectFromGUID("165258")
     create_buttons()
